@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +20,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['middleware'=>'api', 'prefix'=> 'admin'],function($router){
+    Route::post('/register',[AuthController::class, 'register']);
+    Route::post('/login',[AuthController::class, 'login']);
+    Route::get('/dashboard',[DashboardController::class, 'index']);
+    Route::post('/categoryCreate',[CategoryController::class, 'store']);
+    Route::post('/categoryUpdate/{id}',[CategoryController::class, 'update']);
+    Route::post('/categoryDelete/{id}',[CategoryController::class, 'destroy']);
+    Route::get('/allcategoryInfo',[CategoryController::class, 'getAllCategoryInfo']);
+
 });
 
 Route::post('/userCreate',[UserController::class, 'store']);
