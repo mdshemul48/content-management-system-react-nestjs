@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware'=>'api', 'prefix'=> 'admin'],function($router){
+Route::group(['middleware'=>'api','namespace' => 'App\Http\Controllers', 'prefix'=> 'admin'],function($router){
     Route::post('/register',[AuthController::class, 'register']);
     Route::post('/login',[AuthController::class, 'login']);
     Route::get('/dashboard',[DashboardController::class, 'index']);
