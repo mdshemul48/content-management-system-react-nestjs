@@ -1,6 +1,12 @@
 <?php
 
 namespace App\Exceptions;
+use Response;
+use Exception;
+use Throwable;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -34,4 +40,6 @@ class Handler extends ExceptionHandler
     {
         //
     }
+
+    
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use JWTAuth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class JwtMiddleware
@@ -16,6 +18,8 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $user = JWTAuth::parseToken()->authenticate();
         return $next($request);
+        
     }
 }

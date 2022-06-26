@@ -33,6 +33,10 @@ Route::group(['middleware'=>'api','namespace' => 'App\Http\Controllers', 'prefix
 
 });
 
+Route::get('/user', [
+    UserController::class, 'getUser'
+])->middleware('api');
+
 Route::post('/userCreate',[UserController::class, 'store']);
 Route::post('/userUpdate/{id}',[UserController::class, 'update']);
 Route::post('/userDelete/{id}',[UserController::class, 'destroy']);

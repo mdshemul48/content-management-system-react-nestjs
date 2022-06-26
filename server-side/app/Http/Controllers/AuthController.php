@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Models\User;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
@@ -18,8 +20,8 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        if(auth()->user())
-        {
+     
+
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required|string|email|unique:users',
@@ -36,11 +38,6 @@ class AuthController extends Controller
                 'message' => 'User Successfully registerd',
                 'user' => $user
             ], 201);
-        }
-        else
-        {
-            return response()->json(['error'=>'Unauthorized'],401);
-        }
       
     }
     public function login(Request $request)
