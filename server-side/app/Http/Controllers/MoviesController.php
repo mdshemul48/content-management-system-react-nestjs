@@ -50,21 +50,22 @@ class MoviesController extends Controller
             'type' => 'required',
             'image' => 'required',
             'category_id' => 'required',
-            'createdBy' => 'required',
 
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $post = Post::create(
+        $post = Post::create(array_merge(
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'movies'],
             ['image' => $request->input('image')],
             ['category_id' => $request->input('category_id')],
+            ['subCategory_id' => $request->input('subCategory_id')],
+            ['meta_data' => $request->input('meta_data')],
             ['createdBy' => auth()->user()->id]
-        );
+        ));
 
         $post->save();
 
