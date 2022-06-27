@@ -13,40 +13,40 @@ function NavBar() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="m-auto">
           <Nav className="m-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-            <Nav.Link href="" className="fw-bold text-dark">
+            <Nav.Link href="" className="fw-bold text-dark text-uppercase">
               Home
             </Nav.Link>
-            <NavDropdown title="Categories" id="navbarScrollingDropdown" className="fw-bold text-dark">
-              <NavDropdown.Item>English Movies</NavDropdown.Item>
-              <NavDropdown.Item>Hindi Movies</NavDropdown.Item>
-              <NavDropdown.Item>Tamil Movies</NavDropdown.Item>
-              <NavDropdown.Item>Tamil Hindi Dubbed Movies</NavDropdown.Item>
-              <NavDropdown.Item>English Hindi Dubbed</NavDropdown.Item>
-              <NavDropdown.Item>Foreign Language Movies</NavDropdown.Item>
-              <NavDropdown title="Animation Movies" className="submenu fw-normal ms-2 text-dark">
-                <NavDropdown.Item>Animation Movies 2021</NavDropdown.Item>
-                <NavDropdown.Item>Animation Movies 2022</NavDropdown.Item>
+            <NavDropdown title="Categories" id="navbarScrollingDropdown" className="fw-bold text-dark text-uppercase">
+              <NavDropdown.Item className="text-uppercase">English Movies</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">Hindi Movies</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">Tamil Movies</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">Tamil Hindi Dubbed Movies</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">English Hindi Dubbed</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">Foreign Language Movies</NavDropdown.Item>
+              <NavDropdown title="Animation Movies" className="submenu fw-normal ms-2 text-dark text-uppercase">
+                <NavDropdown.Item className="text-uppercase">Animation Movies 2021</NavDropdown.Item>
+                <NavDropdown.Item className="text-uppercase">Animation Movies 2022</NavDropdown.Item>
               </NavDropdown>
             </NavDropdown>
-            <NavDropdown title="Partner FTP" id="navbarScrollingDropdown" className="fw-bold text-dark">
-              <NavDropdown.Item>Index 1</NavDropdown.Item>
-              <NavDropdown.Item>Index 1</NavDropdown.Item>
-              <NavDropdown.Item>Index 1</NavDropdown.Item>
-              <NavDropdown.Item>Tamil Hindi Dubbed Movies</NavDropdown.Item>
-              <NavDropdown.Item>English Hindi Dubbed</NavDropdown.Item>
-              <NavDropdown.Item>Foreign Language Movies</NavDropdown.Item>
-              <NavDropdown title="Animation Movies" className="submenu fw-normal ms-2 text-dark">
-                <NavDropdown.Item>Animation Movies 2021</NavDropdown.Item>
-                <NavDropdown.Item>Animation Movies 2022</NavDropdown.Item>
+            <NavDropdown title="Partner FTP" id="navbarScrollingDropdown" className="text-uppercase fw-bold text-dark">
+              <NavDropdown.Item className="text-uppercase">Index 1</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">Index 1</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">Index 1</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">Tamil Hindi Dubbed Movies</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase">English Hindi Dubbed</NavDropdown.Item>
+              <NavDropdown.Item className="text-uppercase"> Foreign Language Movies</NavDropdown.Item>
+              <NavDropdown title="Animation Movies" className="text-uppercase submenu fw-normal ms-2 text-dark">
+                <NavDropdown.Item className="text-uppercase">Animation Movies 2021</NavDropdown.Item>
+                <NavDropdown.Item className="text-uppercase">Animation Movies 2022</NavDropdown.Item>
               </NavDropdown>
             </NavDropdown>
-            <Nav.Link href="" className="fw-bold text-dark">
+            <Nav.Link href="" className="fw-bold text-dark text-uppercase">
               Live Tv
             </Nav.Link>
-            <Nav.Link href="" className="fw-bold text-dark">
+            <Nav.Link href="" className="fw-bold text-dark text-uppercase">
               Emby
             </Nav.Link>
-            <Nav.Link href="" className="fw-bold text-dark">
+            <Nav.Link href="" className="fw-bold text-dark text-uppercase">
               Download App
             </Nav.Link>
           </Nav>

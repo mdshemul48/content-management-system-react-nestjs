@@ -1,7 +1,11 @@
 import React from "react";
-
+import LatestUpload from "./LatestUpload/LatestUpload";
 function Home() {
-  return <div>hello world this is the home</div>;
+  return (
+    <main>
+      <LatestUpload />
+    </main>
+  );
 }
 
 export default Home;
