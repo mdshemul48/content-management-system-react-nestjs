@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Validator;
+use App\Models\Post;
+use App\Models\Post_details;
+use App\Models\User;
+use App\Models\Category;
 
 class MoviesController extends Controller
 {
@@ -38,7 +45,45 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'type' => 'required',
+            'img_url' => 'required',
+            'category_id' => 'required',
+            'url' => 'required'
+           
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $post = Post::create(
+            $validator->validated(),
+            ['title' => $request->input('title')],
+            ['type' => 'movies'],
+            ['img_url' => $request->input('img_url')],
+            ['category_id' => $request->input('category_id')],
+            ['createdBy' => auth()->user()->id]
+        );
+
+        $post->save();
+
+        $post_details = Post_details::create([
+            'post_id' => $post->id,
+            'url' => $request->input('img_url'),
+            'createdBy' => auth()->user()->id
+
+        ]);
+
+        DB::table('posts')->insert([
+            'post_details_id' => $post_details->id
+        ]);
+
+        return response()->json([
+            'message' => 'post Successfully Created',
+            'post' => $post,
+            'post_details' => $post_details
+        ], 201);
     }
 
     /**

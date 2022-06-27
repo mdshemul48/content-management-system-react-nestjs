@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::group(['middleware'=>'api','namespace' => 'App\Http\Controllers', 'prefix
     Route::post('/categoryUpdate/{id}',[CategoryController::class, 'update']);
     Route::post('/categoryDelete/{id}',[CategoryController::class, 'destroy']);
     Route::get('/allcategoryInfo',[CategoryController::class, 'getAllCategoryInfo']);
+    Route::post('/createMovies',[MoviesController::class, 'store']);
+
 
 });
 
