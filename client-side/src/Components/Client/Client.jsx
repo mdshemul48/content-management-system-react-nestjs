@@ -1,12 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "../Shared/NavBar/NavBar";
+import Home from "./Home/Home";
 
 function Client() {
   return (
-    <div>
+    <>
       <NavBar />
-      <h1>this is Client page</h1>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </>
   );
 }
 
