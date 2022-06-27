@@ -1,16 +1,13 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import NavBar from "../Shared/NavBar/NavBar";
 
-import Home from './Home/Home';
-
-const Client = () => {
+function Client() {
   return (
-    <>
-      <Routes>
-        <Route path='/' element={<Home />} exact />
-      </Routes>
-    </>
+    <div>
+      <NavBar />
+      <h1>this is Client page</h1>
+    </div>
   );
-};
+}
 
 export default Client;
