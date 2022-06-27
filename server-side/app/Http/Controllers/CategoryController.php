@@ -154,7 +154,7 @@ class CategoryController extends Controller
     {
        
             $category = Category::with('subCategory')->where('type', 'mainCategory')->get();
-            return response()->auth()->user()->json([
+            return response()->json([
                 'category' => $category 
             ]);
                 
