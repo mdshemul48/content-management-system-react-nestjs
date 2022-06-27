@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class MoviesController extends Controller
 {
     public function __construct()
     {
@@ -41,14 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return  User::create([
-
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
-
-
-        ]);
+        //
     }
 
     /**
@@ -82,14 +72,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user_id = User::find($id);
-        $user_id->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
-
-
-        ]);
+        //
     }
 
     /**
@@ -100,15 +83,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-       $user = User::find($id);
-       $user->delete();
-       return $user;
-    }
-
-    public function getUser(){
-        $user = DB::table('users')->get();
-        return response()->json([
-            'category' => $user
-        ], 201);
+        //
     }
 }

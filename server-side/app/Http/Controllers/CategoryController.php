@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\Category;
+use App\Models\User;
+use Exception;
 
 
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,10 +57,13 @@ class CategoryController extends Controller
             if ($validator->fails()) {
                 return response()->json($validator->errors()->toJson(), 400);
             }
+
+            //$created_by = auth()->user()->id;
             $category = Category::create(array_merge(
                 $validator->validated(),
                 ['parent_id' => $request->input('parent_id')],
-                ['type' => $request->input('type')]
+                ['type' => $request->input('type')],
+                ['createdBy' => $request->input('createdBy')]
             ));
             return response()->json([
                 'message' => 'category Successfully Created',
@@ -134,27 +144,21 @@ class CategoryController extends Controller
         if (auth()->user()) {
             $category = Category::find($id);
             $category->delete();
-            return response()->json(['message'=> 'Deleted Successfully'],201);
-        }
-        else
-        {
+            return response()->json(['message' => 'Deleted Successfully'], 201);
+        } else {
             return response()->json(['error' => 'Unauthorized User'], 401);
         }
     }
 
     public function getAllCategoryInfo()
     {
-        if(auth()->user())
-        {
-            $category = Category::get();
-            return response()->json([
-                'category' => $category
+       
+            $category = Category::with('subCategory')->where('type', 'mainCategory')->get();
+            return response()->auth()->user()->json([
+                'category' => $category 
             ]);
-        }
-        else
-        {
-            return response()->json(['error' => 'Unauthorized User'], 401);
-        }
-        
+                
+
+
     }
 }
