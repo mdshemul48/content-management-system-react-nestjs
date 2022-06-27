@@ -11,4 +11,9 @@ class Post extends Model
     protected $fillable = [
         'title', 'type', 'image','category_id','createdBy','meta_data', 'subCategory_id',
     ];
+
+    public function post_details()
+    {
+        return $this->hasOne(Post_details::class,'post_id', 'id');
+    }
 }

@@ -32,6 +32,8 @@ Route::group(['middleware'=>'api','namespace' => 'App\Http\Controllers', 'prefix
     Route::post('/categoryDelete/{id}',[CategoryController::class, 'destroy']);
     Route::get('/allcategoryInfo',[CategoryController::class, 'getAllCategoryInfo']);
     Route::post('/createMovies',[MoviesController::class, 'store']);
+    Route::post('/deleteMovies/{id}',[MoviesController::class, 'destroy']);
+
 
 
 });

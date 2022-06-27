@@ -45,6 +45,8 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
+        // Post table validation
+
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -55,12 +57,15 @@ class MoviesController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
+        // image store on storage folder
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
             $path = $file->storeAs('public/images', $filename);
         }
+
+        //  store data on post table
 
         $post = Post::create(array_merge(
             $validator->validated(),
@@ -75,10 +80,14 @@ class MoviesController extends Controller
 
         $post->save();
 
+        // Post_details table validation
+
         $details = Validator::make($request->all(), [
             'downloadLink' => 'required',
             'post_id' => 'required'
         ]);
+
+        // store data on post_details table
 
         $post_details = Post_details::create(array_merge(
             $details->validated(),
@@ -87,6 +96,7 @@ class MoviesController extends Controller
 
         ));
 
+        // json response 
 
         return response()->json([
             'message' => 'Movies Successfully Created',
@@ -137,6 +147,19 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        DB::beginTransaction();
+
+        try {
+            DB::statement("delete from post_details where post_id=$post->id");
+            DB::statement("delete from posts where id=$post->id");
+            DB::commit();
+            return response()->json(['message' => 'Deleted Successfully'], 201);
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollback();
+            return response()->json(['message' => 'Something Wrong'], 401);
+        }
     }
 }
