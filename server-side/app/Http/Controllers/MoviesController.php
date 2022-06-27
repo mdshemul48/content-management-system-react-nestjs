@@ -48,10 +48,10 @@ class MoviesController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'type' => 'required',
-            'img_url' => 'required',
+            'image' => 'required',
             'category_id' => 'required',
-            'url' => 'required'
-           
+            'createdBy' => 'required',
+
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
@@ -61,28 +61,30 @@ class MoviesController extends Controller
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'movies'],
-            ['img_url' => $request->input('img_url')],
+            ['image' => $request->input('image')],
             ['category_id' => $request->input('category_id')],
             ['createdBy' => auth()->user()->id]
         );
 
         $post->save();
 
-        $post_details = Post_details::create([
-            'post_id' => $post->id,
-            'url' => $request->input('img_url'),
-            'createdBy' => auth()->user()->id
-
+        $details = Validator::make($request->all(), [
+            'downloadLink' => 'required',
+            'post_id' => 'required'
         ]);
 
-        DB::table('posts')->insert([
-            'post_details_id' => $post_details->id
-        ]);
+        $post_details = Post_details::create(array_merge(
+            $details->validated(),
+            ['post_id' => $post->id],
+            ['downloadLink' => $request->input('downloadLink')]
+
+        ));
+
 
         return response()->json([
-            'message' => 'post Successfully Created',
-            'post' => $post,
-            'post_details' => $post_details
+            'message' => 'Movies Successfully Created',
+            'posts' => $post,
+            'post_details' => $post_details,
         ], 201);
     }
 
