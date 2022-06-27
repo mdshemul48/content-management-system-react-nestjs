@@ -47,8 +47,7 @@ class MoviesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'type' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required',
 
         ]);
@@ -56,11 +55,18 @@ class MoviesController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $path = $file->storeAs('public/images', $filename);
+        }
+
         $post = Post::create(array_merge(
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'movies'],
-            ['image' => $request->input('image')],
+            ['image' => $path],
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
