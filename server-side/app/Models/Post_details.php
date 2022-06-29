@@ -9,7 +9,7 @@ class Post_details extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'post_id', 'downloadLink',
+        'post_id', 'downloadLink', 'part',
     ];
     
 }

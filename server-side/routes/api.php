@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GamesController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -34,6 +35,9 @@ Route::group(['middleware'=>'api','namespace' => 'App\Http\Controllers', 'prefix
     Route::post('/createMovies',[MoviesController::class, 'store']);
     Route::post('/updateMovies/{id}',[MoviesController::class, 'update']);
     Route::post('/deleteMovies/{id}',[MoviesController::class, 'destroy']);
+    Route::post('/createGames',[GamesController::class, 'store']);
+    Route::post('/updateGames/{id}',[GamesController::class, 'update']);
+    Route::post('/deleteGames/{id}',[GamesController::class, 'destroy']);
 
 
 
