@@ -32,6 +32,7 @@ Route::group(['middleware'=>'api','namespace' => 'App\Http\Controllers', 'prefix
     Route::post('/categoryDelete/{id}',[CategoryController::class, 'destroy']);
     Route::get('/allcategoryInfo',[CategoryController::class, 'getAllCategoryInfo']);
     Route::post('/createMovies',[MoviesController::class, 'store']);
+    Route::post('/updateMovies/{id}',[MoviesController::class, 'update']);
     Route::post('/deleteMovies/{id}',[MoviesController::class, 'destroy']);
 
 
@@ -41,7 +42,3 @@ Route::group(['middleware'=>'api','namespace' => 'App\Http\Controllers', 'prefix
 Route::get('/user', [
     UserController::class, 'getUser'
 ])->middleware('api');
-
-Route::post('/userCreate',[UserController::class, 'store']);
-Route::post('/userUpdate/{id}',[UserController::class, 'update']);
-Route::post('/userDelete/{id}',[UserController::class, 'destroy']);

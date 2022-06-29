@@ -136,7 +136,63 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Post table validation
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        // image store on storage folder
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $path = $file->storeAs('public/images', $filename);
+        }
+
+        //  store data on post table
+        $post_id = Post::find($id);
+
+        $post_id->update(array_merge(
+            $validator->validated(),
+            ['title' => $request->input('title')],
+            ['type' => 'movies'],
+            ['image' => $path],
+            ['category_id' => $request->input('category_id')],
+            ['subCategory_id' => $request->input('subCategory_id')],
+            ['meta_data' => $request->input('meta_data')],
+            ['createdBy' => auth()->user()->id]
+        ));
+
+        $post_id->save();
+
+        $details = Validator::make($request->all(), [
+            'downloadLink' => 'required',
+            'post_id' => 'required'
+        ]);
+
+        // store data on post_details table
+        $post_details_id = Post_details::where('post_id', $id);
+        $post_details_id->update(array_merge(
+            $details->validated(),
+            ['post_id' => $post_id->id],
+            ['downloadLink' => $request->input('downloadLink')]
+
+        ));
+
+        // json response 
+
+        return response()->json([
+            'message' => 'Movies Successfully Updated',
+            'post_id' => $post_id,
+            'post_details_id' => $post_details_id,
+        ], 201);
     }
 
     /**
