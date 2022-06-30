@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import CategoryPage from "./Components/Client/CategoryPage/CategoryPage";
-import Home from "./Components/Client/Home/Home";
+import Home from "./Components/Client/HomePage/Home";
 import NavBar from "./Components/Shared/NavBar/NavBar";
 
 import "./App.css";
