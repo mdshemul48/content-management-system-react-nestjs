@@ -5,7 +5,7 @@ import SinglePost from "../../../Shared/SinglePost/SinglePost";
 function LatestUpload() {
   return (
     <Container className="mt-5" fluid>
-      <h1 className="text-white text-center ">Latest Upload</h1>
+      <h1 className="text-white text-center bg-dark">Latest Upload</h1>
       <hr className="text-light" />
       <Row className="mt-1">
         <SinglePost />

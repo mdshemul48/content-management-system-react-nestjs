@@ -8,7 +8,7 @@ import PartnerFTPLinks from "./PartnerFTPLinks";
 
 function NavBar() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="white" expand="lg">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img src={logo} alt="Logo" height="60px" />
