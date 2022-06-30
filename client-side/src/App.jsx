@@ -7,6 +7,7 @@ import NavBar from "./Components/Shared/NavBar/NavBar";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ContentPage from "./Components/Client/ContentPage/ContentPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="category/:mainCategory" element={<CategoryPage />}>
             <Route path=":subCategory" element={<CategoryPage />} />
           </Route>
+          <Route path="content/:contentId" element={<ContentPage />} />
         </Route>
       </Routes>
     </>
