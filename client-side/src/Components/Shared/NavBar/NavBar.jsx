@@ -1,8 +1,9 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown, FormControl, Form, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, FormControl, Form, Button } from "react-bootstrap";
 
 import logo from "../../../Assets/logo.jpg";
 import MenuCategories from "./MenuCategories";
+import PartnerFTPLinks from "./PartnerFTPLinks";
 
 function NavBar() {
   return (
@@ -20,18 +21,8 @@ function NavBar() {
 
             <MenuCategories />
 
-            <NavDropdown title="Partner FTP" id="navbarScrollingDropdown" className="text-uppercase fw-bold text-dark">
-              <NavDropdown.Item className="text-uppercase">Index 1</NavDropdown.Item>
-              <NavDropdown.Item className="text-uppercase">Index 1</NavDropdown.Item>
-              <NavDropdown.Item className="text-uppercase">Index 1</NavDropdown.Item>
-              <NavDropdown.Item className="text-uppercase">Tamil Hindi Dubbed Movies</NavDropdown.Item>
-              <NavDropdown.Item className="text-uppercase">English Hindi Dubbed</NavDropdown.Item>
-              <NavDropdown.Item className="text-uppercase"> Foreign Language Movies</NavDropdown.Item>
-              <NavDropdown title="Animation Movies" className="text-uppercase submenu fw-normal ms-2 text-dark">
-                <NavDropdown.Item className="text-uppercase">Animation Movies 2021</NavDropdown.Item>
-                <NavDropdown.Item className="text-uppercase">Animation Movies 2022</NavDropdown.Item>
-              </NavDropdown>
-            </NavDropdown>
+            <PartnerFTPLinks />
+
             <Nav.Link href="" className="fw-bold text-dark text-uppercase">
               Live Tv
             </Nav.Link>
