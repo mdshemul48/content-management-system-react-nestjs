@@ -11,6 +11,13 @@ function SubCategories() {
         <SingleSubCategory />
         <SingleSubCategory />
         <SingleSubCategory />
+        <SingleSubCategory />
+        <SingleSubCategory />
+        <SingleSubCategory />
+        <SingleSubCategory />
+        <SingleSubCategory />
+        <SingleSubCategory />
+        <SingleSubCategory />
       </Row>
     </Container>
   );
