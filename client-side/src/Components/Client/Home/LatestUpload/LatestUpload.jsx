@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import SingleLatestPost from "./SingleLatestPost";
+import { Container, Row } from "react-bootstrap";
+import SinglePost from "../../../Shared/SinglePost/SinglePost";
 
 function LatestUpload() {
   return (
@@ -8,12 +8,12 @@ function LatestUpload() {
       <h1 className="text-white text-center ">Latest Upload</h1>
       <hr className="text-light" />
       <Row className="mt-1">
-        <SingleLatestPost />
-        <SingleLatestPost />
-        <SingleLatestPost />
-        <SingleLatestPost />
-        <SingleLatestPost />
-        <SingleLatestPost />
+        <SinglePost />
+        <SinglePost />
+        <SinglePost />
+        <SinglePost />
+        <SinglePost />
+        <SinglePost />
       </Row>
     </Container>
   );

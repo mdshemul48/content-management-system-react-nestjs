@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonGroup, Col, ToggleButton } from "react-bootstrap";
 
-function SingleLatestPost() {
+function SinglePost() {
   return (
     <Col xxl={2}>
       <div className="border m-2 rounded" style={{ background: "#DDDDDD" }}>
@@ -27,4 +27,4 @@ function SingleLatestPost() {
   );
 }
 
-export default SingleLatestPost;
+export default SinglePost;

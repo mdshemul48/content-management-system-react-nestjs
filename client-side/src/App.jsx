@@ -1,12 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Client from "./Components/Client/Client";
 
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import CategoryPage from "./Components/Client/CategoryPage/CategoryPage";
 import Home from "./Components/Client/Home/Home";
 import NavBar from "./Components/Shared/NavBar/NavBar";
+
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

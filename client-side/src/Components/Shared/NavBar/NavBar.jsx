@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav, FormControl, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import logo from "../../../Assets/logo.jpg";
 import MenuCategories from "./MenuCategories";
@@ -9,13 +10,13 @@ function NavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand as={Link} to="/">
           <img src={logo} alt="Logo" height="60px" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="m-auto">
           <Nav className="m-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-            <Nav.Link href="" className="fw-bold text-dark text-uppercase">
+            <Nav.Link as={Link} to="/" className="fw-bold text-dark text-uppercase">
               Home
             </Nav.Link>
 
