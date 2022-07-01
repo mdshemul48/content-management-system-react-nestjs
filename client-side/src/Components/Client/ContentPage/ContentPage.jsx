@@ -1,15 +1,46 @@
 import React from "react";
+import { Card, Container } from "react-bootstrap";
+import Plyr from "plyr-react";
+import "plyr-react/plyr.css";
 
 function ContentPage() {
   return (
-    <main className="mt-5">
-      <h1 className="text-center text-white text-bold">The Wife 2017-1080p BluRay</h1>
+    <main className="mt-5 text-center">
+      <h1 className="text-center text-white text-bolder">The Wife 2017-1080p BluRay</h1>
       <p className="text-center text-white text-bolder">March 17, 2019</p>
       <br />
-      <img
-        src="http://circleftp.net/wp-content/uploads/2019/03/MV5BNzA2Yzk4YjItZmU5OS00ZjFjLTlkNTEtMzJjZDVlOGY0OWRlXkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_UX182_CR00182268_AL_.jpg"
-        alt="this is going to be really good."
-      />
+      <Container>
+        <Card className="p-2">
+          <img
+            src="http://circleftp.net/wp-content/uploads/2022/06/MV5BMGZiZmNkZWMtMjE0OS00NzBmLWIwNjMtZmZjMWE1MjE1MTM2XkEyXkFqcGdeQXVyMTQzNTA5MzYz._V1_-1184x1754.jpg"
+            alt="this is going to be really good."
+            className="w-auto"
+          />
+        </Card>
+        <Card className="p-2 m-4">
+          <Plyr
+            source={{
+              type: "video",
+              sources: [
+                {
+                  src: "http://ftp8.circleftp.net/FILE/Animation%20Movies/2021/Motu%20Patlu%20in%20the%20Toy%20World%20%282021%29%201080p%20WEB-DL%20AAC2.0%20x264/Motu%20Patlu%20in%20the%20Toy%20World%20%282021%29%201080p%20WEB-DL%20AAC2.0%20x264.mkv",
+                  type: "video/mp4",
+                },
+              ],
+            }}
+          />
+        </Card>
+        <a
+          className="btn btn-warning btn-lg"
+          size="lg"
+          target="_blank"
+          download
+          href="http://ftp8.circleftp.net/FILE/Animation%20Movies/2021/Motu%20Patlu%20in%20the%20Toy%20World%20%282021%29%201080p%20WEB-DL%20AAC2.0%20x264/Motu%20Patlu%20in%20the%20Toy%20World%20%282021%29%201080p%20WEB-DL%20AAC2.0%20x264.mkv"
+          rel="noreferrer"
+        >
+          Download
+        </a>
+      </Container>
     </main>
   );
 }

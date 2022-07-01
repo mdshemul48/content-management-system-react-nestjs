@@ -13,15 +13,18 @@ function App() {
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route path="/">
-          <Route index element={<Home />} />
-          <Route path="category/:mainCategory" element={<CategoryPage />}>
-            <Route path=":subCategory" element={<CategoryPage />} />
+      <div style={{ marginTop: "7rem" }}>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="category/:mainCategory" element={<CategoryPage />}>
+              <Route path=":subCategory" element={<CategoryPage />} />
+            </Route>
+            <Route path="content/:contentId" element={<ContentPage />} />
           </Route>
-          <Route path="content/:contentId" element={<ContentPage />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </div>
+      <p className="bg-dark text-white mb-0 py-2 text-center mt-2 ">POWERED & DEVELOPED BY YETFIX.COM</p>
     </>
   );
 }
