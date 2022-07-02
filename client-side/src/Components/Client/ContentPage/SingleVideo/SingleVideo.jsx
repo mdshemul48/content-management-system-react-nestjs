@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
 
-const SingleVideo = () => {
+function SingleVideo() {
   return (
     <>
       <Card className="p-2 m-4">
@@ -32,6 +32,6 @@ const SingleVideo = () => {
       </a>
     </>
   );
-};
+}
 
 export default SingleVideo;
