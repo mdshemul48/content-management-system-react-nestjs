@@ -161,4 +161,15 @@ class CategoryController extends Controller
 
 
     }
+
+    public function getSubCategory($id)
+    {
+      //  $cat_id = Category::find($id);
+        $subCategory = Category::where('parent_id', $id)->get()->all();
+
+        return response()->json([
+            'subCategory' => $subCategory 
+        ]);
+
+    }
 }

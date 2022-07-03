@@ -53,6 +53,8 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
     Route::post('/createTutorials', [TutorialsController::class, 'store']);
     Route::post('/updateTutorials/{id}', [TutorialsController::class, 'update']);
     Route::post('/deleteTutorials/{id}', [TutorialsController::class, 'destroy']);
+
+    Route::get('/getSubCategory/{id}',[CategoryController::class,'getSubCategory']);
 });
 
 Route::get('/user', [
