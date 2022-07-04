@@ -2,11 +2,13 @@ import React from "react";
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function SingleSubCategory() {
+function SingleSubCategory(props) {
+  const { item } = props;
+  console.log(item.id);
   return (
     <Col>
-      <Card as={Link} to="3" className="text-decoration-none text-dark">
-        English Movie 2021
+      <Card as={Link} to={`${item.id}`} className="text-decoration-none text-dark">
+        {item.name}
       </Card>
     </Col>
   );

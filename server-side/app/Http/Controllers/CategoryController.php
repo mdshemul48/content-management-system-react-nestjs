@@ -161,10 +161,18 @@ class CategoryController extends Controller
 
     public function getSubCategory($id)
     {
+        $categoryWithSubCategory = Category::with('subCategory')->where('id', $id)->first();
 
-        $subCategory = Category::with('subCategory')->where('id', $id)->get()->all();
-        return response()->json([
-            'Categories' => $subCategory
-        ]);
+        return response()->json($categoryWithSubCategory);
+        
+    }
+
+    
+    public function getAllPostByCategory($id)
+    {
+        $categoryWithSubCategory = Category::with('subCategory')->where('id', $id)->first();
+
+        return response()->json($categoryWithSubCategory);
+        
     }
 }
