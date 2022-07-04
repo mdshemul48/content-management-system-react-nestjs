@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['getAllCategoryInfo','getSubCategory']]);
+        $this->middleware('auth:api', ['except' => ['getAllCategoryInfo', 'getSubCategory']]);
     }
     /**
      * Display a listing of the resource.
@@ -152,28 +152,19 @@ class CategoryController extends Controller
 
     public function getAllCategoryInfo()
     {
-       
-            $category = Category::with('subCategory')->where('type', 'mainCategory')->get();
-            return response()->json([
-                'category' => $category 
-            ]);
-                
 
-
+        $category = Category::with('subCategory')->where('type', 'mainCategory')->get();
+        return response()->json([
+            'category' => $category
+        ]);
     }
 
     public function getSubCategory($id)
     {
-      //  $cat_id = Category::find($id);
+
         $subCategory = Category::with('subCategory')->where('id', $id)->get()->all();
-
-       // $maincategory = Category::where('id', $id)->get();
-
         return response()->json([
-
-            //'mainCategory' => $maincategory,
-            'Categories' => $subCategory 
+            'Categories' => $subCategory
         ]);
-
     }
 }
