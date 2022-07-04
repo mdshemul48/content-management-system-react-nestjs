@@ -1,23 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import SingleSubCategory from "./SingleSubCategory";
 
-function SubCategories() {
+function SubCategories({ items }) {
   return (
     <Container className="mt-2">
       <Row lg={6} md={3} sm={6} className="g-1">
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
-        <SingleSubCategory />
+        {items.map(item => (
+          <SingleSubCategory item={item} />
+        ))}
       </Row>
     </Container>
   );
