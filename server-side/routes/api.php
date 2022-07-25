@@ -65,7 +65,7 @@ Route::group(['middleware' => 'api'],  function ($router) {
     Route::get('/getSubCategory/{id}', [CategoryController::class, 'getSubCategory']);
     Route::get('/getAllPostByCategory', [CategoryController::class, 'getAllPostByCategory']);
 
-    Route::get('/getPost', [CategoryController::class, 'getPostByID']);
+    Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
 });
 
 Route::get('/user', [

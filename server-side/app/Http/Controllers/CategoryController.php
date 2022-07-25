@@ -190,8 +190,10 @@ class CategoryController extends Controller
         return response()->json($allPostByCategory);
     }
 
-    public function getPostByID()
+    public function getPostByID($id)
     {
-        return response()->json("Hi");
+        $getPostByID = Post::with('post_details')->where('id', $id)->get();
+        return response()->json($getPostByID);
+
     }
 }
