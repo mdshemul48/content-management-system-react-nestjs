@@ -55,7 +55,10 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
     Route::post('/deleteTutorials/{id}', [TutorialsController::class, 'destroy']);
 
     Route::get('/getSubCategory/{id}',[CategoryController::class,'getSubCategory']);
+
+    Route::get('/getAllPostByCategory',[CategoryController::class,'getAllPostByCategory']);
 });
+
 
 Route::get('/user', [
     UserController::class, 'getUser'

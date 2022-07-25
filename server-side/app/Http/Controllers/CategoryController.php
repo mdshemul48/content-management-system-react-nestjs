@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 use Exception;
 
@@ -17,7 +18,10 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['getAllCategoryInfo', 'getSubCategory']]);
+        $this->middleware(
+            'auth:api',
+            ['except' => ['getAllCategoryInfo', 'getSubCategory', 'getAllPostByCategory']]
+        );
     }
     /**
      * Display a listing of the resource.
@@ -164,15 +168,25 @@ class CategoryController extends Controller
         $categoryWithSubCategory = Category::with('subCategory')->where('id', $id)->first();
 
         return response()->json($categoryWithSubCategory);
-        
     }
 
-    
-    public function getAllPostByCategory($id)
-    {
-        $categoryWithSubCategory = Category::with('subCategory')->where('id', $id)->first();
 
-        return response()->json($categoryWithSubCategory);
-        
+    public function getAllPostByCategory(Request $request)
+
+
+    {
+        if ($request->mainCategory && $request->subCategory) {
+            $allPostByCategory = Post::where('category_id', $request->mainCategory)
+                ->where('subCategory_id', $request->subCategory)
+                ->paginate(100);
+        } elseif ($request->mainCategory) {
+            $allPostByCategory = Post::where('category_id', $request->mainCategory)
+                ->paginate(100);
+        } elseif ($request->subCategory) {
+            $allPostByCategory = Post::where('subCategory_id', $request->subCategory)
+                ->paginate(100);
+        }
+
+        return response()->json($allPostByCategory);
     }
 }
