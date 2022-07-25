@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $this->middleware(
             'auth:api',
-            ['except' => ['getAllCategoryInfo', 'getSubCategory', 'getAllPostByCategory']]
+            ['except' => ['getAllCategoryInfo', 'getSubCategory', 'getAllPostByCategory', 'getPostByID']]
         );
     }
     /**
@@ -188,5 +188,10 @@ class CategoryController extends Controller
         }
 
         return response()->json($allPostByCategory);
+    }
+
+    public function getPostByID()
+    {
+        return response()->json("Hi");
     }
 }

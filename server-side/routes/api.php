@@ -26,39 +26,47 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Protected route
+
 Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'prefix' => 'admin'], function ($router) {
 
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-    
+
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::post('/categoryCreate', [CategoryController::class, 'store']);
-    Route::post('/categoryUpdate/{id}', [CategoryController::class, 'update']);
-    Route::post('/categoryDelete/{id}', [CategoryController::class, 'destroy']);
-    Route::get('/allcategoryInfo', [CategoryController::class, 'getAllCategoryInfo']);
+    Route::put('/categoryUpdate/{id}', [CategoryController::class, 'update']);
+    Route::delete('/categoryDelete/{id}', [CategoryController::class, 'destroy']);
+
 
     Route::post('/createMovies', [MoviesController::class, 'store']);
-    Route::post('/updateMovies/{id}', [MoviesController::class, 'update']);
-    Route::post('/deleteMovies/{id}', [MoviesController::class, 'destroy']);
+    Route::put('/updateMovies/{id}', [MoviesController::class, 'update']);
+    Route::delete('/deleteMovies/{id}', [MoviesController::class, 'destroy']);
 
     Route::post('/createGames', [GamesController::class, 'store']);
-    Route::post('/updateGames/{id}', [GamesController::class, 'update']);
-    Route::post('/deleteGames/{id}', [GamesController::class, 'destroy']);
+    Route::put('/updateGames/{id}', [GamesController::class, 'update']);
+    Route::delete('/deleteGames/{id}', [GamesController::class, 'destroy']);
 
     Route::post('/createSoftware', [SoftwareController::class, 'store']);
-    Route::post('/updateSoftware/{id}', [SoftwareController::class, 'update']);
-    Route::post('/deleteSoftware/{id}', [SoftwareController::class, 'destroy']);
+    Route::put('/updateSoftware/{id}', [SoftwareController::class, 'update']);
+    Route::delete('/deleteSoftware/{id}', [SoftwareController::class, 'destroy']);
 
     Route::post('/createTutorials', [TutorialsController::class, 'store']);
-    Route::post('/updateTutorials/{id}', [TutorialsController::class, 'update']);
-    Route::post('/deleteTutorials/{id}', [TutorialsController::class, 'destroy']);
-
-    Route::get('/getSubCategory/{id}',[CategoryController::class,'getSubCategory']);
-
-    Route::get('/getAllPostByCategory',[CategoryController::class,'getAllPostByCategory']);
+    Route::put('/updateTutorials/{id}', [TutorialsController::class, 'update']);
+    Route::delete('/deleteTutorials/{id}', [TutorialsController::class, 'destroy']);
 });
 
+//unprotected route
+
+Route::group(['middleware' => 'api'],  function ($router) {
+
+    Route::get('/allcategoryInfo', [CategoryController::class, 'getAllCategoryInfo']);
+    Route::get('/getSubCategory/{id}', [CategoryController::class, 'getSubCategory']);
+    Route::get('/getAllPostByCategory', [CategoryController::class, 'getAllPostByCategory']);
+
+    Route::get('/getPost', [CategoryController::class, 'getPostByID']);
+});
 
 Route::get('/user', [
     UserController::class, 'getUser'
