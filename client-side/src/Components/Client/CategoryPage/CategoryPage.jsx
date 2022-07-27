@@ -10,6 +10,7 @@ function CategoryPage() {
   const [category, setCategory] = useState({ sub_category: [] });
   const [posts, setPosts] = useState([]);
 
+  // getting sub category
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,6 +23,7 @@ function CategoryPage() {
     fetchData();
   }, [mainCategoryId]);
 
+  // fetching post for category page.
   useEffect(() => {
     const fetchData = async () => {
       try {
