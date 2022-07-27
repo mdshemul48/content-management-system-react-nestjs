@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 function SinglePost(props) {
   const { title, image } = props.item;
-  console.log(props, process.env);
   return (
     <Col xxl={2}>
       <div className="border m-2 rounded" style={{ background: "#DDDDDD" }}>
