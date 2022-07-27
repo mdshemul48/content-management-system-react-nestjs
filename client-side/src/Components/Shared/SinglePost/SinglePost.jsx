@@ -2,7 +2,9 @@ import React from "react";
 import { ButtonGroup, Col, ToggleButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function SinglePost() {
+function SinglePost(props) {
+  const { title } = props.item;
+  console.log(props);
   return (
     <Col xxl={2}>
       <div className="border m-2 rounded" style={{ background: "#DDDDDD" }}>
@@ -13,7 +15,7 @@ function SinglePost() {
               className="w-100"
               alt=""
             />
-            <h6 className="text-dark mt-2 text-center p-1 ">Westworld (TV Series 2016-)</h6>
+            <h6 className="text-dark mt-2 text-center p-1 ">{title}</h6>
           </div>
         </Link>
         <ButtonGroup className="w-100 p-1">

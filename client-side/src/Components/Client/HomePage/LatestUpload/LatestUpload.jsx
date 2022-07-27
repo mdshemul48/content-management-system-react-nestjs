@@ -8,12 +8,12 @@ function LatestUpload() {
       <h1 className="text-white text-center bg-dark">Latest Upload</h1>
       <hr className="text-light" />
       <Row className="mt-1">
+        {/* <SinglePost />
         <SinglePost />
         <SinglePost />
         <SinglePost />
         <SinglePost />
-        <SinglePost />
-        <SinglePost />
+        <SinglePost /> */}
       </Row>
     </Container>
   );
