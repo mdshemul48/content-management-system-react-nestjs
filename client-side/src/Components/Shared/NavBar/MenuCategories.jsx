@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../../utility/axiosInstance";
 import { Link } from "react-router-dom";
 import { NavDropdown } from "react-bootstrap";
 
@@ -9,13 +9,13 @@ function MenuCategories() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/admin/allcategoryInfo");
+        const response = await axiosInstance.get("/allCategoryInfo");
         const {
           data: { category },
         } = response;
         setCategories(category);
       } catch (err) {
-        alert(err);
+        console.log(err);
       }
     };
     fetchData();
