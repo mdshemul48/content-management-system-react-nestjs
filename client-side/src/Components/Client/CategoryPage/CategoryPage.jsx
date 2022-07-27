@@ -6,26 +6,30 @@ import SinglePost from "../../Shared/SinglePost/SinglePost";
 import SubCategories from "./SubCategories/SubCategories";
 
 function CategoryPage() {
-  const { mainCategory: mainCategoryId } = useParams();
+  const cetagoryIds = useParams();
+  const { mainCategory: mainCategoryId, subCategory } = cetagoryIds;
   const [category, setCategory] = useState({ sub_category: [] });
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axiosInstance.get(`/admin/getSubCategory/${mainCategoryId}`);
-      setCategory(data);
+      try {
+        const { data } = await axiosInstance.get(`/getSubCategory/${mainCategoryId}`);
+        setCategory(data);
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchData();
   }, [mainCategoryId]);
 
-  console.log(category);
   return (
     <main>
       <h1 className="text-light text-center my-3 bg-dark py-1">{category.name}</h1>
-      <SubCategories items={category.sub_category} />
+      {!subCategory && <SubCategories items={category.sub_category} />}
       <hr className="text-light" />
       <Container fluid>
         <Row>
-          {/* {category.sub_category.map(item => (
+          {/* {category.sub_category.map((item) => (
             <SinglePost item={item} key={item.id} />
           ))} */}
           <SinglePost />
