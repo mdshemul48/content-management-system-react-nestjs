@@ -192,8 +192,7 @@ class CategoryController extends Controller
 
     public function getPostByID($id)
     {
-        $getPostByID = Post::with('post_details')->where('id', $id)->get();
+        $getPostByID = Post::with('post_details')->find($id);
         return response()->json($getPostByID);
-
     }
 }

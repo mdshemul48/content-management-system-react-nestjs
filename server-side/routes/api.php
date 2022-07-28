@@ -61,7 +61,7 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
 
 Route::group(['middleware' => 'api'],  function ($router) {
 
-    Route::get('/allcategoryInfo', [CategoryController::class, 'getAllCategoryInfo']);
+    Route::get('/allCategoryInfo', [CategoryController::class, 'getAllCategoryInfo']);
     Route::get('/getSubCategory/{id}', [CategoryController::class, 'getSubCategory']);
     Route::get('/getAllPostByCategory', [CategoryController::class, 'getAllPostByCategory']);
 
