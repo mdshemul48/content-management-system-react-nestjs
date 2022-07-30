@@ -3,12 +3,15 @@ import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../../utility/axiosInstance";
 import SinglePost from "../../Shared/SinglePost/SinglePost";
+import Pagination from "./Pagination/Pagination";
 import SubCategories from "./SubCategories/SubCategories";
 
 function CategoryPage() {
   const { mainCategory: mainCategoryId, subCategory } = useParams();
   const [category, setCategory] = useState({ sub_category: [] });
   const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [paginationInfo, setPaginationInfo] = useState({});
 
   // getting sub category
   useEffect(() => {
@@ -23,6 +26,10 @@ function CategoryPage() {
     fetchData();
   }, [mainCategoryId]);
 
+  const paginationHandler = (pageNo) => {
+    setPage(pageNo);
+  };
+
   // fetching post for category page.
   useEffect(() => {
     const fetchData = async () => {
@@ -32,13 +39,19 @@ function CategoryPage() {
             subCategory ? subCategory : ""
           }`
         );
+
         setPosts(data.data);
+        setPaginationInfo({
+          from: data.from,
+          to: data.last_page,
+          active: data.current_page,
+        });
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [mainCategoryId, subCategory]);
+  }, [mainCategoryId, subCategory, page]);
 
   return (
     <main>
@@ -51,6 +64,12 @@ function CategoryPage() {
             <SinglePost item={item} key={item.id} />
           ))}
         </Row>
+        <Pagination
+          from={paginationInfo.from}
+          to={paginationInfo.to}
+          active={paginationInfo.active}
+          paginationHandler={paginationHandler}
+        />
       </Container>
     </main>
   );
