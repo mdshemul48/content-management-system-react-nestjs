@@ -15,6 +15,7 @@ import UserContext from "./Context/UserContext";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import RequireAuth from "./Components/Routes/RequireAuth";
 
 function App() {
   const user = useAuthHook();
@@ -33,7 +34,14 @@ function App() {
             </Route>
 
             <Route path="/admin">
-              <Route index element={<AdminHomePage />} />
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <AdminHomePage />
+                  </RequireAuth>
+                }
+              />
             </Route>
 
             <Route path="/login" element={<LoginPage />} />

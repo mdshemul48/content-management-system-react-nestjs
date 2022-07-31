@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 function SingleSubCategory(props) {
   const { item } = props;
-  console.log(item.id);
   return (
     <Col>
       <Card as={Link} to={`${item.id}`} className="text-decoration-none text-dark">

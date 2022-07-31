@@ -9,17 +9,12 @@ const getUserLocalStorage = () => JSON.parse(localStorage.getItem("auth"));
 const useAuth = () => {
   const [user, setUser] = useState(getUserLocalStorage());
   const login = async (email, password) => {
-    try {
-      const { data } = await axiosInstance.post("/admin/login", {
-        email,
-        password,
-      });
-      console.log(data);
-      setUser(data);
-      setUserLocalStorage(data);
-    } catch (err) {
-      return err;
-    }
+    const { data } = await axiosInstance.post("/admin/login", {
+      email,
+      password,
+    });
+    setUser(data);
+    setUserLocalStorage(data);
   };
   const logout = () => {
     setUser(null);

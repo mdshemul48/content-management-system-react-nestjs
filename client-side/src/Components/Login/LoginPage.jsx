@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import useUser from "../../Hooks/useUser";
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { login } = useUser();
   const [form, setForm] = useState({
     email: "",
@@ -12,9 +16,16 @@ function LoginPage() {
     setForm((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
   };
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
-    login(form.email, form.password);
+    try {
+      login(form.email, form.password);
+
+      const from = location.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
+    } catch ($err) {
+      console.log("hello world");
+    }
   };
 
   return (

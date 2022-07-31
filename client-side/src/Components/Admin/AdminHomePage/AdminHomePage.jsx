@@ -1,7 +1,7 @@
 import React from "react";
 
 function AdminHomePage() {
-  return <main>hello world</main>;
+  return <main className="text-white">hello world</main>;
 }
 
 export default AdminHomePage;
