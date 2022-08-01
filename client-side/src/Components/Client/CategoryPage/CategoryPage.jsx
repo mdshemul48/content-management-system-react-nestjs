@@ -35,9 +35,7 @@ function CategoryPage() {
     const fetchData = async () => {
       try {
         const { data } = await axiosInstance.get(
-          `/getAllPostByCategory?page=1&mainCategory=${mainCategoryId ? mainCategoryId : ""}&subCategory=${
-            subCategory ? subCategory : ""
-          }`
+          `/getAllPostByCategory?page=1&mainCategory=${mainCategoryId || ""}&subCategory=${subCategory || ""}`
         );
 
         setPosts(data.data);

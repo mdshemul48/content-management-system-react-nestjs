@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Tab, Table, Tabs } from "react-bootstrap";
 
-const SeriesVideo = () => {
+function SeriesVideo() {
   const [key, setKey] = useState("season-1");
 
   return (
@@ -166,6 +166,6 @@ const SeriesVideo = () => {
       </Tabs>
     </section>
   );
-};
+}
 
 export default SeriesVideo;

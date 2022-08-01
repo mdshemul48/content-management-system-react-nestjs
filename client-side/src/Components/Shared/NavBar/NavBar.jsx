@@ -3,6 +3,7 @@ import { Navbar, Container, Nav, FormControl, Form, Button } from "react-bootstr
 import { Link, useLocation } from "react-router-dom";
 
 import logo from "../../../Assets/logo.jpg";
+import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
 
@@ -37,11 +38,12 @@ function NavBar() {
                 Download App
               </Nav.Link>
             </Nav>
+            <Form className="d-flex">
+              <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search" />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+            <AdminBar />
           </Navbar.Collapse>
-          <Form className="d-flex">
-            <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search" />
-            <Button variant="outline-success">Search</Button>
-          </Form>
         </Container>
       </Navbar>
     )

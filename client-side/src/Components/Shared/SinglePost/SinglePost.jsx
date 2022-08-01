@@ -3,7 +3,9 @@ import { ButtonGroup, Col, ToggleButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function SinglePost(props) {
-  const { title, image } = props.item;
+  const {
+    item: { title, image },
+  } = props;
   return (
     <Col xxl={2}>
       <div className="border m-2 rounded" style={{ background: "#DDDDDD" }}>

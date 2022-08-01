@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import useUser from "../../Hooks/useUser";
 
 function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { login } = useUser();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const { login, user } = useUser();
+
+  if (user) {
+    return <Navigate to="/admin" replace />;
+  }
 
   const onChangeHandler = (event) => {
     setForm((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
@@ -19,12 +23,13 @@ function LoginPage() {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      login(form.email, form.password);
+      await login(form.email, form.password);
 
       const from = location.state?.from?.pathname || "/";
+      console.log(from);
       navigate(from, { replace: true });
-    } catch ($err) {
-      console.log("hello world");
+    } catch (err) {
+      console.log(err);
     }
   };
 

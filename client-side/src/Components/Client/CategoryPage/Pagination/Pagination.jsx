@@ -1,30 +1,32 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
+import { Button } from "react-bootstrap";
 
-const Pagination = ({ from, to, active, paginationHandler }) => {
-  if (to == 1) return null;
+function Pagination({ to, active, paginationHandler }) {
+  if (to === 1) return null;
 
   const paginationData = [];
-  for (let i = 1; i <= to; i++) {
+  for (let i = 1; i <= to; i += 1) {
     paginationData.push(
-      <li class={`page-item ${active == i ? "" : ""}`}>
-        <a
-          class="page-link"
-          href="#"
+      <li className={`page-item ${active === i ? "disabled" : ""}`}>
+        <Button
+          className="page-link"
           onClick={(event) => {
             event.preventDefault();
             paginationHandler(i);
           }}
         >
           {i}
-        </a>
+        </Button>
       </li>
     );
   }
   return (
     <nav>
-      <ul class="pagination pagination-md">{paginationData}</ul>
+      <ul className="pagination pagination-md">{paginationData}</ul>
     </nav>
   );
-};
+}
 
 export default Pagination;

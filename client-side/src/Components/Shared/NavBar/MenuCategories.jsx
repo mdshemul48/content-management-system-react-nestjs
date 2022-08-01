@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../../utility/axiosInstance";
 import { Link } from "react-router-dom";
 import { NavDropdown } from "react-bootstrap";
+
+import axiosInstance from "../../../utility/axiosInstance";
 
 function MenuCategories() {
   const [categories, setCategories] = useState([]);

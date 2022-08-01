@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Container } from "react-bootstrap";
 import SeriesVideo from "./SeriesVideo/SeriesVideo";
-import SingleVideo from "./SingleVideo/SingleVideo";
+// import SingleVideo from "./SingleVideo/SingleVideo";
 
 function ContentPage() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import SinglePost from "../../../Shared/SinglePost/SinglePost";
+// import SinglePost from "../../../Shared/SinglePost/SinglePost";
 
 function LatestUpload() {
   return (

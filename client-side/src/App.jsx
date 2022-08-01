@@ -4,18 +4,18 @@ import { Routes, Route } from "react-router-dom";
 import CategoryPage from "./Components/Client/CategoryPage/CategoryPage";
 import Home from "./Components/Client/HomePage/Home";
 import NavBar from "./Components/Shared/NavBar/NavBar";
-
 import ContentPage from "./Components/Client/ContentPage/ContentPage";
-import LoginPage from "./Components/Login/LoginPage";
 
+import LoginPage from "./Components/Login/LoginPage";
 import AdminHomePage from "./Components/Admin/AdminHomePage/AdminHomePage";
 
 import useAuthHook from "./Hooks/useAuthHook";
 import UserContext from "./Context/UserContext";
 
+import RequireAuth from "./Components/Routes/RequireAuth";
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import RequireAuth from "./Components/Routes/RequireAuth";
 
 function App() {
   const user = useAuthHook();
