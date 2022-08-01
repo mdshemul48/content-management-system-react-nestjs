@@ -35,7 +35,7 @@ function App() {
 
             <Route path="/admin">
               <Route
-                index
+                path="dashboard"
                 element={
                   <RequireAuth>
                     <AdminHomePage />
