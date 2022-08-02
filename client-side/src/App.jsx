@@ -33,16 +33,14 @@ function App() {
               <Route path="content/:contentId" element={<ContentPage />} />
             </Route>
 
-            <Route path="/admin">
-              <Route
-                index
-                element={
-                  <RequireAuth>
-                    <AdminPanel />
-                  </RequireAuth>
-                }
-              />
-            </Route>
+            <Route
+              path="/admin/*"
+              element={
+                <RequireAuth>
+                  <AdminPanel />
+                </RequireAuth>
+              }
+            />
 
             <Route path="/login" element={<LoginPage />} />
           </Routes>

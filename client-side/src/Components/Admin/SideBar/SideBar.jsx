@@ -6,7 +6,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 
 function SideBar() {
   return (
-    <ProSidebar>
+    <ProSidebar className="me-3">
       <Menu iconShape="square">
         <MenuItem icon={<FaLightbulb />}>Dashboard</MenuItem>
         <MenuItem icon={<FaPlus />}>Add New Post</MenuItem>
