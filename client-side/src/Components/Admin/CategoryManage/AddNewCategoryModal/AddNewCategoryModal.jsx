@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-const AddNewCategoryModal = ({ categories, show, handleClose }) => {
+const AddNewCategoryModal = ({ addCategoryHandler, categories, show, handleClose }) => {
   const [form, setForm] = useState({ name: "", parentId: "" });
 
   const onChangeHandler = (event) => {
     setForm((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
   };
-  console.log(form);
+
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    await addCategoryHandler(form);
+  };
   return (
     <Form>
       <Modal show={show} onHide={handleClose}>
@@ -23,7 +27,9 @@ const AddNewCategoryModal = ({ categories, show, handleClose }) => {
             <Form.Select name="parentId" onChange={onChangeHandler}>
               <option value="">Parent Category</option>
               {categories.map((item) => (
-                <option value={item.id}>{item.name}</option>
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
               ))}
             </Form.Select>
           </Form.Group>
@@ -32,7 +38,7 @@ const AddNewCategoryModal = ({ categories, show, handleClose }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" onClick={onSubmitHandler}>
             Submit
           </Button>
         </Modal.Footer>
