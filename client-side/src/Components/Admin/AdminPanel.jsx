@@ -11,7 +11,7 @@ function AdminHomePage() {
       <section className="bg-light w-100 me-2 rounded">
         <Routes>
           <Route index element={<Dashboard />} />
-          <Route path="category" element={<CategoryManage />} />
+          <Route path="/category" element={<CategoryManage />} />
         </Routes>
       </section>
     </main>
