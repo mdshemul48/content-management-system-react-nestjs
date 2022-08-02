@@ -8,7 +8,7 @@ function AdminHomePage() {
   return (
     <main className="d-flex">
       <SideBar />
-      <section className="bg-light w-100 me-2 rounded">
+      <section className="bg-light w-100 me-2 rounded mt-2">
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="/category" element={<CategoryManage />} />

@@ -11,10 +11,8 @@ function MenuCategories() {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get("/allCategoryInfo");
-        const {
-          data: { category },
-        } = response;
-        setCategories(category);
+        const { data } = response;
+        setCategories(data);
       } catch (err) {
         console.log(err);
       }
