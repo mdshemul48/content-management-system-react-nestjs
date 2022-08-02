@@ -53,7 +53,9 @@ function CategoryPage() {
 
   return (
     <main>
-      <h1 className="text-light text-center my-3 bg-dark py-1">{category.name}</h1>
+      <h1 className="text-light text-center my-3 bg-dark py-1">
+        {subCategory ? category.sub_category.find((sub) => sub.id === parseInt(subCategory, 10))?.name : category.name}
+      </h1>
       {!subCategory && <SubCategories items={category.sub_category} />}
       <hr className="text-light" />
       <Container fluid>
