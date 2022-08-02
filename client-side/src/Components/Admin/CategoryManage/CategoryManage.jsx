@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 import AxiosInstance from "../../../utility/axiosInstance";
-
-import SingleCategory from "./SingleCategory/SingleCategory";
+import AddNewCategoryModal from "./AddNewCategoryModal/AddNewCategoryModal";
+import CategoryTable from "./CategoryTable/CategoryTable";
 
 const CategoryManage = () => {
   const [categories, setCategories] = useState([]);
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,29 +22,13 @@ const CategoryManage = () => {
     };
     fetchData();
   }, []);
+
   return (
     <Container fluid className="mt-2">
-      <Button>Add New Category</Button>
-      <Table striped bordered hover className="mt-3 rounded">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Created By</th>
-            <th>Created At</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((item) => {
-            console.log(item.sub_category);
-            return [
-              <SingleCategory key={item.id} item={item} />,
-              item.sub_category.map((subItem) => <SingleCategory key={subItem.id} item={subItem} />),
-            ];
-          })}
-        </tbody>
-      </Table>
+      <Button onClick={handleShow}>Add New Category</Button>
+      <AddNewCategoryModal categories={categories} show={show} handleClose={handleClose} />
+
+      <CategoryTable categories={categories} />
     </Container>
   );
 };
