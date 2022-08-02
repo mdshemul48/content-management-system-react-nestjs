@@ -26,7 +26,7 @@ function AdminBar() {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item as={Link} to="/admin/dashboard">
+          <Dropdown.Item as={Link} to="/admin">
             Dashboard
           </Dropdown.Item>
           <Dropdown.Item href="#">Add New Post</Dropdown.Item>

@@ -7,7 +7,7 @@ import NavBar from "./Components/Shared/NavBar/NavBar";
 import ContentPage from "./Components/Client/ContentPage/ContentPage";
 
 import LoginPage from "./Components/Login/LoginPage";
-import AdminHomePage from "./Components/Admin/AdminHomePage/AdminHomePage";
+import AdminPanel from "./Components/Admin/AdminPanel";
 
 import useAuthHook from "./Hooks/useAuthHook";
 import UserContext from "./Context/UserContext";
@@ -23,7 +23,7 @@ function App() {
     <UserContext.Provider value={user}>
       <>
         <NavBar />
-        <div style={{ marginTop: "7rem" }}>
+        <div style={{ marginTop: "6rem" }}>
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
@@ -35,10 +35,10 @@ function App() {
 
             <Route path="/admin">
               <Route
-                path="dashboard"
+                index
                 element={
                   <RequireAuth>
-                    <AdminHomePage />
+                    <AdminPanel />
                   </RequireAuth>
                 }
               />
