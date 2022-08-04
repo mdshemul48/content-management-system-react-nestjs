@@ -67,7 +67,7 @@ class CategoryController extends Controller
                 $validator->validated(),
                 ['parent_id' => $request->input('parent_id')],
                 ['type' => $request->input('type')],
-                ['createdBy' => $request->input('createdBy')]
+                ['createdBy' => auth()->user()->id]
             ));
             return response()->json([
                 'message' => 'category Successfully Created',
@@ -124,7 +124,8 @@ class CategoryController extends Controller
                 $validator->validated(),
                 'name' => $request->input('name'),
                 'type' => $request->input('type'),
-                'parent_id' => $request->input('parent_id')
+                'parent_id' => $request->input('parent_id'),
+                
 
 
             ]);
