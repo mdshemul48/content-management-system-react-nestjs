@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import ArrowButton from "../../../Shared/ArrowButton/ArrowButton";
-// import SinglePost from "../../../Shared/SinglePost/SinglePost";
+import SinglePost from "../../../Shared/SinglePost/SinglePost";
 
 function LatestUpload() {
   return (
@@ -17,6 +17,7 @@ function LatestUpload() {
       <hr className="m-0" />
       <hr className="text-light my-1" />
       <Row className="mt-1">
+        <SinglePost />
         {/* <SinglePost />
         <SinglePost />
         <SinglePost />
