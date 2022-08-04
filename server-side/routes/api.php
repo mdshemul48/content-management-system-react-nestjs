@@ -42,7 +42,7 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
 
 
     Route::post('/createMovies', [MoviesController::class, 'store']);
-    Route::put('/updateMovies/{id}', [MoviesController::class, 'update']);
+    Route::post('/updateMovies/{id}', [MoviesController::class, 'update']);
     Route::delete('/deleteMovies/{id}', [MoviesController::class, 'destroy']);
 
     Route::post('/createGames', [GamesController::class, 'store']);
@@ -50,11 +50,11 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
     Route::delete('/deleteGames/{id}', [GamesController::class, 'destroy']);
 
     Route::post('/createSoftware', [SoftwareController::class, 'store']);
-    Route::put('/updateSoftware/{id}', [SoftwareController::class, 'update']);
+    Route::post('/updateSoftware/{id}', [SoftwareController::class, 'update']);
     Route::delete('/deleteSoftware/{id}', [SoftwareController::class, 'destroy']);
 
     Route::post('/createTutorials', [TutorialsController::class, 'store']);
-    Route::put('/updateTutorials/{id}', [TutorialsController::class, 'update']);
+    Route::post('/updateTutorials/{id}', [TutorialsController::class, 'update']);
     Route::delete('/deleteTutorials/{id}', [TutorialsController::class, 'destroy']);
 });
 
