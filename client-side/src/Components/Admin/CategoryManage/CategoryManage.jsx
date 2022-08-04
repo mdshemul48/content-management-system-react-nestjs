@@ -28,6 +28,7 @@ const CategoryManage = () => {
     const newCategory = { name, parent_id: parentId || null, type: parentId ? "subCategory" : "mainCategory" };
     try {
       const { date } = await axiosInstance.post("/admin/categoryCreate", newCategory);
+      handleClose();
       console.log(date);
     } catch (err) {
       console.log(err);
