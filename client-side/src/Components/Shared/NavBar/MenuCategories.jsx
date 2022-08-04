@@ -21,7 +21,7 @@ function MenuCategories() {
   }, []);
 
   return (
-    <NavDropdown title="Categories" id="navbarScrollingDropdown" className="fw-bold text-dark text-uppercase">
+    <NavDropdown title="Categories" id="navbarScrollingDropdown" className="fw-bold text-white text-uppercase">
       {categories.map((item) => (
         <NavDropdown.Item className="text-uppercase" as={Link} to={`/category/${item.id}`} key={item.id}>
           {item.name}

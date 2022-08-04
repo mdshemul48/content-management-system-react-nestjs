@@ -1,0 +1,12 @@
+.homeCarousel {
+  text-align: left !important;
+}
+
+.homeCarouselTitle {
+  font-size: 2.9rem;
+}
+.homeCarouselWatchButton {
+  font-family: "Poppins", sans-serif !important;
+  background-color: #f4181c !important;
+  font-size: 16px !important;
+}

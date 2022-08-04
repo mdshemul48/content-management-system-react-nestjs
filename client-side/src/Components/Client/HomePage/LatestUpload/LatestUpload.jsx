@@ -5,7 +5,8 @@ import { Container, Row } from "react-bootstrap";
 function LatestUpload() {
   return (
     <Container className="mt-5" fluid>
-      <h1 className="text-white text-center bg-dark">Latest Upload</h1>
+      <h2 className="text-white">Latest Upload</h2>
+      <hr />
       <hr className="text-light" />
       <Row className="mt-1">
         {/* <SinglePost />

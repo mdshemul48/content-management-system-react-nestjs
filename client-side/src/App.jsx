@@ -23,7 +23,7 @@ function App() {
     <UserContext.Provider value={user}>
       <>
         <NavBar />
-        <div style={{ marginTop: "6rem" }}>
+        <div>
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
