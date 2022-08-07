@@ -1,0 +1,6 @@
+.singlePost_image {
+  transition: transform 0.4s ease;
+}
+.singlePost_image:hover {
+  transform: scale(1.1);
+}

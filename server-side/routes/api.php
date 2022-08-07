@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GamesController;
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SoftwareController;
 use App\Http\Controllers\TutorialsController;
 use App\Http\Controllers\UserController;
@@ -66,6 +67,7 @@ Route::group(['middleware' => 'api'],  function ($router) {
     Route::get('/getAllPostByCategory', [CategoryController::class, 'getAllPostByCategory']);
 
     Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
+    Route::get('/search/{titel}', [PostController::class, 'search']);
 });
 
 Route::get('/user', [

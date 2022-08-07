@@ -14,6 +14,6 @@ class Post extends Model
 
     public function post_details()
     {
-        return $this->hasOne(Post_details::class,'post_id', 'id');
+        return $this->hasMany(Post_details::class,'post_id', 'id');
     }
 }

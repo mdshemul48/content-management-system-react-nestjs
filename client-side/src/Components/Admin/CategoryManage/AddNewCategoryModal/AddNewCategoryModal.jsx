@@ -13,8 +13,8 @@ const AddNewCategoryModal = ({ addCategoryHandler, categories, show, handleClose
     await addCategoryHandler(form);
   };
   return (
-    <Form>
-      <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose}>
+      <Form onSubmit={onSubmitHandler}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Category</Modal.Title>
         </Modal.Header>
@@ -38,12 +38,12 @@ const AddNewCategoryModal = ({ addCategoryHandler, categories, show, handleClose
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={onSubmitHandler}>
+          <Button variant="primary" type="submit">
             Submit
           </Button>
         </Modal.Footer>
-      </Modal>
-    </Form>
+      </Form>
+    </Modal>
   );
 };
 export default AddNewCategoryModal;
