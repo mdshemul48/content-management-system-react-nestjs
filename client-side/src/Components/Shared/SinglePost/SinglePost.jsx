@@ -6,12 +6,13 @@ function SinglePost(props) {
   const {
     item: { title, image },
   } = props;
+  console.log(image)
   return (
     <Col xxl={2}>
       <div className="border m-2 rounded" style={{ background: "#DDDDDD" }}>
         <Link to="/content/2" className="text-decoration-none">
           <div className="p-2">
-            <img src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${image}`} className="w-100" alt="" />
+            <img src={`${process.env.REAOCATICT_APP_IMAGE_FOLDER_LON}/${image}`} className="w-100" alt="" />
             <h6 className="text-dark mt-2 text-center p-1 ">{title}</h6>
           </div>
         </Link>
