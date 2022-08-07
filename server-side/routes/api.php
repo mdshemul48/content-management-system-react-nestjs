@@ -69,7 +69,7 @@ Route::group(['middleware' => 'api'],  function ($router) {
 
     Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
     Route::get('/search/{titel}', [PostController::class, 'search']);
-    Route::get('/getLatestPostByCategory/{id}', [HomepageController::class, 'getLatestPostByCategory']);
+    Route::get('/getLatestPostByCategory', [HomepageController::class, 'getLatestPostByCategory']);
     Route::get('/home', [HomepageController::class, 'index']);
 });
 
