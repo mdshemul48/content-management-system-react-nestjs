@@ -87,21 +87,21 @@ class HomepageController extends Controller
     {
         // $category_id = $request->id
 
-        $animation_movies = Post::where('category_id', 1)->latest()->take(6)->get();
-        $hindi_movies = Post::where('category_id', 2)->latest()->take(6)->get();
-        $south_indian_dubbed = Post::where('category_id', 3)->latest()->take(6)->get();
-        $south_indian_movies = Post::where('category_id', 4)->latest()->take(6)->get();
-        $hindi_tv_serial = Post::where('category_id', 5)->latest()->take(6)->get();
-        $english_movies = Post::where('category_id', 6)->latest()->take(6)->get();
-        $english_foreign_hindi_dubbed_movies = Post::where('category_id', 7)->latest()->take(6)->get();
-        $foreign_language_movies = Post::where('category_id', 8)->latest()->take(6)->get();
-        $english_foreign_tv_series = Post::where('category_id', 9)->latest()->take(6)->get();
-        $islamic = Post::where('category_id', 10)->latest()->take(6)->get();
-        $software = Post::where('category_id', 11)->latest()->take(6)->get();
-        $tutorials = Post::where('category_id', 12)->latest()->take(6)->get();
-        $pc_games = Post::where('category_id', 13)->latest()->take(6)->get();
-        $android_apps_games = Post::where('category_id', 14)->latest()->take(6)->get();
-        $wwe = Post::where('category_id', 15)->latest()->take(6)->get();
+        $animation_movies = Post::with('category')->where('category_id', 1)->latest()->take(6)->get();
+        $hindi_movies = Post::with('category')->where('category_id', 2)->latest()->take(6)->get();
+        $south_indian_dubbed = Post::with('category')->where('category_id', 3)->latest()->take(6)->get();
+        $south_indian_movies = Post::with('category')->where('category_id', 4)->latest()->take(6)->get();
+        $hindi_tv_serial = Post::with('category')->where('category_id', 5)->latest()->take(6)->get();
+        $english_movies = Post::with('category')->where('category_id', 6)->latest()->take(6)->get();
+        $english_foreign_hindi_dubbed_movies = Post::with('category')->where('category_id', 7)->latest()->take(6)->get();
+        $foreign_language_movies = Post::with('category')->where('category_id', 8)->latest()->take(6)->get();
+        $english_foreign_tv_series = Post::with('category')->where('category_id', 9)->latest()->take(6)->get();
+        $islamic = Post::with('category')->where('category_id', 10)->latest()->take(6)->get();
+        $software = Post::with('category')->where('category_id', 11)->latest()->take(6)->get();
+        $tutorials = Post::with('category')->where('category_id', 12)->latest()->take(6)->get();
+        $pc_games = Post::with('category')->where('category_id', 13)->latest()->take(6)->get();
+        $android_apps_games = Post::with('category')->where('category_id', 14)->latest()->take(6)->get();
+        $wwe = Post::with('category')->where('category_id', 15)->latest()->take(6)->get();
 
         $latest_post = Post::latest()->take(12)->get();
 
