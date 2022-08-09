@@ -3,11 +3,21 @@ import { Card, Container } from "react-bootstrap";
 import SeriesVideo from "./SeriesVideo/SeriesVideo";
 // import SingleVideo from "./SingleVideo/SingleVideo";
 
+import styles from "./ContentPage.module.css";
+
 function ContentPage() {
   return (
     <main className="mt-5 text-center">
-      <h1 className="text-center text-white text-bolder">The Wife 2017-1080p BluRay</h1>
-      <p className="text-center text-white text-bolder">March 17, 2019</p>
+      <div className={styles.contentPage_title}>
+        <h2 className="text-center text-white text-bolder">The Walk</h2>
+        <ul>
+          <li>45 Minutes</li>
+          <li>2022-02-02</li>
+          <li>Romantic</li>
+          <li>U/A 18+</li>
+        </ul>
+        <p className="text-center text-white text-bolder">March 17, 2019</p>
+      </div>
       <br />
       <Container>
         <Card className="p-2">

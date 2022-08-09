@@ -16,6 +16,7 @@ import RequireAuth from "./Components/Routes/RequireAuth";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import SearchPage from "./Components/Client/SearchPage/SearchPage";
 
 function App() {
   const user = useAuthHook();
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
+              <Route path="/search" element={<SearchPage />} />
               <Route path="category/:mainCategory" element={<CategoryPage />}>
                 <Route path=":subCategory" element={<CategoryPage />} />
               </Route>

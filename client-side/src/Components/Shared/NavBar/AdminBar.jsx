@@ -10,7 +10,6 @@ function AdminBar() {
   const navigate = useNavigate();
 
   const { user, logout } = useUser();
-  console.log(user);
 
   const logoutHandler = () => {
     logout();
