@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -83,49 +84,17 @@ class HomepageController extends Controller
         //
     }
 
-    public function getLatestPostByCategory()
+    public function getHomePagePost()
     {
-        // $category_id = $request->id
 
-        $animation_movies = Post::with('category')->where('category_id', 1)->latest()->take(6)->get();
-        $hindi_movies = Post::with('category')->where('category_id', 2)->latest()->take(6)->get();
-        $south_indian_dubbed = Post::with('category')->where('category_id', 3)->latest()->take(6)->get();
-        $south_indian_movies = Post::with('category')->where('category_id', 4)->latest()->take(6)->get();
-        $hindi_tv_serial = Post::with('category')->where('category_id', 5)->latest()->take(6)->get();
-        $english_movies = Post::with('category')->where('category_id', 6)->latest()->take(6)->get();
-        $english_foreign_hindi_dubbed_movies = Post::with('category')->where('category_id', 7)->latest()->take(6)->get();
-        $foreign_language_movies = Post::with('category')->where('category_id', 8)->latest()->take(6)->get();
-        $english_foreign_tv_series = Post::with('category')->where('category_id', 9)->latest()->take(6)->get();
-        $islamic = Post::with('category')->where('category_id', 10)->latest()->take(6)->get();
-        $software = Post::with('category')->where('category_id', 11)->latest()->take(6)->get();
-        $tutorials = Post::with('category')->where('category_id', 12)->latest()->take(6)->get();
-        $pc_games = Post::with('category')->where('category_id', 13)->latest()->take(6)->get();
-        $android_apps_games = Post::with('category')->where('category_id', 14)->latest()->take(6)->get();
-        $wwe = Post::with('category')->where('category_id', 15)->latest()->take(6)->get();
-
-        $latest_post = Post::latest()->take(12)->get();
-
-        return response()->json([
-
-            'latest_post' => $latest_post,
-            'animation_movies' => $animation_movies,
-            'hindi_movies' => $hindi_movies,
-            'south_indian_dubbed' => $south_indian_dubbed,
-            'south_indian_movies' => $south_indian_movies,
-            'hindi_tv_serial' => $hindi_tv_serial,
-            'english_movies' => $english_movies,
-            'english_foreign_hindi_dubbed_movies' => $english_foreign_hindi_dubbed_movies,
-            'foreign_language_movies' => $foreign_language_movies,
-            'english_foreign_tv_series' => $english_foreign_tv_series,
-            'islamic' => $islamic,
-            'software' => $software,
-            'tutorials' => $tutorials,
-            'pc_games' => $pc_games,
-            'android_apps_games' => $android_apps_games,
-            'wwe' => $wwe,
-
-
-
-        ], 201);
+        $homePageCategoryPost = [];
+        for ($i = 1; $i <= 15; $i++) {
+            $category = Category::with("posts")->find($i);
+            array_push($homePageCategoryPost,  $category);
+        }
+        return Response()->json([
+            "latestPost" => Post::latest()->take(12)->get(),
+            "categoryPost" => $homePageCategoryPost
+        ]);
     }
 }
