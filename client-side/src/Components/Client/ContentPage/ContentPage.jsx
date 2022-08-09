@@ -8,15 +8,16 @@ import styles from "./ContentPage.module.css";
 function ContentPage() {
   return (
     <main className="mt-5 text-center">
-      <div className={styles.contentPage_title}>
-        <h2 className="text-center text-white text-bolder">The Walk</h2>
-        <ul>
-          <li>45 Minutes</li>
-          <li>2022-02-02</li>
-          <li>Romantic</li>
-          <li>U/A 18+</li>
-        </ul>
-        <p className="text-center text-white text-bolder">March 17, 2019</p>
+      <div className={`${styles.contentPage_title} py-2`}>
+        <div className="d-flex align-items-center justify-content-center">
+          <h2 className="text-white text-bolder">The Walk</h2>
+          <ul className="d-flex text-light align-items-center">
+            <li className="list-unstyled ms-1">45 Minutes </li>
+            <li className="list-unstyled ms-1">March 17, 2019 </li>
+            <li className="list-unstyled ms-1">Romantic </li>
+            <li className="list-unstyled ms-1">U/A 18+ </li>
+          </ul>
+        </div>
       </div>
       <br />
       <Container>
