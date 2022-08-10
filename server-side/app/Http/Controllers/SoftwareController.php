@@ -75,6 +75,7 @@ class SoftwareController extends Controller
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -84,7 +85,7 @@ class SoftwareController extends Controller
 
         $details = Validator::make($request->all(), [
             'downloadLink' => 'required',
-            'post_id' => 'required'
+            'post_id' => 'required',
         ]);
 
         // store data on post_details table
@@ -93,7 +94,8 @@ class SoftwareController extends Controller
             $details->validated(),
             ['post_id' => $post->id],
             ['downloadLink' => $request->input('downloadLink')],
-            ['part' => $request->input('part')]
+            ['session' => $request->input('session')],
+            ['episode' => $request->input('episode')]
 
         ));
 
@@ -168,6 +170,7 @@ class SoftwareController extends Controller
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -175,7 +178,7 @@ class SoftwareController extends Controller
 
         $details = Validator::make($request->all(), [
             'downloadLink' => 'required',
-            'post_id' => 'required'
+            'post_id' => 'required',
         ]);
 
         // store data on post_details table
@@ -184,7 +187,8 @@ class SoftwareController extends Controller
             $details->validated(),
             ['post_id' => $post_id->id],
             ['downloadLink' => $request->input('downloadLink')],
-            ['part' => $request->input('part')]
+            ['session' => $request->input('session')],
+            ['episode' => $request->input('episode')]
 
         ));
 

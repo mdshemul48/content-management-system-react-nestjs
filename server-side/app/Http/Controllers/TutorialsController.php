@@ -75,6 +75,7 @@ class TutorialsController extends Controller
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -93,7 +94,8 @@ class TutorialsController extends Controller
             $details->validated(),
             ['post_id' => $post->id],
             ['downloadLink' => $request->input('downloadLink')],
-            ['part' => $request->input('part')]
+            ['session' => $request->input('session')],
+            ['episode' => $request->input('episode')]
 
         ));
 
@@ -168,6 +170,7 @@ class TutorialsController extends Controller
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -184,7 +187,8 @@ class TutorialsController extends Controller
             $details->validated(),
             ['post_id' => $post_id->id],
             ['downloadLink' => $request->input('downloadLink')],
-            ['part' => $request->input('part')]
+            ['session' => $request->input('session')],
+            ['episode' => $request->input('episode')]
 
         ));
 
