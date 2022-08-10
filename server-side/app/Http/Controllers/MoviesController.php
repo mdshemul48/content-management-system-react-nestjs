@@ -96,7 +96,7 @@ class MoviesController extends Controller
 
         ));
 
-        // json response 
+        // json response
 
         return response()->json([
             'message' => 'Movies Successfully Created',
@@ -186,7 +186,7 @@ class MoviesController extends Controller
 
         ));
 
-        // json response 
+        // json response
 
         return response()->json([
             'message' => 'Movies Successfully Updated',
