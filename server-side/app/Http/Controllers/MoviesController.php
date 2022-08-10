@@ -75,6 +75,9 @@ class MoviesController extends Controller
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
+            ['watch_time' => $request->input('watch_time')],
+            ['quality' => $request->input('quality')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -167,6 +170,9 @@ class MoviesController extends Controller
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
+            ['watch_time' => $request->input('watch_time')],
+            ['quality' => $request->input('quality')],
             ['createdBy' => auth()->user()->id]
         ));
 
