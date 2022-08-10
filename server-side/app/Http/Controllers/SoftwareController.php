@@ -61,8 +61,8 @@ class SoftwareController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('public/images', $filename);
+            $imageName = time() . '.' . $file->extension();
+            $path = $file->storeAs('public/images', $imageName);
         }
 
         //  store data on post table
@@ -71,7 +71,7 @@ class SoftwareController extends Controller
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'software'],
-            ['image' => $filename],
+            ['image' => $imageName],
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
@@ -155,8 +155,8 @@ class SoftwareController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('public/images', $filename);
+            $imageName = time() . '.' . $file->extension();
+            $path = $file->storeAs('public/images', $imageName);
         }
 
         //  store data on post table
@@ -166,7 +166,7 @@ class SoftwareController extends Controller
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'software'],
-            ['image' => $filename],
+            ['image' => $imageName],
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
