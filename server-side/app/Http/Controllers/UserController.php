@@ -100,12 +100,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-       $user = User::find($id);
-       $user->delete();
-       return $user;
+        $user = User::find($id);
+        $user->delete();
+        return $user;
     }
 
-    public function getUser(){
+    public function getUser()
+    {
         $user = DB::table('users')->get();
         return response()->json([
             'category' => $user

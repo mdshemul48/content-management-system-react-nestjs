@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../utility/axiosInstance";
 
 import LatestUpload from "./LatestUpload/LatestUpload";
-
 import HomeCarousel from "./HomeCarousel/HomeCarousel";
+import LatestPostInCategory from "./LatestPostInCategory/LatestPostInCategory";
 
 function Home() {
   const [categoryWithPost, setCategoryWithPost] = useState({ categoryPost: [], latestPost: [] });
@@ -16,10 +16,15 @@ function Home() {
     fetchPost();
   }, []);
 
+  console.log(categoryWithPost);
+
   return (
     <main>
       <HomeCarousel />
       <LatestUpload posts={categoryWithPost.latestPost} />
+      {categoryWithPost.categoryPost.map((categoryAndPosts) => (
+        <LatestPostInCategory item={categoryAndPosts} />
+      ))}
     </main>
   );
 }
