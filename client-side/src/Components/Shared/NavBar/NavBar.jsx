@@ -3,7 +3,7 @@ import { Navbar, Container, Nav, FormControl, Form, Button } from "react-bootstr
 import { Link, useLocation, createSearchParams, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
-import logo from "../../../Assets/logo.jpg";
+import logo from "../../../Assets/logo.png";
 import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
@@ -35,8 +35,7 @@ function NavBar() {
       <Navbar bg="black" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            {/* <img src={logo} alt="Logo" height="60px" /> */}
-            <span className="fw-bolder fs-3">Circle Network</span>
+            <img src={logo} alt="Logo" height="60px" className="rounded"/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="m-auto">
