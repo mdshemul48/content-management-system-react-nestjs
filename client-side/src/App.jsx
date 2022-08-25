@@ -5,6 +5,7 @@ import CategoryPage from "./Components/Client/CategoryPage/CategoryPage";
 import Home from "./Components/Client/HomePage/Home";
 import NavBar from "./Components/Shared/NavBar/NavBar";
 import ContentPage from "./Components/Client/ContentPage/ContentPage";
+import SearchPage from "./Components/Client/SearchPage/SearchPage";
 
 import LoginPage from "./Components/Login/LoginPage";
 import AdminPanel from "./Components/Admin/AdminPanel";
@@ -16,7 +17,6 @@ import RequireAuth from "./Components/Routes/RequireAuth";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SearchPage from "./Components/Client/SearchPage/SearchPage";
 
 function App() {
   const user = useAuthHook();

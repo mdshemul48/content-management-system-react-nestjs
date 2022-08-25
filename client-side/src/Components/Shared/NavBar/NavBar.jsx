@@ -7,28 +7,10 @@ import logo from "../../../Assets/logo.png";
 import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
-
-import styles from "./NavBar.module.css";
+import SearchBox from "./SearchBox/SearchBox";
 
 function NavBar() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const [searchText, setSearchText] = useState("");
-
-  const onChangeHandler = (event) => {
-    setSearchText(event.target.value);
-  };
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    navigate({
-      pathname: "search",
-      search: createSearchParams({
-        q: searchText,
-      }).toString(),
-    });
-  };
 
   return (
     pathname !== "/login" && (
@@ -58,23 +40,7 @@ function NavBar() {
                 Download App
               </Nav.Link>
             </Nav>
-            <Form className="d-flex ms-auto" onSubmit={onSubmitHandler}>
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className={`me-2 ${styles.searchBox}`}
-                aria-label="Search"
-                name="searchBox"
-                onChange={onChangeHandler}
-              />
-              <Button
-                variant="outline-danger"
-                type="submit"
-                className={`rounded-circle py-2 ${styles.navBar_search_button}`}
-              >
-                <FaSearch />
-              </Button>
-            </Form>
+            <SearchBox />
             <AdminBar />
           </Navbar.Collapse>
         </Container>
