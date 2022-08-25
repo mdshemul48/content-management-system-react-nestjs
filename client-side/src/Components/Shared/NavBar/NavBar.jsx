@@ -3,12 +3,12 @@ import { Navbar, Container, Nav, FormControl, Form, Button } from "react-bootstr
 import { Link, useLocation, createSearchParams, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
-import logo from "../../../Assets/logo.jpg";
+import logo from "../../../Assets/logo.png";
 import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
 
-import styles from "./NabBar.module.css";
+import styles from "./NavBar.module.css";
 
 function NavBar() {
   const { pathname } = useLocation();
@@ -35,8 +35,7 @@ function NavBar() {
       <Navbar bg="black" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            {/* <img src={logo} alt="Logo" height="60px" /> */}
-            <span className="fw-bolder fs-3">Circle Network</span>
+            <img src={logo} alt="Logo" height="60px" className="rounded" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="m-auto">
@@ -68,7 +67,11 @@ function NavBar() {
                 name="searchBox"
                 onChange={onChangeHandler}
               />
-              <Button variant="outline-danger" type="submit" className="rounded-circle py-2">
+              <Button
+                variant="outline-danger"
+                type="submit"
+                className={`rounded-circle py-2 ${styles.navBar_search_button}`}
+              >
                 <FaSearch />
               </Button>
             </Form>
