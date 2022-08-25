@@ -16,7 +16,7 @@ const SearchPage = () => {
       setSearchResult(data);
     };
     fetchPost();
-  }, []);
+  }, [search]);
 
   return (
     <main>

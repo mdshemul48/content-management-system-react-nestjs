@@ -20,8 +20,6 @@ function ContentPage() {
     fetchData();
   }, []);
 
-  console.log(contentData);
-
   return (
     contentData && (
       <main className="mt-5 text-center">
@@ -41,7 +39,7 @@ function ContentPage() {
           <Card className="p-2">
             <img
               src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${contentData.image}`}
-              alt="this is going to be really good."
+              alt={contentData.name}
               className="w-auto"
             />
           </Card>
