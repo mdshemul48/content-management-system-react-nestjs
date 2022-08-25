@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Col, ToggleButton } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import styles from "./SinglePost.module.css";
