@@ -3,7 +3,6 @@ import { Container, Row } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import axiosInstance from "../../../utility/axiosInstance";
 import SinglePost from "../../Shared/SinglePost/SinglePost";
-import Pagination from "../CategoryPage/Pagination/Pagination";
 
 const SearchPage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -16,7 +15,7 @@ const SearchPage = () => {
       setSearchResult(data);
     };
     fetchPost();
-  }, []);
+  }, [search]);
 
   return (
     <main>

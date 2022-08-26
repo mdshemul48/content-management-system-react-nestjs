@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     //
-    public function search($titel){
-        $result = Post::with('post_details')->where('title','like','%'.$titel.'%')->get();
-        // $result = Post::with('post_details')->whereFuzzy('title',$titel)->get();
+    public function search($title)
+    {
+        $result = Post::with('post_details')->where('title', 'like', '%' . $title . '%')->get();
 
         // dd($result);
         return response()->json($result);
