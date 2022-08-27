@@ -3,40 +3,21 @@ import { Navbar, Container, Nav, FormControl, Form, Button } from "react-bootstr
 import { Link, useLocation, createSearchParams, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
-import logo from "../../../Assets/logo.jpg";
+import logo from "../../../Assets/logo.png";
 import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
-
-import styles from "./NabBar.module.css";
+import SearchBox from "./SearchBox/SearchBox";
 
 function NavBar() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const [searchText, setSearchText] = useState("");
-
-  const onChangeHandler = (event) => {
-    setSearchText(event.target.value);
-  };
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    navigate({
-      pathname: "search",
-      search: createSearchParams({
-        q: searchText,
-      }).toString(),
-    });
-  };
 
   return (
     pathname !== "/login" && (
       <Navbar bg="black" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            {/* <img src={logo} alt="Logo" height="60px" /> */}
-            <span className="fw-bolder fs-3">Circle Network</span>
+            <img src={logo} alt="Logo" height="60px" className="rounded" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="m-auto">
@@ -59,19 +40,7 @@ function NavBar() {
                 Download App
               </Nav.Link>
             </Nav>
-            <Form className="d-flex ms-auto" onSubmit={onSubmitHandler}>
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className={`me-2 ${styles.searchBox}`}
-                aria-label="Search"
-                name="searchBox"
-                onChange={onChangeHandler}
-              />
-              <Button variant="outline-danger" type="submit" className="rounded-circle py-2">
-                <FaSearch />
-              </Button>
-            </Form>
+            <SearchBox />
             <AdminBar />
           </Navbar.Collapse>
         </Container>

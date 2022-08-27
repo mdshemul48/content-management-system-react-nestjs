@@ -68,7 +68,7 @@ Route::group(['middleware' => 'api'],  function ($router) {
     Route::get('/getAllPostByCategory', [CategoryController::class, 'getAllPostByCategory']);
 
     Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
-    Route::get('/search/{titel}', [PostController::class, 'search']);
+    Route::get('/search/{title}', [PostController::class, 'search']);
     Route::get('/getHomePagePost', [HomepageController::class, 'getHomePagePost']);
     Route::get('/home', [HomepageController::class, 'index']);
 });

@@ -1,18 +1,18 @@
 import React from "react";
-import { Button, ButtonGroup, Col, ToggleButton } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import styles from "./SinglePost.module.css";
 
-function SinglePost({ item: { title, image, name, quality, watch_time, id } }) {
+function SinglePost({ item: { image, name, quality, id } }) {
   return (
-    <Col xxl={2}>
+    <Col xxl={2} lg={3}>
       <div className={`rounded ${styles.singlePost_card} p-1 m-1`}>
         <Link to={`/content/${id}`} className="text-decoration-none">
           <div className="overflow-hidden d-flex justify-content-center  align-items-end rounded">
             <img
               src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${image}`}
-              className={`w-100 ${styles.singlePost_image} rounded`}
+              className={`${styles.singlePost_image} rounded`}
               alt=""
             />
             <div className={`text-center ${styles.singlePost_text}`}>

@@ -3,8 +3,9 @@ import { Button } from "react-bootstrap";
 
 import styles from "./ArrowButton.module.css";
 
-const ArrowButton = ({ children }) => (
-  <Button variant="outline-dark" className={`${styles.arrowButton} ms-1`}>
+const ArrowButton = ({ children, ...props }) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Button {...props} variant="outline-dark" className={`${styles.arrowButton} ms-1`}>
     {children}
   </Button>
 );

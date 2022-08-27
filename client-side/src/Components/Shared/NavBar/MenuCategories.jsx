@@ -4,6 +4,8 @@ import { NavDropdown } from "react-bootstrap";
 
 import axiosInstance from "../../../utility/axiosInstance";
 
+import "./MenuCategories.css";
+
 function MenuCategories() {
   const [categories, setCategories] = useState([]);
 
@@ -21,7 +23,7 @@ function MenuCategories() {
   }, []);
 
   return (
-    <NavDropdown title="Categories" id="navbarScrollingDropdown" className="fw-bold text-white text-uppercase">
+    <NavDropdown title="Categories" id="navbarScrollingDropdown" className="text-uppercase">
       {categories.map((item) => (
         <NavDropdown.Item className="text-uppercase" as={Link} to={`/category/${item.id}`} key={item.id}>
           {item.name}

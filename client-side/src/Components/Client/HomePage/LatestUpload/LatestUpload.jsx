@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import ArrowButton from "../../../Shared/ArrowButton/ArrowButton";
 import SinglePost from "../../../Shared/SinglePost/SinglePost";
 
