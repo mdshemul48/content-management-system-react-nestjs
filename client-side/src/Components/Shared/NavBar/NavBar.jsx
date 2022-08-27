@@ -21,7 +21,7 @@ function NavBar() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="m-auto">
-            <Nav className="mx-auto my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
+            <Nav className="mx-auto my-lg-0">
               <Nav.Link as={Link} to="/" className="text-white fw-normal text-uppercase">
                 Home
               </Nav.Link>
