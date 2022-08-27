@@ -15,13 +15,13 @@ function NavBar() {
   return (
     pathname !== "/login" && (
       <Navbar bg="black" variant="dark" expand="lg">
-        <Container fluid>
+        <Container fluid style={{ paddingInline: "73px" }}>
           <Navbar.Brand as={Link} to="/">
             <img src={logo} alt="Logo" height="60px" className="rounded" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="m-auto">
-            <Nav className=" my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
+            <Nav className="mx-auto my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
               <Nav.Link as={Link} to="/" className="text-white fw-normal text-uppercase">
                 Home
               </Nav.Link>
