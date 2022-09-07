@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FormControl, Form, Button } from "react-bootstrap";
+import { FormControl, Form, Button, Row, Col } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
 import styles from "./SearchBox.module.css";
+import SearchBoxInput from "./SearchBoxInput";
 
 const SearchBox = () => {
   const navigate = useNavigate();
@@ -24,19 +25,22 @@ const SearchBox = () => {
   };
 
   return (
-    <Form className="d-flex ms-auto" onSubmit={onSubmitHandler}>
-      <FormControl
-        type="search"
-        placeholder="Search"
-        className={`me-2 ${styles.searchBox}`}
-        aria-label="Search"
-        name="searchBox"
-        onChange={onChangeHandler}
-      />
-      <Button variant="outline-danger" type="submit" className={`rounded-circle py-2 ${styles.navBar_search_button}`}>
-        <FaSearch />
-      </Button>
-    </Form>
+    <form onSubmit={onSubmitHandler}>
+      <Row>
+        <Col lg={11} sm={10} xs={10}>
+          <SearchBoxInput />
+        </Col>
+        <Col lg={1} sm={2} xs={2}>
+          <Button
+            variant="outline-danger"
+            type="submit"
+            className={`rounded-circle py-2 ${styles.navBar_search_button}`}
+          >
+            <FaSearch />
+          </Button>
+        </Col>
+      </Row>
+    </form>
   );
 };
 

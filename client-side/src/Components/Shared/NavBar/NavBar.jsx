@@ -8,6 +8,7 @@ import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
 import SearchBox from "./SearchBox/SearchBox";
+import SearchBoxBeta from "./SearchBox/SearchBoxInput";
 
 function NavBar() {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ function NavBar() {
               </Nav.Link>
             </Nav>
             <SearchBox />
+            {/* <SearchBoxBeta /> */}
             <AdminBar />
           </Navbar.Collapse>
         </Container>
