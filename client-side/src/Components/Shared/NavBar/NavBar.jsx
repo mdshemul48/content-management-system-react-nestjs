@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
 
 import logo from "../../../Assets/logo.png";
 import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
 import SearchBox from "./SearchBox/SearchBox";
-import SearchBoxBeta from "./SearchBox/SearchBoxInput";
 
 function NavBar() {
   const { pathname } = useLocation();
@@ -42,7 +40,6 @@ function NavBar() {
               </Nav.Link>
             </Nav>
             <SearchBox />
-            {/* <SearchBoxBeta /> */}
             <AdminBar />
           </Navbar.Collapse>
         </Container>

@@ -27,7 +27,7 @@ const SearchBox = () => {
   return (
     <form onSubmit={onSubmitHandler}>
       <Row>
-        <Col lg={11} sm={10} xs={10}>
+        <Col lg={9} sm={10} xs={10}>
           <SearchBoxInput setSearchQuery={setSearchText} />
         </Col>
         <Col lg={1} sm={2} xs={2}>
