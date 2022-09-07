@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Navbar, Container, Nav, FormControl, Form, Button } from "react-bootstrap";
-import { Link, useLocation, createSearchParams, useNavigate } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
 import logo from "../../../Assets/logo.png";

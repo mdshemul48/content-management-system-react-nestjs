@@ -1,22 +1,18 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import axiosInstance from "../../../../utility/axiosInstance";
 
-const SEARCH_URI = "https://api.github.com/search/users";
-
-const SearchBoxInput = () => {
+const SearchBoxInput = ({ setSearchQuery }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
 
-  const handleSearch = (query) => {
+  const handleSearch = async (query) => {
+    setSearchQuery(query);
     setIsLoading(true);
-
-    fetch(`${SEARCH_URI}?q=${query}+in:login&page=1&per_page=50`)
-      .then((resp) => resp.json())
-      .then(({ items }) => {
-        setOptions(items);
-        setIsLoading(false);
-      });
+    const { data } = await axiosInstance.get(`/getSuggestion?target=${query}`);
+    setOptions(data[1]);
+    setIsLoading(false);
   };
 
   const filterBy = () => true;
@@ -30,21 +26,11 @@ const SearchBoxInput = () => {
       minLength={3}
       onSearch={handleSearch}
       options={options}
-      placeholder="Search for a Github user..."
-      renderMenuItemChildren={(option) => (
-        <>
-          <img
-            alt={option.login}
-            src={option.avatar_url}
-            style={{
-              height: "24px",
-              marginRight: "10px",
-              width: "24px",
-            }}
-          />
-          <span>{option.login}</span>
-        </>
-      )}
+      onChange={(value) => {
+        setSearchQuery(value[0]);
+      }}
+      placeholder="Search for Anything..."
+      renderMenuItemChildren={(option) => <span>{option}</span>}
     />
   );
 };
