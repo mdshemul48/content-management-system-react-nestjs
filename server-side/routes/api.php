@@ -11,6 +11,7 @@ use App\Http\Controllers\SoftwareController;
 use App\Http\Controllers\TutorialsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,11 @@ Route::group(['middleware' => 'api'],  function ($router) {
     Route::get('/search/{title}', [PostController::class, 'search']);
     Route::get('/getHomePagePost', [HomepageController::class, 'getHomePagePost']);
     Route::get('/home', [HomepageController::class, 'index']);
+    Route::get("/getSuggestion", function (Request $request) {
+        $query = $request->query("target");
+        $response = Http::get("http://suggestqueries.google.com/complete/search?client=firefox&q=$query");
+        return Response()->json($response->json());
+    });
 });
 
 Route::get('/user', [
