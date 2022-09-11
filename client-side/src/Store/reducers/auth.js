@@ -30,8 +30,8 @@ if (userToken) {
 
 const reducers = {
   login: (state, action) => {
-    const { token } = action.payload;
-    state.user = decodeJWT(token);
+    const { token, user } = action.payload;
+    state.user = user;
     state.token = token;
     return state;
   },

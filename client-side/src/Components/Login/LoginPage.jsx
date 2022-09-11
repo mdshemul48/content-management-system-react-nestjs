@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
+
+import { loginMathod } from "../../Store/asyncMethods/authMethods";
 import useUser from "../../Hooks/useUser";
 
 function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -23,10 +27,8 @@ function LoginPage() {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      await login(form.email, form.password);
-
+      dispatch(loginMathod(form));
       const from = location.state?.from?.pathname || "/";
-      console.log(from);
       navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
