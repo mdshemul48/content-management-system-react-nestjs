@@ -18,8 +18,8 @@
           "jsx-a11y/anchor-is-valid" :0,
           "react/style-prop-object":0,
           "react/function-component-definition":0,
-
-          "no-unused-vars" :0
+          "no-unused-vars" :0,
+          "no-param-reassign": 0
     }
     
 }
