@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
-import { loginMathod } from "../../Store/asyncMethods/authMethods";
+import { loginMethod } from "../../Store/asyncMethods/authMethods";
 import useUser from "../../Hooks/useUser";
 
 function LoginPage() {
@@ -27,9 +27,9 @@ function LoginPage() {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      dispatch(loginMathod(form));
+      dispatch(loginMethod(form));
       const from = location.state?.from?.pathname || "/";
-      navigate(from, { replace: true });
+      // navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
     }
