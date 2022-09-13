@@ -29,7 +29,7 @@ function LoginPage() {
     try {
       dispatch(loginMethod(form));
       const from = location.state?.from?.pathname || "/";
-      // navigate(from, { replace: true });
+      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
     }
