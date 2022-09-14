@@ -62,7 +62,7 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
 
     //Tv series
     // Route::apiResource('tvSeries', TvSeriesController::class);
-    Route::post('/tvSeries', [TvSeriesController::class,'store']);
+    Route::post('/tvSeriesCreate', [TvSeriesController::class,'store']);
 
 });
 

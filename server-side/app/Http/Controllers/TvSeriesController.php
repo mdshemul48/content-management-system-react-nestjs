@@ -26,7 +26,7 @@ class TvSeriesController extends Controller
      */
     public function store(Request $request)
     {
-        return ["result"=>"pass"];
+
         if($request->name == null){
             return response()->json(['error' => 'Name is required'], 400);
         }
@@ -37,9 +37,11 @@ class TvSeriesController extends Controller
 
         if ($request->hasFile('poster')) {
             $file = $request->file('poster');
-            $filename = $file->getClientOriginalName();
+            $filename = time() . '.' . $file->extension();
             $path = $file->storeAs('public/images', $filename);
         }
+
+       
 
         $post = new Post();
 
@@ -53,17 +55,22 @@ class TvSeriesController extends Controller
         $post->save();
 
         $contents = json_decode($request->contents);
-        foreach($contents as $item){
 
-            $post_details = new Post_details();
-            $post_details->post_id = $post->id;
-            $post_details->downloadLink = $item->link;
-            $post_details->session = $item->seasonName;
-            $post_details->episode = $item->title;
-            $post_details->part = $item->id;
-            $post_details->title = $item->id;
-            $post_details->save();
+        foreach($contents as $key=>$item){
+
+            foreach($item->episodes as $item_key=>$episodes){
+
+                $post_details = new Post_details();
+                $post_details->post_id = $post->id;
+                $post_details->downloadLink = $episodes->link;
+                $post_details->session = $item->seasonName;
+                $post_details->episode = $episodes->title;
+
+                $post_details->save();
+            }
         }
+
+        return response()->json([ 'message' => 'TvSeries Successfully Created', 'category' => Post::with('post_details')->find($post->id) ], 201);
 
 
     }
