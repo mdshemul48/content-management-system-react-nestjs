@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import CategoryPage from "./Components/Client/CategoryPage/CategoryPage";
 import Home from "./Components/Client/HomePage/Home";
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <NavBar />
+      <Toaster position="top-right" reverseOrder />
       <div>
         <Routes>
           <Route path="/">

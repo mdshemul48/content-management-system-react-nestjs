@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
@@ -25,9 +26,9 @@ function LoginPage() {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     dispatch(
-      loginMethod(form, (error) => {
-        if (error) {
-          console.log(error);
+      loginMethod(form, (errorMessage) => {
+        if (errorMessage) {
+          toast.error(errorMessage.error);
         } else {
           const from = location.state?.from?.pathname || "/";
           navigate(from, { replace: true });
