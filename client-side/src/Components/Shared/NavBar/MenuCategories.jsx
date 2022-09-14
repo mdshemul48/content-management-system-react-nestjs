@@ -1,27 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { NavDropdown } from "react-bootstrap";
-
-import axiosInstance from "../../../utility/axiosInstance";
+import { useSelector } from "react-redux";
 
 import "./MenuCategories.css";
 
 function MenuCategories() {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get("/allCategoryInfo");
-        const { data } = response;
-        setCategories(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
-
+  const { categories } = useSelector((state) => state.categories);
   return (
     <NavDropdown title="Categories" id="navbarScrollingDropdown" className="text-uppercase">
       {categories.map((item) => (
