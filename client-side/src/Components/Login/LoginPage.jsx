@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 import { loginMethod } from "../../Store/asyncMethods/authMethods";
-import useUser from "../../Hooks/useUser";
 
 function LoginPage() {
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -13,8 +13,6 @@ function LoginPage() {
     email: "",
     password: "",
   });
-
-  const { login, user } = useUser();
 
   if (user) {
     return <Navigate to="/admin" replace />;
