@@ -26,6 +26,7 @@ const reducers = {
   logout: (state) => {
     state.user = "";
     state.token = "";
+    localStorage.removeItem("userInfo");
     return state;
   },
 };

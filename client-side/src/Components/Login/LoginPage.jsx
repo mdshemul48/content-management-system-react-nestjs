@@ -26,13 +26,16 @@ function LoginPage() {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    try {
-      dispatch(loginMethod(form));
-      const from = location.state?.from?.pathname || "/";
-      navigate(from, { replace: true });
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(
+      loginMethod(form, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          const from = location.state?.from?.pathname || "/";
+          navigate(from, { replace: true });
+        }
+      })
+    );
   };
 
   return (
