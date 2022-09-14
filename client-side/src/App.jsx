@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 import CategoryPage from "./Components/Client/CategoryPage/CategoryPage";
 import Home from "./Components/Client/HomePage/Home";
@@ -13,10 +14,16 @@ import AdminPanel from "./Components/Admin/AdminPanel";
 
 import RequireAuth from "./Components/Routes/RequireAuth";
 
+import { getCategoriesMethod } from "./Store/asyncMethods/categoriesMethod";
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategoriesMethod());
+  }, []);
   return (
     <>
       <NavBar />

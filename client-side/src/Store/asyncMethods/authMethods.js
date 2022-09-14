@@ -1,5 +1,5 @@
 import axiosInstance from "../../utility/axiosInstance";
-import { login, logout } from "../reducers/auth";
+import { login } from "../reducers/auth";
 
 export const loginMethod = (loginInfo, callback) => async (dispatch) => {
   try {
