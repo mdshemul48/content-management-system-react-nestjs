@@ -20,6 +20,5 @@ class JwtMiddleware
     {
         $user = JWTAuth::parseToken()->authenticate();
         return $next($request);
-        
     }
 }

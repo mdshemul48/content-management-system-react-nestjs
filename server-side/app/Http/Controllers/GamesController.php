@@ -61,8 +61,8 @@ class GamesController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('public/images', $filename);
+            $imageName = time() . '.' . $file->extension();
+            $path = $file->storeAs('public/images', $imageName);
         }
 
         //  store data on post table
@@ -71,10 +71,11 @@ class GamesController extends Controller
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'games'],
-            ['image' => $filename],
+            ['image' => $imageName],
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -84,7 +85,9 @@ class GamesController extends Controller
 
         $details = Validator::make($request->all(), [
             'downloadLink' => 'required',
-            'post_id' => 'required'
+            'post_id' => 'required',
+            'session' => 'required',
+            'episode' => 'required'
         ]);
 
         // store data on post_details table
@@ -93,7 +96,8 @@ class GamesController extends Controller
             $details->validated(),
             ['post_id' => $post->id],
             ['downloadLink' => $request->input('downloadLink')],
-            ['part' => $request->input('part')]
+            ['session' => $request->input('session')],
+            ['episode' => $request->input('episode')]
 
         ));
 
@@ -153,8 +157,8 @@ class GamesController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('public/images', $filename);
+            $imageName = time() . '.' . $file->extension();
+            $path = $file->storeAs('public/images', $imageName);
         }
 
         //  store data on post table
@@ -164,10 +168,11 @@ class GamesController extends Controller
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'games'],
-            ['image' => $filename],
+            ['image' => $imageName],
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -175,7 +180,7 @@ class GamesController extends Controller
 
         $details = Validator::make($request->all(), [
             'downloadLink' => 'required',
-            'post_id' => 'required'
+            'post_id' => 'required',
         ]);
 
         // store data on post_details table
@@ -184,7 +189,8 @@ class GamesController extends Controller
             $details->validated(),
             ['post_id' => $post_id->id],
             ['downloadLink' => $request->input('downloadLink')],
-            ['part' => $request->input('part')]
+            ['session' => $request->input('session')],
+            ['episode' => $request->input('episode')]
 
         ));
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import useUser from "../../Hooks/useUser";
+import { useSelector } from "react-redux";
 
 function RequireAuth({ children }) {
-  const { user } = useUser();
+  const { user } = useSelector((state) => state.auth);
   const location = useLocation();
 
   if (!user) {

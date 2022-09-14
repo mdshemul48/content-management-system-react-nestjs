@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
-import axiosInstance from "../../../utility/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddNewCategoryModal from "./AddNewCategoryModal/AddNewCategoryModal";
 import CategoryTable from "./CategoryTable/CategoryTable";
 
+import { addNewCategory } from "../../../Store/asyncMethods/categoriesMethod";
+
 const CategoryManage = () => {
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.categories);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axiosInstance.get("/allCategoryInfo");
-        setCategories(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
-
   const addCategoryHandler = async ({ name, parentId }) => {
     const newCategory = { name, parent_id: parentId || null, type: parentId ? "subCategory" : "mainCategory" };
-    try {
-      const { date } = await axiosInstance.post("/admin/categoryCreate", newCategory);
-      console.log(date);
-    } catch (err) {
-      console.log(err);
-    }
+
+    dispatch(addNewCategory(newCategory, handleClose));
   };
 
   return (

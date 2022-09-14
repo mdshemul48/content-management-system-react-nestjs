@@ -1,0 +1,6 @@
+.searchBox {
+  border-radius: 25px !important;
+}
+.navBar_search_button:hover {
+  background-color: #f4181c !important;
+}

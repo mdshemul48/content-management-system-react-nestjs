@@ -52,7 +52,8 @@ class TvSeriesController extends Controller
         $post->meta_data = $request->meta_data;
         $post->save();
 
-        foreach($request->content as $item){
+        $contents = json_decode($request->contents);
+        foreach($contents as $item){
 
             $post_details = new Post_details();
             $post_details->post_id = $post->id;

@@ -1,16 +1,19 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
-import useUser from "../../Hooks/useUser";
+
+import { loginMethod } from "../../Store/asyncMethods/authMethods";
 
 function LoginPage() {
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
-  const { login, user } = useUser();
 
   if (user) {
     return <Navigate to="/admin" replace />;
@@ -22,15 +25,16 @@ function LoginPage() {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    try {
-      await login(form.email, form.password);
-
-      const from = location.state?.from?.pathname || "/";
-      console.log(from);
-      navigate(from, { replace: true });
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(
+      loginMethod(form, (errorMessage) => {
+        if (errorMessage) {
+          toast.error(errorMessage.error);
+        } else {
+          const from = location.state?.from?.pathname || "/";
+          navigate(from, { replace: true });
+        }
+      })
+    );
   };
 
   return (

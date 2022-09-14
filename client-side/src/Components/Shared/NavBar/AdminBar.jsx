@@ -3,17 +3,16 @@ import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { FaUserAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-
-import useUser from "../../../Hooks/useUser";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../../Store/reducers/auth";
 
 function AdminBar() {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, logout } = useUser();
-  console.log(user);
-
   const logoutHandler = () => {
-    logout();
+    dispatch(logout());
     navigate("/", { replace: true });
   };
 
@@ -22,7 +21,7 @@ function AdminBar() {
       <Dropdown className="ms-2 me-5">
         <Dropdown.Toggle variant="light" id="dropdown-basic">
           <FaUserAlt className="fs-4 text-secondary" />
-          <span className="ms-1">{user?.user?.name}</span>
+          <span className="ms-1">{user?.name}</span>
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

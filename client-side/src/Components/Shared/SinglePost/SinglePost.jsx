@@ -1,28 +1,29 @@
 import React from "react";
-import { ButtonGroup, Col, ToggleButton } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function SinglePost(props) {
-  const {
-    item: { title, image },
-  } = props;
+import styles from "./SinglePost.module.css";
+
+function SinglePost({ item: { image, name, quality, id } }) {
   return (
-    <Col xxl={2}>
-      <div className="border m-2 rounded" style={{ background: "#DDDDDD" }}>
-        <Link to="/content/2" className="text-decoration-none">
-          <div className="p-2">
-            <img src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${image}`} className="w-100" alt="" />
-            <h6 className="text-dark mt-2 text-center p-1 ">{title}</h6>
+    <Col xxl={2} lg={3}>
+      <div className={`rounded ${styles.singlePost_card} p-1 m-1`}>
+        <Link to={`/content/${id}`} className="text-decoration-none">
+          <div className="overflow-hidden d-flex justify-content-center  align-items-end rounded">
+            <img
+              src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${image}`}
+              className={`${styles.singlePost_image} rounded`}
+              alt=""
+            />
+            <div className={`text-center ${styles.singlePost_text}`}>
+              <h3 className="fs-5 text-white">{name}</h3>
+              <p className="text-white">Quality : {quality}</p>
+              <Button variant="danger" className="rounded-0 mb-2">
+                Watch Now
+              </Button>
+            </div>
           </div>
         </Link>
-        <ButtonGroup className="w-100 p-1">
-          <ToggleButton variant="danger" className="rounded-0">
-            Play
-          </ToggleButton>
-          <ToggleButton variant="success" className="rounded-0">
-            Download
-          </ToggleButton>
-        </ButtonGroup>
       </div>
     </Col>
   );

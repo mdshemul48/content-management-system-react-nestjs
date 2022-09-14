@@ -1,26 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Card, Container } from "react-bootstrap";
-import SeriesVideo from "./SeriesVideo/SeriesVideo";
-// import SingleVideo from "./SingleVideo/SingleVideo";
+
+import axiosInstance from "../../../utility/axiosInstance";
+// import SeriesVideo from "./SeriesVideo/SeriesVideo";
+import SingleVideo from "./SingleVideo/SingleVideo";
+
+import styles from "./ContentPage.module.css";
 
 function ContentPage() {
+  const { contentId } = useParams();
+  const [contentData, setContentData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axiosInstance.get(`/getPost/${contentId}`);
+      setContentData(data);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <main className="mt-5 text-center">
-      <h1 className="text-center text-white text-bolder">The Wife 2017-1080p BluRay</h1>
-      <p className="text-center text-white text-bolder">March 17, 2019</p>
-      <br />
-      <Container>
-        <Card className="p-2">
-          <img
-            src="http://circleftp.net/wp-content/uploads/2022/06/MV5BMGZiZmNkZWMtMjE0OS00NzBmLWIwNjMtZmZjMWE1MjE1MTM2XkEyXkFqcGdeQXVyMTQzNTA5MzYz._V1_-1184x1754.jpg"
-            alt="this is going to be really good."
-            className="w-auto"
-          />
-        </Card>
-        {/* <SingleVideo /> */}
-        <SeriesVideo />
-      </Container>
-    </main>
+    contentData && (
+      <main className="mt-5 text-center">
+        <div className={`${styles.contentPage_title} py-2`}>
+          <div className="d-flex align-items-center justify-content-center">
+            <h2 className="text-white text-bolder">{contentData.name}</h2>
+            <ul className="d-flex text-light align-items-center">
+              <li className="list-unstyled ms-1">{contentData.watch_time}</li>
+              <li className="list-unstyled ms-1">March 17, 2019 </li>
+              <li className="list-unstyled ms-1">Romantic </li>
+              <li className="list-unstyled ms-1">U/A 18+ </li>
+            </ul>
+          </div>
+        </div>
+        <br />
+        <Container>
+          <Card className="p-2">
+            <img
+              src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${contentData.image}`}
+              alt={contentData.name}
+              className="w-auto"
+            />
+          </Card>
+          <SingleVideo link={contentData?.post_details[0]?.downloadLink} />
+          {/* <SeriesVideo /> */}
+        </Container>
+      </main>
+    )
   );
 }
 

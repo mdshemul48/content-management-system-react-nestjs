@@ -61,8 +61,8 @@ class MoviesController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('public/images', $filename);
+            $imageName = time() . '.' . $file->extension();
+            $path = $file->storeAs('public/images', $imageName);
         }
 
         //  store data on post table
@@ -71,10 +71,13 @@ class MoviesController extends Controller
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'movies'],
-            ['image' => $filename],
+            ['image' => $imageName],
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
+            ['watch_time' => $request->input('watch_time')],
+            ['quality' => $request->input('quality')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -96,7 +99,7 @@ class MoviesController extends Controller
 
         ));
 
-        // json response 
+        // json response
 
         return response()->json([
             'message' => 'Movies Successfully Created',
@@ -152,8 +155,8 @@ class MoviesController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('public/images', $filename);
+            $imageName = time() . '.' . $file->extension();
+            $path = $file->storeAs('public/images', $imageName);
         }
 
         //  store data on post table
@@ -163,10 +166,13 @@ class MoviesController extends Controller
             $validator->validated(),
             ['title' => $request->input('title')],
             ['type' => 'movies'],
-            ['image' => $filename],
+            ['image' => $imageName],
             ['category_id' => $request->input('category_id')],
             ['subCategory_id' => $request->input('subCategory_id')],
             ['meta_data' => $request->input('meta_data')],
+            ['name' => $request->input('name')],
+            ['watch_time' => $request->input('watch_time')],
+            ['quality' => $request->input('quality')],
             ['createdBy' => auth()->user()->id]
         ));
 
@@ -186,7 +192,7 @@ class MoviesController extends Controller
 
         ));
 
-        // json response 
+        // json response
 
         return response()->json([
             'message' => 'Movies Successfully Updated',

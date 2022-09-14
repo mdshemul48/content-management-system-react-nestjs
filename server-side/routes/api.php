@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GamesController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SoftwareController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\TutorialsController;
 use App\Http\Controllers\TvSeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,7 +76,6 @@ Route::group(['middleware' => 'api'],  function ($router) {
 
     Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
     Route::get('/search/{titel}', [PostController::class, 'search']);
-
 });
 
 Route::get('/user', [

@@ -1,0 +1,10 @@
+.contentPage_title {
+  background: #1e272d;
+}
+.contentPage_title ul {
+  margin-top: 11px;
+}
+
+.contentPage_title ul li::before {
+  content: "| ";
+}
