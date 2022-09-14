@@ -15,7 +15,7 @@ const SingleCategory = ({ item }) => {
       <tr>
         <td>{item.id}</td>
         <td>
-          {item.type === "subcategory" && "── "}
+          {item.type !== "mainCategory" && "── "}
           {item.name}
         </td>
         <td>{item.type}</td>

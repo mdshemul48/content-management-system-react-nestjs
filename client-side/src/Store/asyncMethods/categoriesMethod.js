@@ -17,15 +17,19 @@ export const addNewCategory = (data, callback) => async (dispatch, state) => {
     auth: { token },
   } = state();
   try {
-    const res = await axiosInstance.post("/admin/categoryCreate", data, {
+    const {
+      data: { category },
+    } = await axiosInstance.post("/admin/categoryCreate", data, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(addCategory(res.data));
+    dispatch(addCategory(category));
     callback();
+    toast.success("Category Added");
   } catch (error) {
+    console.log(error);
     toast.error(error.message);
   }
 };

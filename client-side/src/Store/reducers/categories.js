@@ -11,7 +11,14 @@ const reducers = {
     return state;
   },
   addCategory: (state, action) => {
-    state.categories.push(action.payload);
+    const category = action.payload;
+    if (category.type === "mainCategory") {
+      state.categories.push(category);
+    } else {
+      // eslint-disable-next-line eqeqeq
+      const parentCategory = state.categories.find((cat) => cat.id == category.parent_id);
+      parentCategory.sub_category.push(category);
+    }
     return state;
   },
   deleteCategory: (state, action) => {
