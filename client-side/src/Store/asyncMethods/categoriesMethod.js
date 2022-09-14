@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { toast } from "react-hot-toast";
-import { addCategory, getCategories } from "../reducers/categories";
+import { addCategory, deleteCategory, getCategories } from "../reducers/categories";
 import axiosInstance from "../../utility/axiosInstance";
 
 export const getCategoriesMethod = () => async (dispatch) => {
@@ -12,7 +12,7 @@ export const getCategoriesMethod = () => async (dispatch) => {
   }
 };
 
-export const addNewCategory = (data, callback) => async (dispatch, state) => {
+export const addNewCategoryMethod = (data, callback) => async (dispatch, state) => {
   const {
     auth: { token },
   } = state();
@@ -29,7 +29,24 @@ export const addNewCategory = (data, callback) => async (dispatch, state) => {
     callback();
     toast.success("Category Added");
   } catch (error) {
-    console.log(error);
+    toast.error(error.message);
+  }
+};
+
+export const deleteCategoryMethod = (item, callback) => async (dispatch, state) => {
+  const {
+    auth: { token },
+  } = state();
+  try {
+    await axiosInstance.delete(`/admin/categoryDelete/${item.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch(deleteCategory(item));
+    callback();
+    toast.success("Category Deleted");
+  } catch (error) {
     toast.error(error.message);
   }
 };

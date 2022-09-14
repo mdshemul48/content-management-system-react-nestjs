@@ -1,13 +1,24 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import moment from "moment";
 import { Button } from "react-bootstrap";
 import UpdateCategoryModal from "../UpdateCategoryModal/UpdateCategoryModal";
+import { deleteCategoryMethod } from "../../../../Store/asyncMethods/categoriesMethod";
 
 const SingleCategory = ({ item }) => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const onDeleteHandler = () => {
+    // eslint-disable-next-line no-alert, no-undef
+    const confirm = window.confirm("Are you sure you want to delete this category?");
+    if (confirm) {
+      dispatch(deleteCategoryMethod(item, handleClose));
+    }
+  };
 
   return (
     <>
@@ -26,7 +37,9 @@ const SingleCategory = ({ item }) => {
             <Button variant="warning" className="me-1" onClick={handleShow}>
               Update
             </Button>
-            <Button variant="danger">Delete</Button>
+            <Button variant="danger" onClick={onDeleteHandler}>
+              Delete
+            </Button>
           </div>
         </td>
       </tr>

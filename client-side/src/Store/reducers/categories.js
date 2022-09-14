@@ -22,7 +22,21 @@ const reducers = {
     return state;
   },
   deleteCategory: (state, action) => {
-    state.categories = state.categories.filter((category) => category.id !== action.payload);
+    const category = action.payload;
+    if (category.type === "mainCategory") {
+      // eslint-disable-next-line eqeqeq
+      if (category.sub_category.length === 0) {
+        // eslint-disable-next-line eqeqeq
+        const filteredCategories = state.categories.filter((cat) => cat.id != category.id);
+        state.categories = filteredCategories;
+      }
+    } else {
+      // eslint-disable-next-line eqeqeq
+      const parentCategory = state.categories.find((cat) => cat.id == category.parent_id);
+      // eslint-disable-next-line eqeqeq
+      const filteredSubCategories = parentCategory.sub_category.filter((cat) => cat.id != category.id);
+      parentCategory.sub_category = filteredSubCategories;
+    }
     return state;
   },
   updateCategory: (state, action) => {
