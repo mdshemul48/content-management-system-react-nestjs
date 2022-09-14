@@ -8,6 +8,7 @@ use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SoftwareController;
 use App\Http\Controllers\TutorialsController;
+use App\Http\Controllers\TvSeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,11 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
     Route::post('/createTutorials', [TutorialsController::class, 'store']);
     Route::post('/updateTutorials/{id}', [TutorialsController::class, 'update']);
     Route::delete('/deleteTutorials/{id}', [TutorialsController::class, 'destroy']);
+
+    //Tv series
+    // Route::apiResource('tvSeries', TvSeriesController::class);
+    Route::post('/tvSeries', [TvSeriesController::class,'store']);
+
 });
 
 //unprotected route
@@ -68,6 +74,7 @@ Route::group(['middleware' => 'api'],  function ($router) {
 
     Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
     Route::get('/search/{titel}', [PostController::class, 'search']);
+
 });
 
 Route::get('/user', [
