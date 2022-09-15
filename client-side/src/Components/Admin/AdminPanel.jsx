@@ -12,7 +12,7 @@ function AdminHomePage() {
       <section className="bg-light w-100 me-2 rounded mt-2">
         <Routes>
           <Route index element={<Dashboard />} />
-          <Route path="/addNewPostPage" element={<AddNewPost />} />
+          <Route path="/addNewPost" element={<AddNewPost />} />
           <Route path="/category" element={<CategoryManage />} />
         </Routes>
       </section>
