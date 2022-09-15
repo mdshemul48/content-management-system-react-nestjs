@@ -31,12 +31,12 @@ class TvSeriesController extends Controller
             return response()->json(['error' => 'Name is required'], 400);
         }
 
-        if($request->poster == null){
+        if($request->image == null){
             return response()->json(['error' => 'Poster is required'], 400);
         }
 
-        if ($request->hasFile('poster')) {
-            $file = $request->file('poster');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
             $filename = time() . '.' . $file->extension();
             $path = $file->storeAs('public/images', $filename);
         }
