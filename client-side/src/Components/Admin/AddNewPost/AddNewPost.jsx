@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 
-import placeHolderImage from "../../../Assets/300x450.png";
+import Categories from "./Categories/Categories";
 
 import styles from "./AddNewPost.module.css";
+import PosterImage from "./PosterImage/PosterImage";
 
 const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("movie");
@@ -39,37 +40,8 @@ const AddNewPost = () => {
         <Row>
           <Col lg={10}>THis is the +</Col>
           <Col lg={2}>
-            <Card className="mb-2">
-              <Card.Header>Categories</Card.Header>
-              <Card.Body className={`p-1 ${styles.categorySelectPage}`}>
-                <ul className={styles.categoryList}>
-                  <li className="list-unstyled">
-                    <label>
-                      <input type="checkbox" className="me-1" />
-                      Hindi Movie
-                    </label>
-                    <ul>
-                      <li className="list-unstyled">
-                        <label>
-                          <input type="checkbox" className="me-1" />
-                          Hindi Movie 2018
-                        </label>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </Card.Body>
-            </Card>
-            <Card>
-              <Card.Header>Featured</Card.Header>{" "}
-              <Card.Body className="p-1">
-                {" "}
-                <img src={placeHolderImage} alt="poster" className="img-fluid mb-1 rounded" />
-                <Form.Group controlId="formFile">
-                  <Form.Control type="file" size="sm" />
-                </Form.Group>
-              </Card.Body>
-            </Card>
+            <Categories />
+            <PosterImage />
           </Col>
         </Row>
       </section>

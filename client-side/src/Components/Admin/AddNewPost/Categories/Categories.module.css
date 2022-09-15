@@ -1,0 +1,12 @@
+.categorySelectPage {
+  height: 300px;
+  overflow: scroll;
+}
+
+.categoryList {
+  margin-left: -24px;
+}
+
+.selectedSubCategory {
+  margin-left: -23px;
+}
