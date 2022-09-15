@@ -1,3 +1,8 @@
-.selectPublishType {
-  width: auto !important;
+.categorySelectPage {
+  height: 300px;
+  overflow: scroll;
+}
+
+.categoryList {
+  margin-left: -24px;
 }
