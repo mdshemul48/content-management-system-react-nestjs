@@ -55,23 +55,30 @@ class CategoryController extends Controller
         if (auth()->user()) {
 
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
+                'name' => 'required|unique:categories,name',
                 'type' => 'required',
             ]);
             if ($validator->fails()) {
                 return response()->json($validator->errors()->toJson(), 400);
             }
-
+            //old Code
             //$created_by = auth()->user()->id;
-            $category = Category::create(array_merge(
-                $validator->validated(),
-                ['parent_id' => $request->input('parent_id')],
-                ['type' => $request->input('type')],
-                ['createdBy' => auth()->user()->id]
-            ));
+            // $category = Category::create(array_merge(
+            //     $validator->validated(),
+            //     ['parent_id' => $request->input('parent_id')],
+            //     ['type' => $request->input('type')],
+            //     ['createdBy' => auth()->user()->id]
+            // ));
+            //new Code
+            $category = new Category();
+            $category->name = $request->name;
+            $category->type = $request->type;
+            $category->parent_id = $request->parent_id;
+            $category->createdBy = auth()->user()->id;
+            $category->save();
             return response()->json([
                 'message' => 'category Successfully Created',
-                'category' => $category
+                'category' => Category::find($category->id)
             ], 201);
         } else {
             return response()->json(['error' => 'Unauthorized User'], 401);
@@ -125,7 +132,7 @@ class CategoryController extends Controller
                 'name' => $request->input('name'),
                 'type' => $request->input('type'),
                 'parent_id' => $request->input('parent_id'),
-                
+
 
 
             ]);

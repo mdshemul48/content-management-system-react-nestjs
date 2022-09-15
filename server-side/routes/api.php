@@ -9,6 +9,7 @@ use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SoftwareController;
 use App\Http\Controllers\TutorialsController;
+use App\Http\Controllers\TvSeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -58,6 +59,11 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
     Route::post('/createTutorials', [TutorialsController::class, 'store']);
     Route::post('/updateTutorials/{id}', [TutorialsController::class, 'update']);
     Route::delete('/deleteTutorials/{id}', [TutorialsController::class, 'destroy']);
+
+    //Tv series
+    // Route::apiResource('tvSeries', TvSeriesController::class);
+    Route::post('/tvSeriesCreate', [TvSeriesController::class,'store']);
+
 });
 
 //unprotected route
@@ -69,14 +75,7 @@ Route::group(['middleware' => 'api'],  function ($router) {
     Route::get('/getAllPostByCategory', [CategoryController::class, 'getAllPostByCategory']);
 
     Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
-    Route::get('/search/{title}', [PostController::class, 'search']);
-    Route::get('/getHomePagePost', [HomepageController::class, 'getHomePagePost']);
-    Route::get('/home', [HomepageController::class, 'index']);
-    Route::get("/getSuggestion", function (Request $request) {
-        $query = $request->query("target");
-        $response = Http::get("http://suggestqueries.google.com/complete/search?client=firefox&q=$query");
-        return Response()->json($response->json());
-    });
+    Route::get('/search/{titel}', [PostController::class, 'search']);
 });
 
 Route::get('/user', [
