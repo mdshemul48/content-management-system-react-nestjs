@@ -80,6 +80,14 @@ Route::group(['middleware' => 'api'],  function ($router) {
 
     Route::get('/getPost/{id}', [CategoryController::class, 'getPostByID']);
     Route::get('/search/{titel}', [PostController::class, 'search']);
+
+    Route::get('/getHomePagePost', [HomepageController::class, 'getHomePagePost']);
+    Route::get('/home', [HomepageController::class, 'index']);
+    Route::get("/getSuggestion", function (Request $request) {
+        $query = $request->query("target");
+        $response = Http::get("http://suggestqueries.google.com/complete/search?client=firefox&q=$query");
+        return Response()->json($response->json());
+    });
 });
 
 Route::get('/user', [
