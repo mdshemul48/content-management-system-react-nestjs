@@ -15,7 +15,7 @@ class TvSeriesController extends Controller
      */
     public function index()
     {
-        // return ["pass"=>"Index"];
+
     }
 
     /**
@@ -41,7 +41,7 @@ class TvSeriesController extends Controller
             $path = $file->storeAs('public/images', $filename);
         }
 
-       
+
 
         $post = new Post();
 
@@ -83,7 +83,10 @@ class TvSeriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $tvSeries = Post::with('post_details')->find($id);
+        $result = $tvSeries->post_details->groupBy('session');
+        return response()->json($result);
+
     }
 
     /**
