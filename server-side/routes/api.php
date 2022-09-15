@@ -34,6 +34,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'prefix' => 'admin'], function ($router) {
 
+
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 
@@ -63,12 +64,15 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
     //Tv series
     // Route::apiResource('tvSeries', TvSeriesController::class);
     Route::post('/tvSeriesCreate', [TvSeriesController::class,'store']);
+    Route::get('/tvSeriesShow/{id}', [TvSeriesController::class,'show']);
 
 });
 
 //unprotected route
 
 Route::group(['middleware' => 'api'],  function ($router) {
+
+
 
     Route::get('/allCategoryInfo', [CategoryController::class, 'getAllCategoryInfo']);
     Route::get('/getSubCategory/{id}', [CategoryController::class, 'getSubCategory']);
