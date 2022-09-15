@@ -85,7 +85,12 @@ class TvSeriesController extends Controller
     {
         $tvSeries = Post::with('post_details')->find($id);
         $result = $tvSeries->post_details->groupBy('session');
-        return response()->json($result);
+        $data = [
+            'post' => Post::find($id),
+            'post_details' => $result,
+
+        ];
+        return response()->json($data);
 
     }
 
