@@ -1,6 +1,7 @@
 .categorySelectPage {
   height: 300px;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .categoryList {
