@@ -155,8 +155,13 @@ class CategoryController extends Controller
     {
         if (auth()->user()) {
             $category = Category::find($id);
-            $category->delete();
-            return response()->json(['message' => 'Deleted Successfully'], 201);
+            if(Category::where('parent_id',$id)->count() > 0){
+                return response()->json(['error' => 'Category have SubCategory '], 401);
+            }else{
+
+                $category->delete();
+                return response()->json(['message' => 'Deleted Successfully'], 201);
+            }
         } else {
             return response()->json(['error' => 'Unauthorized User'], 401);
         }
