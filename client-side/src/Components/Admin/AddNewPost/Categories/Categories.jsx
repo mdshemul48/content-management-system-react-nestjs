@@ -12,14 +12,14 @@ const Categories = () => {
       <Card.Body className={`p-1 ${styles.categorySelectPage}`}>
         <ul className={styles.categoryList}>
           {categories.map((category) => (
-            <li className="list-unstyled">
+            <li className="list-unstyled" key={category.id}>
               <label>
                 <input type="checkbox" className="me-1 my-1" />
                 {category.name}
               </label>
               <ul className={styles.selectedSubCategory}>
                 {category.sub_category.map((subCategory) => (
-                  <li className="list-unstyled">
+                  <li className="list-unstyled" key={subCategory.id}>
                     <label>
                       <input type="checkbox" className="me-1 my-1" />
                       {subCategory.name}
