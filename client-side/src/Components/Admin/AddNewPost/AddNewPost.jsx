@@ -15,6 +15,7 @@ const AddNewPost = () => {
     image: null,
     previewImage: null,
     categories: [],
+    content: [],
   });
 
   const onChangeHandler = (event) => {
@@ -65,7 +66,10 @@ const AddNewPost = () => {
             <Col lg={10}>
               {/* {publishOption === "movie" && <Movie />} */}
               {/* {publishOption === "series" && <Series />} */}
-              <Series />
+              <Series
+                content={postDetail.content}
+                setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
+              />
             </Col>
             <Col lg={2}>
               <Categories />

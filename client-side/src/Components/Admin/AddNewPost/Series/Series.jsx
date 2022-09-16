@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, Col, Dropdown, Form, Row, Tab, Table, Tabs } from "react-bootstrap";
 import AddNewEpisode from "./AddNewEpisode";
 
-const Series = () => {
-  const [content, setContent] = useState([]);
+const Series = ({ content, setContent }) => {
   const [seasonName, setSeasonName] = useState("");
 
   console.log(content, seasonName);
@@ -74,7 +73,7 @@ const Series = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {content.map((season, seasonIndex) => (
-                    <Dropdown.Item onClick={() => onRemoveSeasonHandler(seasonIndex)}>
+                    <Dropdown.Item onClick={() => onRemoveSeasonHandler(seasonIndex)} key={seasonIndex}>
                       {season.seasonName}
                     </Dropdown.Item>
                   ))}
@@ -86,7 +85,7 @@ const Series = () => {
 
         <Tabs>
           {content.map((item, seasonIndex) => (
-            <Tab eventKey={item.seasonName} title={item.seasonName} key={item.seasonName}>
+            <Tab eventKey={item.seasonName} title={item.seasonName} key={seasonIndex}>
               <Table striped bordered hover size="sm">
                 <thead>
                   <tr>
@@ -97,7 +96,7 @@ const Series = () => {
                 </thead>
                 <tbody>
                   {item.episodes.map((episode, episodeIndex) => (
-                    <tr key={episode.title}>
+                    <tr key={episodeIndex}>
                       <td>{episodeIndex + 1}</td>
                       <td>
                         <Form.Control
