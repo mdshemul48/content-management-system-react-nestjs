@@ -16,8 +16,6 @@ function Home() {
     fetchPost();
   }, []);
 
-  console.log(categoryWithPost);
-
   return (
     <main>
       <HomeCarousel />

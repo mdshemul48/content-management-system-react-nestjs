@@ -2,45 +2,31 @@ import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
 const AddNewEpisode = ({ onAddNewEpisodeHandler, seasonIndex }) => {
-  const [episode, setEpisodeHandler] = useState({
-    title: "",
-    link: "",
-  });
-
-  const onEpisodeNameChangeHandler = (event) => {
-    setEpisodeHandler({ ...episode, title: event.target.value });
-  };
-  const onEpisodeDownloadLinkChangeHandler = (event) => {
-    setEpisodeHandler({ ...episode, link: event.target.value });
-  };
+  const [episodeCount, setEpisodeCount] = useState(1);
 
   const onAddNewEpisode = () => {
-    onAddNewEpisodeHandler(seasonIndex, episode);
-    setEpisodeHandler({ title: "", link: "" });
+    onAddNewEpisodeHandler(seasonIndex, Array(Number(episodeCount)).fill({ title: "", link: "" }));
+    setEpisodeCount(1);
   };
+
+  const onEpisodeCountChangeHandler = (event) => {
+    setEpisodeCount(event.target.value);
+  };
+
   return (
     <Row className="mt-2">
-      <Col>
+      <Col lg={2}>
         <Form.Control
           className="mb-1"
-          type="text"
-          placeholder="episode Name"
-          onChange={onEpisodeNameChangeHandler}
-          value={episode.title}
-        />
-      </Col>
-      <Col>
-        <Form.Control
-          className="mb-1"
-          type="text"
-          placeholder="episode Download Link"
-          onChange={onEpisodeDownloadLinkChangeHandler}
-          value={episode.link}
+          type="Number"
+          placeholder="Episode Empty box in the end"
+          value={episodeCount}
+          onChange={onEpisodeCountChangeHandler}
         />
       </Col>
       <Col>
         <Button variant="dark" onClick={onAddNewEpisode}>
-          Add New Episode
+          Add Empty Box for Episode
         </Button>
       </Col>
     </Row>

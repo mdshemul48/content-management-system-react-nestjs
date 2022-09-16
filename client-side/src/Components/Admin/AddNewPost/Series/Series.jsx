@@ -14,9 +14,9 @@ const Series = ({ content, setContent }) => {
     setSeasonName("");
   };
 
-  const onAddNewEpisodeHandler = (seasonIndex, episode) => {
+  const onAddNewEpisodeHandler = (seasonIndex, episodes) => {
     const newContent = [...content];
-    newContent[seasonIndex].episodes.push(episode);
+    newContent[seasonIndex].episodes.push(...episodes);
     setContent(newContent);
   };
 
