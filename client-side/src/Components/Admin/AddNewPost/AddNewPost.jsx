@@ -6,6 +6,7 @@ import Categories from "./Categories/Categories";
 import styles from "./AddNewPost.module.css";
 import PosterImage from "./PosterImage/PosterImage";
 import Movie from "./Movie/Movie";
+import Series from "./Series/Series";
 
 const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("movie");
@@ -61,7 +62,11 @@ const AddNewPost = () => {
             </Col>
           </Row>
           <Row>
-            <Col lg={10}>{publishOption === "movie" && <Movie />}</Col>
+            <Col lg={10}>
+              {/* {publishOption === "movie" && <Movie />} */}
+              {/* {publishOption === "series" && <Series />} */}
+              <Series />
+            </Col>
             <Col lg={2}>
               <Categories />
               <PosterImage onImageChangeHandler={onImageChangeHandler} image={postDetail.previewImage} />
