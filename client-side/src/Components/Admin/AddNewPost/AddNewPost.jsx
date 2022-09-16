@@ -16,7 +16,6 @@ const AddNewPost = () => {
     categories: [],
   });
 
-  console.log(postDetail);
   const onChangeHandler = (event) => {
     setPublishOption(event.target.value);
   };
