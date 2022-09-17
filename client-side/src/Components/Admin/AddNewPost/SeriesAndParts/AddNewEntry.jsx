@@ -6,6 +6,7 @@ const AddNewEntry = ({ onAddNewEpisodeHandler, seasonIndex }) => {
 
   const onAddNewEpisode = () => {
     for (let i = 0; i < episodeCount; i += 1) {
+      console.log("onAddNewEpisodeHandler", i);
       onAddNewEpisodeHandler(seasonIndex, { title: "", link: "" });
     }
     setEpisodeCount(1);
@@ -21,14 +22,14 @@ const AddNewEntry = ({ onAddNewEpisodeHandler, seasonIndex }) => {
         <Form.Control
           className="mb-1"
           type="Number"
-          placeholder="Episode Empty box in the end"
+          placeholder="Empty box in the end"
           value={episodeCount}
           onChange={onEpisodeCountChangeHandler}
         />
       </Col>
       <Col>
         <Button variant="dark" onClick={onAddNewEpisode}>
-          Add Empty Box for Episode
+          Add Empty Box
         </Button>
       </Col>
     </Row>

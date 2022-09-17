@@ -7,6 +7,7 @@ import styles from "./AddNewPost.module.css";
 import PosterImage from "./PosterImage/PosterImage";
 import Movie from "./Movie/Movie";
 import Series from "./SeriesAndParts/Series";
+import Parts from "./SeriesAndParts/Parts";
 
 const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("movie");
@@ -65,11 +66,13 @@ const AddNewPost = () => {
           <Row>
             <Col lg={10}>
               {/* {publishOption === "movie" && <Movie />} */}
-              {/* {publishOption === "series" && <Series />} */}
-              <Series
-                content={postDetail.content}
-                setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
-              />
+              {/* {publishOption === "series" && (
+                <Series
+                  content={postDetail.content}
+                  setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
+                />
+              )} */}
+              <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
             </Col>
             <Col lg={2}>
               <Categories
