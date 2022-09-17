@@ -6,7 +6,7 @@ import Categories from "./Categories/Categories";
 import styles from "./AddNewPost.module.css";
 import PosterImage from "./PosterImage/PosterImage";
 import Movie from "./Movie/Movie";
-import Series from "./Series/Series";
+import Series from "./SeriesAndParts/Series";
 
 const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("movie");

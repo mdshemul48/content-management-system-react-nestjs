@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-const AddNewEpisode = ({ onAddNewEpisodeHandler, seasonIndex }) => {
+const AddNewEntry = ({ onAddNewEpisodeHandler, seasonIndex }) => {
   const [episodeCount, setEpisodeCount] = useState(1);
 
   const onAddNewEpisode = () => {
@@ -35,4 +35,4 @@ const AddNewEpisode = ({ onAddNewEpisodeHandler, seasonIndex }) => {
   );
 };
 
-export default AddNewEpisode;
+export default AddNewEntry;
