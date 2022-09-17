@@ -70,7 +70,21 @@ class TvSeriesController extends Controller
             }
         }
 
-        return response()->json([ 'message' => 'TvSeries Successfully Created', 'category' => Post::with('post_details')->find($post->id) ], 201);
+        $afte_save_post = Post::with('post_details')->find($post->id);
+        $after_save_post_details_groupBy = $afte_save_post->post_details->groupBy('session');
+        $new_post_details = [];
+        foreach($after_save_post_details_groupBy as $key=>$item){
+           $new_post_details[]= [
+                'seasonName' => $key,
+                'episodes' => $item
+            ];
+        }
+        $data = [
+            'post' => Post::find($post->id),
+            'post_details' => $new_post_details
+        ];
+
+        return response()->json([ 'message' => 'TvSeries Successfully Created', 'data' => $data ], 201);
 
 
     }
@@ -85,9 +99,16 @@ class TvSeriesController extends Controller
     {
         $tvSeries = Post::with('post_details')->find($id);
         $result = $tvSeries->post_details->groupBy('session');
+        $new_data = [];
+        foreach($result as $key=>$item){
+            $new_data[] = [
+                'seasonName' => $key,
+                'episodes' => $item
+            ];
+        }
         $data = [
             'post' => Post::find($id),
-            'post_details' => $result,
+            'post_details' => $new_data
 
         ];
         return response()->json($data);
