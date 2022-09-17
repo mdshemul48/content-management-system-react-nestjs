@@ -5,7 +5,9 @@ const AddNewEpisode = ({ onAddNewEpisodeHandler, seasonIndex }) => {
   const [episodeCount, setEpisodeCount] = useState(1);
 
   const onAddNewEpisode = () => {
-    onAddNewEpisodeHandler(seasonIndex, Array(Number(episodeCount)).fill({ title: "", link: "" }));
+    for (let i = 0; i < episodeCount; i += 1) {
+      onAddNewEpisodeHandler(seasonIndex, { title: "", link: "" });
+    }
     setEpisodeCount(1);
   };
 

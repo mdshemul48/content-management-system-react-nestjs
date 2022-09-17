@@ -72,7 +72,10 @@ const AddNewPost = () => {
               />
             </Col>
             <Col lg={2}>
-              <Categories />
+              <Categories
+                selectedCategories={postDetail.categories}
+                setSelectedCategories={(newCategories) => setPostDetail({ ...postDetail, categories: newCategories })}
+              />
               <PosterImage onImageChangeHandler={onImageChangeHandler} image={postDetail.previewImage} />
               <Card className="p-1 mt-2">
                 {" "}

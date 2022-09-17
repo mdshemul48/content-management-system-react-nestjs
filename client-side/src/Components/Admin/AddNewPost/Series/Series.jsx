@@ -5,7 +5,6 @@ import AddNewEpisode from "./AddNewEpisode";
 const Series = ({ content, setContent }) => {
   const [seasonName, setSeasonName] = useState("");
 
-  console.log(content, seasonName);
   const onSeasonNameChangeHandler = (event) => {
     setSeasonName(event.target.value);
   };
@@ -16,7 +15,7 @@ const Series = ({ content, setContent }) => {
 
   const onAddNewEpisodeHandler = (seasonIndex, episodes) => {
     const newContent = [...content];
-    newContent[seasonIndex].episodes.push(...episodes);
+    newContent[seasonIndex].episodes.push(episodes);
     setContent(newContent);
   };
 
