@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import axiosInstance from "../../../utility/axiosInstance";
 import SinglePost from "../../Shared/SinglePost/SinglePost";
 import Pagination from "./Pagination/Pagination";
@@ -20,7 +21,7 @@ function CategoryPage() {
         const { data } = await axiosInstance.get(`/getSubCategory/${mainCategoryId}`);
         setCategory(data);
       } catch (err) {
-        console.log(err);
+        toast.error(err.response.data.message);
       }
     };
     fetchData();
@@ -45,7 +46,7 @@ function CategoryPage() {
           active: data.current_page,
         });
       } catch (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
       }
     };
     fetchData();

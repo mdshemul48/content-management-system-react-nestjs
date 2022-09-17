@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Dropdown } from "react-bootstrap";
-import { FaUserAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../Store/reducers/auth";
@@ -19,8 +18,8 @@ function AdminBar() {
   return (
     user && (
       <Dropdown className="ms-2 me-5">
-        <Dropdown.Toggle variant="light" id="dropdown-basic">
-          <FaUserAlt className="fs-4 text-secondary" />
+        <Dropdown.Toggle variant="light">
+          <img src={`https://avatars.dicebear.com/api/bottts/:${user?.email}.svg`} width="30px" alt="" />
           <span className="ms-1">{user?.name}</span>
         </Dropdown.Toggle>
 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AddNewCategoryModal from "./AddNewCategoryModal/AddNewCategoryModal";
 import CategoryTable from "./CategoryTable/CategoryTable";
 
-import { addNewCategory } from "../../../Store/asyncMethods/categoriesMethod";
+import { addNewCategoryMethod } from "../../../Store/asyncMethods/categoriesMethod";
 
 const CategoryManage = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const CategoryManage = () => {
   const addCategoryHandler = async ({ name, parentId }) => {
     const newCategory = { name, parent_id: parentId || null, type: parentId ? "subCategory" : "mainCategory" };
 
-    dispatch(addNewCategory(newCategory, handleClose));
+    dispatch(addNewCategoryMethod(newCategory, handleClose));
   };
 
   return (
