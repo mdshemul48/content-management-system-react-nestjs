@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->enum('type',['mainCategory','subcategory'])->default('mainCategory');
+            $table->integer('createdBy');
             $table->timestamps();
         });
     }

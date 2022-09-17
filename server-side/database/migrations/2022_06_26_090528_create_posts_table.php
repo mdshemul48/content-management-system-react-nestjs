@@ -16,9 +16,15 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('post_details_id');
             $table->enum('type',['movies', 'tvSeries', 'software', 'tutorials', 'games','others'])->default('others');
-            $table->text('img_url')->nullable();
+            $table->text('image')->nullable();
+            $table->string('category_id');
+            $table->string('subCategory_id')->nullable();
+            $table->string('meta_data')->nullable();
+            $table->integer('createdBy');
+            $table->string("name")->nullable();
+            $table->string("quality")->nullable();
+            $table->string("watch_time")->nullable();
             $table->timestamps();
         });
     }
