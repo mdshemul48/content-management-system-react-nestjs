@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Post_details;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TvSeriesController extends Controller
 {
@@ -42,49 +43,59 @@ class TvSeriesController extends Controller
         }
 
 
+        DB::beginTransaction();
+        try{
 
-        $post = new Post();
+            $post = new Post();
 
-        $post->title = $request->name;
-        $post->type = "tvSeries";
-        $post->image = $filename;
-        $post->createdBy = auth()->user()->id;
-        $post->category_id = $request->category_id;
-        $post->subCategory_id = $request->subCategory_id;
-        $post->meta_data = $request->meta_data;
-        $post->save();
+            $post->title = $request->name;
+            $post->type = "tvSeries";
+            $post->image = $filename;
+            $post->createdBy = auth()->user()->id;
+            $post->category_id = $request->category_id;
+            $post->subCategory_id = $request->subCategory_id;
+            $post->meta_data = $request->meta_data;
+            $post->save();
 
-        $contents = json_decode($request->contents);
+            $contents = json_decode($request->contents);
 
-        foreach($contents as $key=>$item){
+            foreach($contents as $key=>$item){
 
-            foreach($item->episodes as $item_key=>$episodes){
+                foreach($item->episodes as $item_key=>$episodes){
 
-                $post_details = new Post_details();
-                $post_details->post_id = $post->id;
-                $post_details->downloadLink = $episodes->link;
-                $post_details->session = $item->seasonName;
-                $post_details->episode = $episodes->title;
+                    $post_details = new Post_details();
+                    $post_details->post_id = $post->id;
+                    $post_details->downloadLink = $episodes->link;
+                    $post_details->session = $item->seasonName;
+                    $post_details->episode = $episodes->title;
 
-                $post_details->save();
+                    $post_details->save();
+                }
             }
-        }
 
-        $afte_save_post = Post::with('post_details')->find($post->id);
-        $after_save_post_details_groupBy = $afte_save_post->post_details->groupBy('session');
-        $new_post_details = [];
-        foreach($after_save_post_details_groupBy as $key=>$item){
-           $new_post_details[]= [
-                'seasonName' => $key,
-                'episodes' => $item
+            DB::commit();
+
+            $afte_save_post = Post::with('post_details')->find($post->id);
+            $after_save_post_details_groupBy = $afte_save_post->post_details->groupBy('session');
+            $new_post_details = [];
+            foreach($after_save_post_details_groupBy as $key=>$item){
+            $new_post_details[]= [
+                    'seasonName' => $key,
+                    'episodes' => $item
+                ];
+            }
+            $data = [
+                'post' => Post::find($post->id),
+                'post_details' => $new_post_details
             ];
-        }
-        $data = [
-            'post' => Post::find($post->id),
-            'post_details' => $new_post_details
-        ];
 
-        return response()->json([ 'message' => 'TvSeries Successfully Created', 'data' => $data ], 201);
+            return response()->json([ 'message' => 'TvSeries Successfully Created', 'data' => $data ], 201);
+
+        }catch(\Exception $e){
+            DB::rollback();
+            return response()->json(['error' => $e], 400);
+        }
+
 
 
     }

@@ -16,11 +16,11 @@ class CreatePostDetailsTable extends Migration
         Schema::create('post_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id');
-            $table->text('url');
             $table->string('session')->nullable();
             $table->string('episode')->nullable();
             $table->string('part')->nullable();
             $table->string('title')->nullable();
+            $table->text('downloadLink')->nullable();
             $table->timestamps();
         });
     }
