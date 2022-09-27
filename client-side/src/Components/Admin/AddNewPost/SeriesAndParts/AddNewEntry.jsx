@@ -6,7 +6,6 @@ const AddNewEntry = ({ onAddNewEpisodeHandler, seasonIndex }) => {
 
   const onAddNewEpisode = () => {
     for (let i = 0; i < episodeCount; i += 1) {
-      console.log("onAddNewEpisodeHandler", i);
       onAddNewEpisodeHandler(seasonIndex, { title: "", link: "" });
     }
     setEpisodeCount(1);

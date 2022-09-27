@@ -6,7 +6,7 @@ const Parts = ({ postDetail, setPostDetail }) => {
   const { content } = postDetail;
 
   const onAddNewEpisodeHandler = (_, episode) => {
-    setPostDetail({ ...postDetail, content: [...content, episode] });
+    setPostDetail((prevState) => ({ ...prevState, content: [...prevState.content, episode] }));
   };
 
   const onReNameHandler = (index, event) => {
