@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Card, Col, Form, Row } from "react-bootstrap";
 
 import Categories from "./Categories/Categories";
@@ -11,13 +11,18 @@ import Parts from "./SeriesAndParts/Parts";
 
 const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("movie");
-  const [postDetail, setPostDetail] = useState({
+  const defaultFormValue = {
     title: "",
     image: null,
     previewImage: null,
     categories: [],
     content: [],
-  });
+  };
+  const [postDetail, setPostDetail] = useState(defaultFormValue);
+
+  useEffect(() => {
+    setPostDetail(defaultFormValue);
+  }, [publishOption]);
 
   const onChangeHandler = (event) => {
     setPublishOption(event.target.value);
@@ -65,14 +70,16 @@ const AddNewPost = () => {
           </Row>
           <Row>
             <Col lg={10}>
-              {/* {publishOption === "movie" && <Movie />} */}
-              {/* {publishOption === "series" && (
+              {publishOption === "movie" && <Movie />}
+              {publishOption === "series" && (
                 <Series
                   content={postDetail.content}
                   setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
                 />
-              )} */}
-              <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
+              )}
+              {publishOption !== "movie" && publishOption !== "series" && (
+                <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
+              )}
             </Col>
             <Col lg={2}>
               <Categories
