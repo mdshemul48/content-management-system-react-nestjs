@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category Category[]
+  post     Post[]
+
+  @@map("users")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  subCategory Category[] @relation("subCategory")
+  parentId    Int?
+  parent      Category?  @relation("subCategory", fields: [parentId], references: [id])
+
+  createdBy User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+
+  posts             Post[]
+  categoriesOnPosts categoriesOnPosts[]
+
+  @@map("categories")
+}
+
+enum PostType {
+  singleVideo
+  multiVideo
+  singleFile
+  multiFile
+  series
+}
+
+model Post {
+  id       Int      @id @default(autoincrement())
+  title    String?
+  type     PostType
+  image    String
+  metaData String?
+  tags     String
+
+  name      String?
+  quality   String?
+  watchTime String?
+
+  categories Category[]
+
+  createdBy         User                @relation(fields: [userId], references: [id])
+  userId            Int
+  categoriesOnPosts categoriesOnPosts[]
+
+  @@map("posts")
+}
+
+model categoriesOnPosts {
+  post       Post     @relation(fields: [postId], references: [id])
+  postId     Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  @@id([postId, categoryId])
+}
