@@ -9,12 +9,17 @@ import {
   UseGuards,
   UploadedFile,
   UseInterceptors,
+  BadRequestException,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from 'src/auth/guard';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { v4 as uuid } from 'uuid';
+import { GetUser } from 'src/auth/decorator';
+import { User } from '@prisma/client';
 
 @Controller('posts')
 export class PostsController {
@@ -22,13 +27,31 @@ export class PostsController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  @UseInterceptors(FileInterceptor('image'))
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './public/uploads',
+        filename: (req, file, cb) => {
+          if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(
+              new BadRequestException('Only image files are allowed!'),
+              '',
+            );
+          }
+
+          const fileExtName = file.originalname.split('.')[1];
+          const newFileName = `${uuid()}.${fileExtName}`;
+          cb(null, newFileName);
+        },
+      }),
+    }),
+  )
   create(
+    @GetUser() user: User,
     @Body() createPostDto: CreatePostDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    console.log(file, createPostDto);
-    return this.postsService.create(createPostDto);
+    return this.postsService.create(user, createPostDto, file);
   }
 
   @Get()

@@ -1,10 +1,5 @@
-import {
-  IsArray,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { Prisma } from '@prisma/client';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreatePostDto {
   @IsNotEmpty()
@@ -24,7 +19,7 @@ export class CreatePostDto {
 
   @IsNotEmpty()
   @IsString()
-  content: string;
+  content: Prisma.JsonValue;
 
   @IsNotEmpty()
   @IsString()
@@ -38,10 +33,8 @@ export class CreatePostDto {
   year: string;
 
   @IsNotEmpty()
-  @IsArray()
-  categories: number[];
+  categories: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  userId: number;
+  @IsOptional()
+  userId?: number;
 }

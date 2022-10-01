@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -7,28 +8,58 @@ import { UpdatePostDto } from './dto/update-post.dto';
 export class PostsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createPostDto: CreatePostDto) {
-    // return this.prisma.post.create({
-    //   data: {
-    //     title,
-    //     type,
-    //     image,
-    //     metaData,
-    //     tags,
-    //     content,
-    //     name,
-    //     quality,
-    //     watchTime,
-    //     categories: {
-    //       connect: categories.map((id) => ({ id })),
-    //     },
-    //     user: {
-    //       connect: { id: userId },
-    //     },
-    //   },
-    // });
+  create(user: User, createPostDto: CreatePostDto, file: Express.Multer.File) {
+    const {
+      title,
+      type,
+      metaData,
+      tags,
+      content,
+      name,
+      quality,
+      watchTime,
+      year,
+      categories,
+    } = createPostDto;
 
-    return 'This action adds a new post';
+    return this.prisma.post.create({
+      data: {
+        title,
+        type,
+        image: file.filename,
+        metaData,
+        tags,
+        content,
+        name,
+        quality,
+        watchTime,
+        year,
+        categories: {
+          connect: JSON.parse(categories).map((category: number) => ({
+            id: category,
+          })),
+        },
+        createdBy: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        categories: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
   }
 
   findAll() {

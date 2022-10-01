@@ -72,6 +72,7 @@ model Post {
   name      String?
   quality   String?
   watchTime String?
+  year      String?
 
   categories Category[]
 
