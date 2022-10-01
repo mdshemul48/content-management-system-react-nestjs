@@ -8,7 +8,11 @@ import { UpdatePostDto } from './dto/update-post.dto';
 export class PostsService {
   constructor(private prisma: PrismaService) {}
 
-  create(user: User, createPostDto: CreatePostDto, file: Express.Multer.File) {
+  async create(
+    user: User,
+    createPostDto: CreatePostDto,
+    file: Express.Multer.File,
+  ) {
     const {
       title,
       type,
@@ -19,10 +23,10 @@ export class PostsService {
       quality,
       watchTime,
       year,
-      categories,
+      categories: categoriesString,
     } = createPostDto;
 
-    return this.prisma.post.create({
+    return await this.prisma.post.create({
       data: {
         title,
         type,
@@ -35,7 +39,7 @@ export class PostsService {
         watchTime,
         year,
         categories: {
-          connect: JSON.parse(categories).map((category: number) => ({
+          connect: JSON.parse(categoriesString).map((category: number) => ({
             id: category,
           })),
         },
@@ -54,8 +58,10 @@ export class PostsService {
         },
         categories: {
           select: {
+            parentId: true,
             id: true,
             name: true,
+            type: true,
           },
         },
       },
@@ -67,14 +73,92 @@ export class PostsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} post`;
+    const post = this.prisma.post.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        categories: {
+          select: {
+            parentId: true,
+            id: true,
+            name: true,
+            type: true,
+          },
+        },
+      },
+    });
+
+    return post;
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  update(id: number, updatePostDto: UpdatePostDto, file: Express.Multer.File) {
+    const {
+      title,
+      type,
+      metaData,
+      tags,
+      content,
+      name,
+      quality,
+      watchTime,
+      year,
+      categories: categoriesString,
+    } = updatePostDto;
+    console.log(file);
+    return this.prisma.post.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        type,
+        metaData,
+        tags,
+        content,
+        image: file && file.filename,
+        name,
+        quality,
+        watchTime,
+        year,
+        categories: {
+          connect: JSON.parse(categoriesString).map((category: number) => ({
+            id: category,
+          })),
+        },
+      },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        categories: {
+          select: {
+            parentId: true,
+            id: true,
+            name: true,
+            type: true,
+          },
+        },
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: number) {
+    await this.prisma.post.delete({
+      where: {
+        id,
+      },
+    });
+
+    return 'Post deleted successfully';
   }
 }

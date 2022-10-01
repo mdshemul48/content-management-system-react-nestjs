@@ -66,8 +66,31 @@ export class PostsController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './public/uploads',
+        filename: (req, file, cb) => {
+          if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(
+              new BadRequestException('Only image files are allowed!'),
+              '',
+            );
+          }
+
+          const fileExtName = file.originalname.split('.')[1];
+          const newFileName = `${uuid()}.${fileExtName}`;
+          cb(null, newFileName);
+        },
+      }),
+    }),
+  )
+  update(
+    @Param('id') id: string,
+    @Body() updatePostDto: UpdatePostDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.postsService.update(+id, updatePostDto, file);
   }
 
   @Delete(':id')
