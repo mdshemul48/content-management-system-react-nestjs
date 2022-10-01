@@ -67,6 +67,8 @@ model Post {
   metaData String?
   tags     String
 
+  content Json
+
   name      String?
   quality   String?
   watchTime String?
