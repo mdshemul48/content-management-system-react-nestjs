@@ -111,7 +111,6 @@ export class PostsService {
       year,
       categories: categoriesString,
     } = updatePostDto;
-    console.log(file);
     return this.prisma.post.update({
       where: {
         id,
