@@ -156,7 +156,6 @@ export class PostsService {
       OR: whereOr.length > 0 ? whereOr : undefined,
       AND: categoryExactFilter,
     };
-    console.log(where);
 
     return this.prisma.post.findMany({
       where,

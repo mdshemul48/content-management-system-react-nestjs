@@ -53,6 +53,9 @@ export class PostsController {
     @Body() createPostDto: CreatePostDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
+    if (!file) {
+      throw new BadRequestException('Image is required');
+    }
     return this.postsService.create(user, createPostDto, file);
   }
 
