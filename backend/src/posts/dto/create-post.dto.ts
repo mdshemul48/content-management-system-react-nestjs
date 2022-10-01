@@ -19,7 +19,7 @@ export class CreatePostDto {
 
   @IsNotEmpty()
   @IsString()
-  content: Prisma.JsonValue;
+  content: string;
 
   @IsNotEmpty()
   @IsString()

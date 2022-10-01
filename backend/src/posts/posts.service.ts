@@ -27,6 +27,8 @@ export class PostsService {
       categories: categoriesString,
     } = createPostDto;
 
+    const postContent = JSON.parse(content);
+
     return await this.prisma.post.create({
       data: {
         title,
@@ -34,7 +36,7 @@ export class PostsService {
         image: file.filename,
         metaData,
         tags,
-        content,
+        content: postContent,
         name,
         quality,
         watchTime,
@@ -70,7 +72,8 @@ export class PostsService {
   }
 
   findAll(findPostDto: FindPostDto) {
-    const { searchTerm, order, page, limit } = findPostDto;
+    const { searchTerm, order, page, limit, category, categoryExact } =
+      findPostDto;
 
     const skip = page ? (Number(page) - 1) * Number(limit) : 0;
     const take = limit ? Number(limit) : 10;
@@ -96,27 +99,64 @@ export class PostsService {
       },
     };
 
-    const where = searchTerm
-      ? {
-          OR: [
-            {
-              title: {
-                contains: searchTerm,
-              },
+    const search = [
+      {
+        title: {
+          contains: searchTerm,
+        },
+      },
+      {
+        metaData: {
+          contains: searchTerm,
+        },
+      },
+      {
+        tags: {
+          contains: searchTerm,
+        },
+      },
+      {
+        name: {
+          contains: searchTerm,
+        },
+      },
+    ];
+
+    const categoryExactFilter = categoryExact
+      ? categoryExact.split(',').map((category: string) => ({
+          categories: {
+            some: {
+              id: Number(category),
             },
-            {
-              metaData: {
-                contains: searchTerm,
-              },
-            },
-            {
-              tags: {
-                contains: searchTerm,
-              },
-            },
-          ],
-        }
+          },
+        }))
       : undefined;
+
+    const categoryFilter = category
+      ? category.split(',').map((category: string) => ({
+          categories: {
+            some: {
+              id: Number(category),
+            },
+          },
+        }))
+      : undefined;
+
+    const whereOr = [];
+
+    if (searchTerm) {
+      whereOr.push(...search);
+    }
+
+    if (categoryFilter) {
+      whereOr.push(...categoryFilter);
+    }
+
+    const where = {
+      OR: whereOr.length > 0 ? whereOr : undefined,
+      AND: categoryExactFilter,
+    };
+    console.log(where);
 
     return this.prisma.post.findMany({
       where,
