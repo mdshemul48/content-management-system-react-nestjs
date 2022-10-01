@@ -8,6 +8,26 @@ export class PostsService {
   constructor(private prisma: PrismaService) {}
 
   create(createPostDto: CreatePostDto) {
+    // return this.prisma.post.create({
+    //   data: {
+    //     title,
+    //     type,
+    //     image,
+    //     metaData,
+    //     tags,
+    //     content,
+    //     name,
+    //     quality,
+    //     watchTime,
+    //     categories: {
+    //       connect: categories.map((id) => ({ id })),
+    //     },
+    //     user: {
+    //       connect: { id: userId },
+    //     },
+    //   },
+    // });
+
     return 'This action adds a new post';
   }
 
