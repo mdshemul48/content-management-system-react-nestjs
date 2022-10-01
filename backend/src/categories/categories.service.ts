@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -31,19 +35,104 @@ export class CategoriesService {
     return createdCategory;
   }
 
-  findAll() {
-    return `This action returns all categories`;
+  async findAll() {
+    const categories = this.prisma.category.findMany({
+      where: { type: 'main' },
+      include: {
+        createdBy: {
+          select: {
+            name: true,
+            id: true,
+          },
+        },
+        subCategory: {
+          select: {
+            id: true,
+            name: true,
+            type: true,
+            parentId: true,
+            userId: true,
+            createdAt: true,
+            updatedAt: true,
+            createdBy: {
+              select: {
+                name: true,
+                id: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return categories;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: number) {
+    return await this.prisma.category.findFirst({
+      where: { id: id },
+      include: {
+        createdBy: {
+          select: {
+            name: true,
+            id: true,
+          },
+        },
+        subCategory: {
+          select: {
+            id: true,
+            name: true,
+            type: true,
+            parentId: true,
+            userId: true,
+            createdAt: true,
+            updatedAt: true,
+            createdBy: {
+              select: {
+                name: true,
+                id: true,
+              },
+            },
+          },
+        },
+      },
+    });
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+    return await this.prisma.category.update({
+      where: {
+        id,
+      },
+      data: updateCategoryDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: number) {
+    const category = await this.prisma.category.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        subCategory: true,
+        posts: true,
+      },
+    });
+
+    if (category.subCategory.length > 0) {
+      throw new ForbiddenException('Category Has sub category.');
+    }
+
+    if (category.posts.length > 0) {
+      throw new ForbiddenException('Category Has posts.');
+    }
+
+    await this.prisma.category.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    return 'category deleted';
   }
 }
