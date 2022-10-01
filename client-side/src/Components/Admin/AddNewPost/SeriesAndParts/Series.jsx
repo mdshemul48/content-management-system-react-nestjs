@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Button, Card, Col, Dropdown, Form, Row, Tab, Table, Tabs } from "react-bootstrap";
-import AddNewEpisode from "./AddNewEpisode";
+import AddNewEntry from "./AddNewEntry";
 
 const Series = ({ content, setContent }) => {
   const [seasonName, setSeasonName] = useState("");
 
-  console.log(content, seasonName);
   const onSeasonNameChangeHandler = (event) => {
     setSeasonName(event.target.value);
   };
@@ -16,7 +15,7 @@ const Series = ({ content, setContent }) => {
 
   const onAddNewEpisodeHandler = (seasonIndex, episodes) => {
     const newContent = [...content];
-    newContent[seasonIndex].episodes.push(...episodes);
+    newContent[seasonIndex].episodes.push(episodes);
     setContent(newContent);
   };
 
@@ -124,7 +123,7 @@ const Series = ({ content, setContent }) => {
                   ))}
                 </tbody>
               </Table>
-              <AddNewEpisode onAddNewEpisodeHandler={onAddNewEpisodeHandler} seasonIndex={seasonIndex} />
+              <AddNewEntry onAddNewEpisodeHandler={onAddNewEpisodeHandler} seasonIndex={seasonIndex} />
             </Tab>
           ))}
         </Tabs>

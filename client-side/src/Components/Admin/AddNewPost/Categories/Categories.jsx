@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import styles from "./Categories.module.css";
 
-const Categories = () => {
-  const [selectedCategories, setSelectedCategories] = React.useState([]);
+const Categories = ({ selectedCategories, setSelectedCategories }) => {
+  // const [selectedCategories, setSelectedCategories] = useState([]);
   const { categories } = useSelector((state) => state.categories);
 
   const onChangeHandler = (event) => {
@@ -15,7 +15,6 @@ const Categories = () => {
       setSelectedCategories([...selectedCategories, event.target.value]);
     }
   };
-  console.log(selectedCategories);
   return (
     <Card className="mb-2">
       <Card.Header>Categories</Card.Header>

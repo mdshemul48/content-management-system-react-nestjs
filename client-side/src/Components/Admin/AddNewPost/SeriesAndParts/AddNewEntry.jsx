@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-const AddNewEpisode = ({ onAddNewEpisodeHandler, seasonIndex }) => {
+const AddNewEntry = ({ onAddNewEpisodeHandler, seasonIndex }) => {
   const [episodeCount, setEpisodeCount] = useState(1);
 
   const onAddNewEpisode = () => {
-    onAddNewEpisodeHandler(seasonIndex, Array(Number(episodeCount)).fill({ title: "", link: "" }));
+    for (let i = 0; i < episodeCount; i += 1) {
+      onAddNewEpisodeHandler(seasonIndex, { title: "", link: "" });
+    }
     setEpisodeCount(1);
   };
 
@@ -19,18 +21,18 @@ const AddNewEpisode = ({ onAddNewEpisodeHandler, seasonIndex }) => {
         <Form.Control
           className="mb-1"
           type="Number"
-          placeholder="Episode Empty box in the end"
+          placeholder="Empty box in the end"
           value={episodeCount}
           onChange={onEpisodeCountChangeHandler}
         />
       </Col>
       <Col>
         <Button variant="dark" onClick={onAddNewEpisode}>
-          Add Empty Box for Episode
+          Add Empty Box
         </Button>
       </Col>
     </Row>
   );
 };
 
-export default AddNewEpisode;
+export default AddNewEntry;

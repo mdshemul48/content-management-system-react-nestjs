@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Card, Col, Form, Row } from "react-bootstrap";
 
 import Categories from "./Categories/Categories";
@@ -6,17 +6,23 @@ import Categories from "./Categories/Categories";
 import styles from "./AddNewPost.module.css";
 import PosterImage from "./PosterImage/PosterImage";
 import Movie from "./Movie/Movie";
-import Series from "./Series/Series";
+import Series from "./SeriesAndParts/Series";
+import Parts from "./SeriesAndParts/Parts";
 
 const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("movie");
-  const [postDetail, setPostDetail] = useState({
+  const defaultFormValue = {
     title: "",
     image: null,
     previewImage: null,
     categories: [],
     content: [],
-  });
+  };
+  const [postDetail, setPostDetail] = useState(defaultFormValue);
+
+  useEffect(() => {
+    setPostDetail(defaultFormValue);
+  }, [publishOption]);
 
   const onChangeHandler = (event) => {
     setPublishOption(event.target.value);
@@ -64,15 +70,22 @@ const AddNewPost = () => {
           </Row>
           <Row>
             <Col lg={10}>
-              {/* {publishOption === "movie" && <Movie />} */}
-              {/* {publishOption === "series" && <Series />} */}
-              <Series
-                content={postDetail.content}
-                setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
-              />
+              {publishOption === "movie" && <Movie />}
+              {publishOption === "series" && (
+                <Series
+                  content={postDetail.content}
+                  setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
+                />
+              )}
+              {publishOption !== "movie" && publishOption !== "series" && (
+                <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
+              )}
             </Col>
             <Col lg={2}>
-              <Categories />
+              <Categories
+                selectedCategories={postDetail.categories}
+                setSelectedCategories={(newCategories) => setPostDetail({ ...postDetail, categories: newCategories })}
+              />
               <PosterImage onImageChangeHandler={onImageChangeHandler} image={postDetail.previewImage} />
               <Card className="p-1 mt-2">
                 {" "}
