@@ -47,28 +47,32 @@ class TvSeriesController extends Controller
         try{
 
             $post = new Post();
-
             $post->title = $request->name;
-            $post->type = "tvSeries";
+            $post->type = $request->type;
             $post->image = $filename;
             $post->createdBy = auth()->user()->id;
-            $post->category_id = $request->category_id;
-            $post->subCategory_id = $request->subCategory_id;
+
             $post->meta_data = $request->meta_data;
             $post->save();
+
+            $split_categories = explode(',', $request->category_id);
+            foreach($split_categories as $category){
+                $category_post = DB::table('category_post')->insert([
+                        'category_id' => $category,
+                        'post_id' => $post->id,
+                    ]);
+            }
 
             $contents = json_decode($request->contents);
 
             foreach($contents as $key=>$item){
 
                 foreach($item->episodes as $item_key=>$episodes){
-
                     $post_details = new Post_details();
                     $post_details->post_id = $post->id;
                     $post_details->downloadLink = $episodes->link;
                     $post_details->session = $item->seasonName;
                     $post_details->episode = $episodes->title;
-
                     $post_details->save();
                 }
             }

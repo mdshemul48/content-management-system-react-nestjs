@@ -18,8 +18,6 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->enum('type',['movies', 'tvSeries', 'software', 'tutorials', 'games','others'])->default('others');
             $table->text('image')->nullable();
-            $table->string('category_id');
-            $table->string('subCategory_id')->nullable();
             $table->string('meta_data')->nullable();
             $table->integer('createdBy');
             $table->string("name")->nullable();

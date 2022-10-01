@@ -63,8 +63,8 @@ Route::group(['middleware' => 'api', 'namespace' => 'App\Http\Controllers', 'pre
 
     //Tv series
     // Route::apiResource('tvSeries', TvSeriesController::class);
-    Route::post('/tvSeriesCreate', [TvSeriesController::class, 'store']);
-    Route::get('/tvSeriesShow/{id}', [TvSeriesController::class, 'show']);
+    Route::post('/postCreate', [TvSeriesController::class, 'store']);
+    Route::get('/postShow/{id}', [TvSeriesController::class, 'show']);
 });
 
 //unprotected route
