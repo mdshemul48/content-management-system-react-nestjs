@@ -10,6 +10,7 @@ import {
   UploadedFile,
   UseInterceptors,
   BadRequestException,
+  Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -20,6 +21,7 @@ import { diskStorage } from 'multer';
 import { v4 as uuid } from 'uuid';
 import { GetUser } from 'src/auth/decorator';
 import { User } from '@prisma/client';
+import { FindPostDto } from './dto/find-post.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -55,8 +57,8 @@ export class PostsController {
   }
 
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  findAll(@Query() findPostDto: FindPostDto) {
+    return this.postsService.findAll(findPostDto);
   }
 
   @Get(':id')

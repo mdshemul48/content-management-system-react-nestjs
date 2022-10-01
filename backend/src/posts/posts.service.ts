@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePostDto } from './dto/create-post.dto';
+import { FindPostDto } from './dto/find-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
@@ -68,8 +69,62 @@ export class PostsService {
     });
   }
 
-  findAll() {
-    return `This action returns all posts`;
+  findAll(findPostDto: FindPostDto) {
+    const { searchTerm, order, page, limit } = findPostDto;
+
+    const skip = page ? (Number(page) - 1) * Number(limit) : 0;
+    const take = limit ? Number(limit) : 10;
+
+    const orderBy = {
+      createdAt: order,
+    };
+
+    const include = {
+      createdBy: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      categories: {
+        select: {
+          parentId: true,
+          id: true,
+          name: true,
+          type: true,
+        },
+      },
+    };
+
+    const where = searchTerm
+      ? {
+          OR: [
+            {
+              title: {
+                contains: searchTerm,
+              },
+            },
+            {
+              metaData: {
+                contains: searchTerm,
+              },
+            },
+            {
+              tags: {
+                contains: searchTerm,
+              },
+            },
+          ],
+        }
+      : undefined;
+
+    return this.prisma.post.findMany({
+      where,
+      include,
+      orderBy,
+      skip,
+      take,
+    });
   }
 
   findOne(id: number) {
