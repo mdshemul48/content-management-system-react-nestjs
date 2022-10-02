@@ -31,7 +31,9 @@ function CategoryPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axiosInstance.get(`/posts`);
+        const { data } = await axiosInstance.get(
+          `/posts?categoryExact=${subCategory ? `${mainCategoryId},${subCategory}` : mainCategoryId}&page=${page}`
+        );
         setPosts(data);
         setPaginationInfo({
           from: data.from,
@@ -45,8 +47,6 @@ function CategoryPage() {
     fetchData();
   }, [mainCategoryId, subCategory, page]);
 
-  console.log(category, subCategory);
-
   return (
     <main>
       <h1 className="text-light text-center my-3 bg-dark py-1">
@@ -54,7 +54,7 @@ function CategoryPage() {
           ? category?.subCategory?.find((sub) => sub.id === parseInt(subCategory, 10))?.name
           : category?.name}
       </h1>
-      {!subCategory && <SubCategories items={category.subCategory} />}
+      {!subCategory && <SubCategories items={category?.subCategory} />}
       <hr className="text-light" />
       <Container fluid>
         <Row>
