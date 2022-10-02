@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./SinglePost.module.css";
 
-function SinglePost({ item: { image, name, quality, id } }) {
+function SinglePost({ item: { image, name, quality, id, year } }) {
   return (
     <Col xxl={2} lg={3}>
       <div className={`rounded ${styles.singlePost_card} p-1 m-1`}>
@@ -16,7 +16,9 @@ function SinglePost({ item: { image, name, quality, id } }) {
               alt=""
             />
             <div className={`text-center ${styles.singlePost_text}`}>
-              <h3 className="fs-5 text-white">{name}</h3>
+              <h3 className="fs-5 text-white">
+                {name} ({year})
+              </h3>
               <p className="text-white">Quality : {quality}</p>
               <Button variant="danger" className="rounded-0 mb-2">
                 Watch Now

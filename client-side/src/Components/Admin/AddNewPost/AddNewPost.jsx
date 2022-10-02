@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Card, Col, Form, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 import Categories from "./Categories/Categories";
 
@@ -11,6 +13,7 @@ import Parts from "./SeriesAndParts/Parts";
 
 const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("singleVideo");
+  const { auth } = useSelector((state) => state);
   const defaultFormValue = {
     title: "",
     name: "",
@@ -26,9 +29,7 @@ const AddNewPost = () => {
   const [postDetail, setPostDetail] = useState(defaultFormValue);
 
   useEffect(() => {
-    setPostDetail((prevState) => ({
-      ...prevState,
-    }));
+    setPostDetail(defaultFormValue);
   }, [publishOption]);
 
   const onResetHandler = () => {
@@ -62,11 +63,44 @@ const AddNewPost = () => {
     };
   };
 
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+
+    // eslint-disable-next-line no-undef
+    const formData = new FormData();
+    formData.append("title", postDetail.title);
+    formData.append("type", publishOption);
+    formData.append("name", postDetail.name);
+    formData.append("image", postDetail.image);
+    formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
+    formData.append(
+      "content",
+      publishOption === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
+    );
+    formData.append("tags", "this is tags");
+    formData.append("year", postDetail.year);
+    formData.append("watchTime", postDetail.watchTime);
+    formData.append("quality", postDetail.quality);
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of formData) {
+      console.log(key, value);
+    }
+    console.log(auth);
+    const { data } = await axios.post("http://localhost:5000/posts", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${auth.token}`,
+      },
+    });
+    console.log(data);
+  };
+
   return (
     <main className="m-2 p-3">
       <section>
         <h4>Add New Post</h4>
-        <Form>
+        <Form onSubmit={onSubmitHandler}>
           <Row>
             <Col lg={6} md={12}>
               <Form.Group className="mb-3">
@@ -99,7 +133,9 @@ const AddNewPost = () => {
           </Row>
           <Row>
             <Col lg={10}>
-              {publishOption === "singleVideo" && <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />}
+              {(publishOption === "singleVideo" || publishOption === "series") && (
+                <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />
+              )}
               {publishOption === "series" && (
                 <Series
                   content={postDetail.content}
@@ -122,7 +158,9 @@ const AddNewPost = () => {
                   <Button variant="secondary" onClick={onResetHandler}>
                     Reset
                   </Button>{" "}
-                  <Button variant="primary">Submit</Button>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
                 </ButtonGroup>
               </Card>
             </Col>
