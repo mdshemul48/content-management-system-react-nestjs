@@ -13,26 +13,45 @@ const AddNewPost = () => {
   const [publishOption, setPublishOption] = useState("singleVideo");
   const defaultFormValue = {
     title: "",
+    name: "",
     image: null,
     previewImage: null,
     categories: [],
     content: [],
+    year: "",
+    downloadLink: "",
+    watchTime: "",
+    quality: "",
   };
   const [postDetail, setPostDetail] = useState(defaultFormValue);
 
   useEffect(() => {
-    setPostDetail(defaultFormValue);
+    setPostDetail((prevState) => ({
+      ...prevState,
+    }));
   }, [publishOption]);
 
-  const onChangeHandler = (event) => {
+  const onResetHandler = () => {
+    setPostDetail(defaultFormValue);
+  };
+
+  const onPostTypeChangeHandler = (event) => {
     setPublishOption(event.target.value);
+  };
+
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setPostDetail((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const onImageChangeHandler = (event) => {
     const file = event.target.files[0];
     // eslint-disable-next-line no-undef
     const reader = new FileReader();
-    const url = reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 
     reader.onloadend = () => {
       setPostDetail({
@@ -52,19 +71,23 @@ const AddNewPost = () => {
             <Col lg={6} md={12}>
               <Form.Group className="mb-3">
                 <Form.Label>Title</Form.Label>
-                <Form.Control name="title" type="text" />
+                <Form.Control name="title" type="text" onChange={onChangeHandler} value={postDetail.title} />
               </Form.Group>
             </Col>
             <Col lg={4} md={8}>
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
-                <Form.Control name="name" type="text" />
+                <Form.Control name="name" type="text" onChange={onChangeHandler} value={postDetail.name} />
               </Form.Group>
             </Col>
             <Col lg={2} md={4} className="align-items-end d-flex">
               {" "}
               <Form.Group className="mb-3 w-100">
-                <Form.Select className={styles.selectPublishType} onChange={onChangeHandler}>
+                <Form.Select
+                  className={styles.selectPublishType}
+                  onChange={onPostTypeChangeHandler}
+                  defaultValue={publishOption}
+                >
                   <option value="singleVideo">Single Video</option>
                   <option value="multiVideo">Multi Video</option>
                   <option value="singleFile">Single File</option>
@@ -76,7 +99,7 @@ const AddNewPost = () => {
           </Row>
           <Row>
             <Col lg={10}>
-              {publishOption === "singleVideo" && <Movie />}
+              {publishOption === "singleVideo" && <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />}
               {publishOption === "series" && (
                 <Series
                   content={postDetail.content}
@@ -96,7 +119,10 @@ const AddNewPost = () => {
               <Card className="p-1 mt-2">
                 {" "}
                 <ButtonGroup className="w-100">
-                  <Button variant="secondary">Back</Button> <Button variant="primary">Submit</Button>
+                  <Button variant="secondary" onClick={onResetHandler}>
+                    Reset
+                  </Button>{" "}
+                  <Button variant="primary">Submit</Button>
                 </ButtonGroup>
               </Card>
             </Col>
