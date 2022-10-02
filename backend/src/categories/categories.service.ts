@@ -30,6 +30,14 @@ export class CategoriesService {
         userId: user.id,
         type: createCategoryDto.parentId ? 'sub' : 'main',
       },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
     });
 
     return createdCategory;
