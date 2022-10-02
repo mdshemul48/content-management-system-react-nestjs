@@ -82,23 +82,6 @@ export class PostsService {
       createdAt: order,
     };
 
-    const include = {
-      createdBy: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
-      categories: {
-        select: {
-          parentId: true,
-          id: true,
-          name: true,
-          type: true,
-        },
-      },
-    };
-
     const search = [
       {
         title: {
@@ -157,9 +140,38 @@ export class PostsService {
       AND: categoryExactFilter,
     };
 
+    const select = {
+      id: true,
+      title: true,
+      type: true,
+      image: true,
+      metaData: true,
+      tags: true,
+      name: true,
+      quality: true,
+      watchTime: true,
+      year: true,
+      createdAt: true,
+      updatedAt: true,
+      categories: {
+        select: {
+          parentId: true,
+          id: true,
+          name: true,
+          type: true,
+        },
+      },
+      createdBy: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    };
+
     return this.prisma.post.findMany({
       where,
-      include,
+      select,
       orderBy,
       skip,
       take,
