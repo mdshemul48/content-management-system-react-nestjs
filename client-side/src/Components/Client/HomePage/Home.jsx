@@ -18,11 +18,11 @@ function Home() {
 
   return (
     <main>
-      <HomeCarousel />
+      {/* <HomeCarousel />
       <LatestUpload posts={categoryWithPost.latestPost} />
       {categoryWithPost.categoryPost.map((categoryAndPosts) => (
         <LatestPostInCategory item={categoryAndPosts} />
-      ))}
+      ))} */}
     </main>
   );
 }
