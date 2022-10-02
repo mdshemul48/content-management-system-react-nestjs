@@ -3,19 +3,13 @@ import { Col, Form, Row } from "react-bootstrap";
 
 const Movie = () => (
   <Row>
-    <Col lg={10}>
-      <Form.Group className="mb-3">
-        <Form.Label>Name</Form.Label>
-        <Form.Control name="name" type="text" />
-      </Form.Group>
-    </Col>
-    <Col lg={2}>
+    <Col lg={6}>
       <Form.Group className="mb-3">
         <Form.Label>Year</Form.Label>
         <Form.Control name="year" type="text" />
       </Form.Group>
     </Col>
-    <Col lg={12}>
+    <Col lg={6}>
       <Form.Group className="mb-3">
         <Form.Label>Download Link</Form.Label>
         <Form.Control name="downloadLink" type="text" />

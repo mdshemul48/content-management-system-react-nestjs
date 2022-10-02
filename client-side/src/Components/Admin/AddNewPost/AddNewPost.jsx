@@ -10,7 +10,7 @@ import Series from "./SeriesAndParts/Series";
 import Parts from "./SeriesAndParts/Parts";
 
 const AddNewPost = () => {
-  const [publishOption, setPublishOption] = useState("movie");
+  const [publishOption, setPublishOption] = useState("singleVideo");
   const defaultFormValue = {
     title: "",
     image: null,
@@ -49,20 +49,26 @@ const AddNewPost = () => {
         <h4>Add New Post</h4>
         <Form>
           <Row>
-            <Col lg={10} md={8}>
+            <Col lg={6} md={12}>
               <Form.Group className="mb-3">
                 <Form.Label>Title</Form.Label>
                 <Form.Control name="title" type="text" />
+              </Form.Group>
+            </Col>
+            <Col lg={4} md={8}>
+              <Form.Group className="mb-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control name="name" type="text" />
               </Form.Group>
             </Col>
             <Col lg={2} md={4} className="align-items-end d-flex">
               {" "}
               <Form.Group className="mb-3 w-100">
                 <Form.Select className={styles.selectPublishType} onChange={onChangeHandler}>
-                  <option value="movie">Movie</option>
-                  <option value="software">Software</option>
-                  <option value="game">Game</option>
-                  <option value="tutorial">Tutorial</option>
+                  <option value="singleVideo">Single Video</option>
+                  <option value="multiVideo">Multi Video</option>
+                  <option value="singleFile">Single File</option>
+                  <option value="multiFile">Multi File</option>
                   <option value="series">Series</option>
                 </Form.Select>
               </Form.Group>
@@ -70,14 +76,14 @@ const AddNewPost = () => {
           </Row>
           <Row>
             <Col lg={10}>
-              {publishOption === "movie" && <Movie />}
+              {publishOption === "singleVideo" && <Movie />}
               {publishOption === "series" && (
                 <Series
                   content={postDetail.content}
                   setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
                 />
               )}
-              {publishOption !== "movie" && publishOption !== "series" && (
+              {publishOption !== "singleVideo" && publishOption !== "series" && (
                 <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
               )}
             </Col>
