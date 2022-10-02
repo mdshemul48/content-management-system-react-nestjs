@@ -75,7 +75,7 @@ export class PostsService {
     const { searchTerm, order, page, limit, category, categoryExact } =
       findPostDto;
 
-    const skip = page ? (Number(page) - 1) * Number(limit) : 0;
+    const skip = page ? (Number(page) - 1) * Number(limit || 10) : 0;
     const take = limit ? Number(limit) : 10;
 
     const orderBy = {
