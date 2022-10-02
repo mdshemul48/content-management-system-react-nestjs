@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import styles from "./Categories.module.css";
 
 const Categories = ({ selectedCategories, setSelectedCategories }) => {
-  // const [selectedCategories, setSelectedCategories] = useState([]);
   const { categories } = useSelector((state) => state.categories);
 
   const onChangeHandler = (event) => {
@@ -27,7 +26,7 @@ const Categories = ({ selectedCategories, setSelectedCategories }) => {
                 {category.name}
               </label>
               <ul className={styles.selectedSubCategory}>
-                {category.sub_category.map((subCategory) => (
+                {category.subCategory.map((subCategory) => (
                   <li className="list-unstyled" key={subCategory.id}>
                     <label>
                       <input type="checkbox" className="me-1 my-1" onChange={onChangeHandler} value={subCategory.id} />
