@@ -3,7 +3,7 @@ import { login } from "../reducers/auth";
 
 export const loginMethod = (loginInfo, callback) => async (dispatch) => {
   try {
-    const { data } = await axiosInstance.post("/admin/login", {
+    const { data } = await axiosInstance.post("/auth/login", {
       email: loginInfo.email,
       password: loginInfo.password,
     });

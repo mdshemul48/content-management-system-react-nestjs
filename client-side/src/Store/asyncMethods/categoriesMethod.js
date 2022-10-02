@@ -5,7 +5,7 @@ import axiosInstance from "../../utility/axiosInstance";
 
 export const getCategoriesMethod = () => async (dispatch) => {
   try {
-    const { data } = await axiosInstance.get("/allCategoryInfo");
+    const { data } = await axiosInstance.get("/categories");
     dispatch(getCategories(data));
   } catch (error) {
     toast.error(error.message);
@@ -17,15 +17,13 @@ export const addNewCategoryMethod = (data, callback) => async (dispatch, state) 
     auth: { token },
   } = state();
   try {
-    const {
-      data: { category },
-    } = await axiosInstance.post("/admin/categoryCreate", data, {
+    const response = await axiosInstance.post("/categories", data, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(addCategory(category));
+    dispatch(addCategory(response.data));
     callback();
     toast.success("Category Added");
   } catch (error) {
@@ -38,7 +36,7 @@ export const deleteCategoryMethod = (item, callback) => async (dispatch, state) 
     auth: { token },
   } = state();
   try {
-    await axiosInstance.delete(`/admin/categoryDelete/${item.id}`, {
+    await axiosInstance.delete(`/categories/${item.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

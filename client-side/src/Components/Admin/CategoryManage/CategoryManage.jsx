@@ -16,8 +16,7 @@ const CategoryManage = () => {
   const handleShow = () => setShow(true);
 
   const addCategoryHandler = async ({ name, parentId }) => {
-    const newCategory = { name, parent_id: parentId || null, type: parentId ? "subCategory" : "mainCategory" };
-
+    const newCategory = { name, parentId: +parentId || null };
     dispatch(addNewCategoryMethod(newCategory, handleClose));
   };
 
