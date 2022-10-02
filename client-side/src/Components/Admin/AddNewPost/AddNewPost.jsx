@@ -82,11 +82,6 @@ const AddNewPost = () => {
     formData.append("watchTime", postDetail.watchTime);
     formData.append("quality", postDetail.quality);
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of formData) {
-      console.log(key, value);
-    }
-    console.log(auth);
     const { data } = await axios.post("http://localhost:5000/posts", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
