@@ -22,14 +22,26 @@ const Categories = ({ selectedCategories, setSelectedCategories }) => {
           {categories.map((category) => (
             <li className="list-unstyled" key={category.id}>
               <label>
-                <input type="checkbox" className="me-1 my-1" onChange={onChangeHandler} value={category.id} />
-                {category.name}
+                <input
+                  type="checkbox"
+                  className="me-1 my-1"
+                  onChange={onChangeHandler}
+                  value={category.id}
+                  checked={selectedCategories.includes(`${category.id}`)}
+                />
+                {category.name}s
               </label>
               <ul className={styles.selectedSubCategory}>
                 {category.subCategory.map((subCategory) => (
                   <li className="list-unstyled" key={subCategory.id}>
                     <label>
-                      <input type="checkbox" className="me-1 my-1" onChange={onChangeHandler} value={subCategory.id} />
+                      <input
+                        type="checkbox"
+                        className="me-1 my-1"
+                        onChange={onChangeHandler}
+                        value={subCategory.id}
+                        checked={selectedCategories.includes(`${subCategory.id}`)}
+                      />
                       {subCategory.name}
                     </label>
                   </li>

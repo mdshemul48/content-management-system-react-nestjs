@@ -32,7 +32,9 @@ function CategoryPage() {
     const fetchData = async () => {
       try {
         const { data } = await axiosInstance.get(
-          `/posts?categoryExact=${subCategory ? `${mainCategoryId},${subCategory}` : mainCategoryId}&page=${page}`
+          `/posts?categoryExact=${
+            subCategory ? `${mainCategoryId},${subCategory}` : mainCategoryId
+          }&page=${page}&order=desc`
         );
         setPosts(data);
         setPaginationInfo({

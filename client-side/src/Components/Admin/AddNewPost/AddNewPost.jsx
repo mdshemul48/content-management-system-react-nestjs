@@ -17,7 +17,7 @@ const AddNewPost = () => {
   const defaultFormValue = {
     title: "",
     name: "",
-    image: null,
+    imageFile: null,
     previewImage: null,
     categories: [],
     content: [],
@@ -34,6 +34,7 @@ const AddNewPost = () => {
 
   const onResetHandler = () => {
     setPostDetail(defaultFormValue);
+    setPublishOption("singleVideo");
   };
 
   const onPostTypeChangeHandler = (event) => {
@@ -57,7 +58,7 @@ const AddNewPost = () => {
     reader.onloadend = () => {
       setPostDetail({
         ...postDetail,
-        image: file,
+        imageFile: file,
         previewImage: reader.result,
       });
     };
@@ -71,7 +72,7 @@ const AddNewPost = () => {
     formData.append("title", postDetail.title);
     formData.append("type", publishOption);
     formData.append("name", postDetail.name);
-    formData.append("image", postDetail.image);
+    formData.append("image", postDetail.imageFile);
     formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
     formData.append(
       "content",
@@ -88,8 +89,9 @@ const AddNewPost = () => {
         Authorization: `Bearer ${auth.token}`,
       },
     });
-    console.log(data);
   };
+
+  console.log(postDetail);
 
   return (
     <main className="m-2 p-3">
@@ -115,7 +117,7 @@ const AddNewPost = () => {
                 <Form.Select
                   className={styles.selectPublishType}
                   onChange={onPostTypeChangeHandler}
-                  defaultValue={publishOption}
+                  value={publishOption}
                 >
                   <option value="singleVideo">Single Video</option>
                   <option value="multiVideo">Multi Video</option>
