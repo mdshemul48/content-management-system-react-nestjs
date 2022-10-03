@@ -217,6 +217,9 @@ export class PostsService {
       year,
       categories: categoriesString,
     } = updatePostDto;
+
+    const postContent = JSON.parse(content);
+
     return this.prisma.post.update({
       where: {
         id,
@@ -226,7 +229,7 @@ export class PostsService {
         type,
         metaData,
         tags,
-        content,
+        content: postContent,
         image: file && file.filename,
         name,
         quality,
