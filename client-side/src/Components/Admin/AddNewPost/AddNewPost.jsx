@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, ButtonGroup, Card, Col, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import AddPostAndEditPostForm from "./AddPostAndEditPostForm/AddPostAndEditPostForm";
 
-import Categories from "./Categories/Categories";
+const AddNewPostAndEdit = () => {
+  const { postId } = useParams();
 
-import styles from "./AddNewPost.module.css";
-import PosterImage from "./PosterImage/PosterImage";
-import Movie from "./Movie/Movie";
-import Series from "./SeriesAndParts/Series";
-import Parts from "./SeriesAndParts/Parts";
-
-const AddNewPost = () => {
-  const [publishOption, setPublishOption] = useState("singleVideo");
   const { auth } = useSelector((state) => state);
   const defaultFormValue = {
     title: "",
@@ -26,50 +20,46 @@ const AddNewPost = () => {
     downloadLink: "",
     watchTime: "",
     quality: "",
+    type: "singleVideo",
   };
-  const [postDetail, setPostDetail] = useState(defaultFormValue);
 
+  const [postDetail, setPostDetail] = useState(defaultFormValue);
+  const [publishOption, setPublishOption] = useState("singleVideo");
   useEffect(() => {
-    setPostDetail(defaultFormValue);
-  }, [publishOption]);
+    if (postId) {
+      const fetchPostDetail = async () => {
+        const { data } = await axios.get(`${process.env.REACT_APP_API_BACKEND_API}/posts/${postId}`);
+
+        setPublishOption(data.type);
+        setPostDetail({
+          title: data.title,
+          name: data.name,
+          imageFile: null,
+          previewImage: data.image,
+          categories: data.categories.map((category) => `${category.id}`),
+          content: data.content,
+          year: data.year,
+          downloadLink: data.content,
+          watchTime: data.watchTime,
+          quality: data.quality,
+        });
+      };
+      fetchPostDetail();
+    }
+  }, [postId]);
 
   const onResetHandler = () => {
     setPostDetail(defaultFormValue);
     setPublishOption("singleVideo");
   };
 
-  const onPostTypeChangeHandler = (event) => {
-    setPublishOption(event.target.value);
-  };
-
-  const onChangeHandler = (event) => {
-    const { name, value } = event.target;
-    setPostDetail((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const onImageChangeHandler = (event) => {
-    const file = event.target.files[0];
-    // eslint-disable-next-line no-undef
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onloadend = () => {
-      setPostDetail({
-        ...postDetail,
-        imageFile: file,
-        previewImage: reader.result,
-      });
-    };
-  };
-
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
-    // eslint-disable-next-line no-undef
+    console.log(postDetail);
+
     try {
+      // eslint-disable-next-line no-undef
       const formData = new FormData();
       formData.append("title", postDetail.title);
       formData.append("type", publishOption);
@@ -85,15 +75,31 @@ const AddNewPost = () => {
       formData.append("watchTime", postDetail.watchTime);
       formData.append("quality", postDetail.quality);
 
-      const { data } = await axios.post(`${process.env.REACT_APP_API_BACKEND_API}/posts`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${auth.token}`,
-        },
-      });
-      toast.success("Post added successfully");
+      if (postId) {
+        await axios.patch(`${process.env.REACT_APP_API_BACKEND_API}/posts/${postId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+        toast.success("Post Updated Successfully");
+      } else {
+        const { data } = await axios.post(`${process.env.REACT_APP_API_BACKEND_API}/posts`, formData, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+        console.log(data);
+        toast.success("Post added successfully");
+      }
     } catch (err) {
-      toast.error(err.message);
+      const errorMessages = err.response.data.message;
+      if (Array.isArray(errorMessages)) {
+        errorMessages.forEach((message) => {
+          toast.error(message);
+        });
+      } else {
+        toast.error(errorMessages);
+      }
     }
   };
 
@@ -101,74 +107,16 @@ const AddNewPost = () => {
     <main className="m-2 p-3">
       <section>
         <h4>Add New Post</h4>
-        <Form onSubmit={onSubmitHandler}>
-          <Row>
-            <Col lg={6} md={12}>
-              <Form.Group className="mb-3">
-                <Form.Label>Title</Form.Label>
-                <Form.Control name="title" type="text" onChange={onChangeHandler} value={postDetail.title} />
-              </Form.Group>
-            </Col>
-            <Col lg={4} md={8}>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control name="name" type="text" onChange={onChangeHandler} value={postDetail.name} />
-              </Form.Group>
-            </Col>
-            <Col lg={2} md={4} className="align-items-end d-flex">
-              {" "}
-              <Form.Group className="mb-3 w-100">
-                <Form.Select
-                  className={styles.selectPublishType}
-                  onChange={onPostTypeChangeHandler}
-                  value={publishOption}
-                >
-                  <option value="singleVideo">Single Video</option>
-                  <option value="multiVideo">Multi Video</option>
-                  <option value="singleFile">Single File</option>
-                  <option value="multiFile">Multi File</option>
-                  <option value="series">Series</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={10}>
-              {(publishOption === "singleVideo" || publishOption === "series") && (
-                <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />
-              )}
-              {publishOption === "series" && (
-                <Series
-                  content={postDetail.content}
-                  setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
-                />
-              )}
-              {publishOption !== "singleVideo" && publishOption !== "series" && (
-                <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
-              )}
-            </Col>
-            <Col lg={2}>
-              <Categories
-                selectedCategories={postDetail.categories}
-                setSelectedCategories={(newCategories) => setPostDetail({ ...postDetail, categories: newCategories })}
-              />
-              <PosterImage onImageChangeHandler={onImageChangeHandler} image={postDetail.previewImage} />
-              <Card className="p-1 mt-2">
-                {" "}
-                <ButtonGroup className="w-100">
-                  <Button variant="secondary" onClick={onResetHandler}>
-                    Reset
-                  </Button>{" "}
-                  <Button variant="primary" type="submit">
-                    Submit
-                  </Button>
-                </ButtonGroup>
-              </Card>
-            </Col>
-          </Row>
-        </Form>
+        <AddPostAndEditPostForm
+          postDetail={postDetail}
+          setPostDetail={setPostDetail}
+          setPublishOption={setPublishOption}
+          onSubmitHandler={onSubmitHandler}
+          publishOption={publishOption}
+          onResetHandler={onResetHandler}
+        />
       </section>
     </main>
   );
 };
-export default AddNewPost;
+export default AddNewPostAndEdit;

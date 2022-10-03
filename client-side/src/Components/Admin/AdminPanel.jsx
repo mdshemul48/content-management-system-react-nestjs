@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import AddNewPost from "./AddNewPost/AddNewPost";
 import CategoryManage from "./CategoryManage/CategoryManage";
 import Dashboard from "./Dashboard/Dashboard";
@@ -13,6 +14,7 @@ function AdminHomePage() {
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="/addNewPost" element={<AddNewPost />} />
+          <Route path="/edit/:postId" element={<AddNewPost />} />
           <Route path="/category" element={<CategoryManage />} />
         </Routes>
       </section>
