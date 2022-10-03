@@ -42,7 +42,7 @@ export class PostsService {
         watchTime,
         year,
         categories: {
-          connect: JSON.parse(categoriesString).map((category: number) => ({
+          connect: JSON.parse(categoriesString).map((category: string) => ({
             id: category,
           })),
         },
