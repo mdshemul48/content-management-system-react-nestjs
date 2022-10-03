@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Card, Col, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 import Categories from "./Categories/Categories";
 
@@ -68,30 +69,33 @@ const AddNewPost = () => {
     event.preventDefault();
 
     // eslint-disable-next-line no-undef
-    const formData = new FormData();
-    formData.append("title", postDetail.title);
-    formData.append("type", publishOption);
-    formData.append("name", postDetail.name);
-    formData.append("image", postDetail.imageFile);
-    formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
-    formData.append(
-      "content",
-      publishOption === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
-    );
-    formData.append("tags", "this is tags");
-    formData.append("year", postDetail.year);
-    formData.append("watchTime", postDetail.watchTime);
-    formData.append("quality", postDetail.quality);
+    try {
+      const formData = new FormData();
+      formData.append("title", postDetail.title);
+      formData.append("type", publishOption);
+      formData.append("name", postDetail.name);
+      formData.append("image", postDetail.imageFile);
+      formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
+      formData.append(
+        "content",
+        publishOption === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
+      );
+      formData.append("tags", "this is tags");
+      formData.append("year", postDetail.year);
+      formData.append("watchTime", postDetail.watchTime);
+      formData.append("quality", postDetail.quality);
 
-    const { data } = await axios.post("http://localhost:5000/posts", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${auth.token}`,
-      },
-    });
+      const { data } = await axios.post(`${process.env.REACT_APP_API_BACKEND_API}/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${auth.token}`,
+        },
+      });
+      toast.success("Post added successfully");
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
-
-  console.log(postDetail);
 
   return (
     <main className="m-2 p-3">
