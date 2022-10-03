@@ -7,7 +7,9 @@ import { ConfigModule } from '@nestjs/config';
 import { PostsModule } from './posts/posts.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { HomePageModule } from './home-page/home-page.module';
 
+console.log(join(__dirname, '..', 'public'));
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -15,12 +17,14 @@ import { join } from 'path';
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
+      exclude: ['/api*'],
     }),
     AuthModule,
     UserModule,
     CategoriesModule,
     PrismaModule,
     PostsModule,
+    HomePageModule,
   ],
   controllers: [],
   providers: [],
