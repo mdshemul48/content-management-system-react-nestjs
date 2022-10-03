@@ -49,14 +49,12 @@ const AddNewPostAndEdit = () => {
   }, [postId]);
 
   const onResetHandler = () => {
-    setPostDetail(defaultFormValue);
+    setPostDetail({ ...defaultFormValue });
     setPublishOption("singleVideo");
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-
-    console.log(postDetail);
 
     try {
       // eslint-disable-next-line no-undef
@@ -88,7 +86,6 @@ const AddNewPostAndEdit = () => {
             Authorization: `Bearer ${auth.token}`,
           },
         });
-        console.log(data);
         toast.success("Post added successfully");
       }
     } catch (err) {
@@ -102,6 +99,8 @@ const AddNewPostAndEdit = () => {
       }
     }
   };
+
+  console.log(postDetail);
 
   return (
     <main className="m-2 p-3">

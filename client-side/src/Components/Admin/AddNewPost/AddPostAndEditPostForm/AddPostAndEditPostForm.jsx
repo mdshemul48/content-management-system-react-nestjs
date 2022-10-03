@@ -62,7 +62,6 @@ const AddPostAndEditPostForm = ({
             <Form.Select onChange={onPostTypeChangeHandler} value={publishOption}>
               <option value="singleVideo">Single Video</option>
               <option value="multiVideo">Multi Video</option>
-              <option value="singleFile">Single File</option>
               <option value="multiFile">Multi File</option>
               <option value="series">Series</option>
             </Form.Select>

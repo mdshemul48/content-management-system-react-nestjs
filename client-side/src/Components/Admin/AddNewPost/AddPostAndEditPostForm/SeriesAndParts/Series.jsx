@@ -94,7 +94,7 @@ const Series = ({ content, setContent }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {item.episodes.map((episode, episodeIndex) => (
+                  {item?.episodes?.map((episode, episodeIndex) => (
                     <tr key={episodeIndex}>
                       <td>{episodeIndex + 1}</td>
                       <td>
