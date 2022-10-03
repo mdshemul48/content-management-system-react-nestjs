@@ -22,6 +22,7 @@ import { v4 as uuid } from 'uuid';
 import { GetUser } from 'src/auth/decorator';
 import { User } from '@prisma/client';
 import { FindPostDto } from './dto/find-post.dto';
+import { join } from 'path';
 
 @Controller('posts')
 export class PostsController {
@@ -32,7 +33,7 @@ export class PostsController {
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
-        destination: './public/uploads',
+        destination: join(__dirname, '..', '..', 'public', 'uploads'),
         filename: (req, file, cb) => {
           if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return cb(
@@ -74,7 +75,7 @@ export class PostsController {
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
-        destination: './public/uploads',
+        destination: join(__dirname, '..', '..', 'public', 'uploads'),
         filename: (req, file, cb) => {
           if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return cb(

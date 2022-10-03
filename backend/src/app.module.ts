@@ -9,7 +9,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { HomePageModule } from './home-page/home-page.module';
 
-console.log(join(__dirname, '..', 'public'));
 @Module({
   imports: [
     ConfigModule.forRoot({
