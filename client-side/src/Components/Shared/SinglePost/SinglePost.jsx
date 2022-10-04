@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 import styles from "./SinglePost.module.css";
 
-function SinglePost({ item: { image, name, quality, id, year } }) {
+function SinglePost({ item: { image, name, quality, id, year, title } }) {
   return (
     <Col xxl={2} lg={3}>
-      <div className={`rounded ${styles.singlePost_card} p-1 m-1`}>
+      <div className={`rounded ${styles.singlePost_card} p-1 m-1`} title={title}>
         <Link to={`/content/${id}`} className="text-decoration-none">
           <div className="overflow-hidden d-flex justify-content-center  align-items-end rounded">
             <img

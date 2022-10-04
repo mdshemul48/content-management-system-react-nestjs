@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Card, Container } from "react-bootstrap";
 
 import axiosInstance from "../../../utility/axiosInstance";
-// import SeriesVideo from "./SeriesVideo/SeriesVideo";
+import SeriesVideo from "./SeriesVideo/SeriesVideo";
 import SingleVideo from "./SingleVideo/SingleVideo";
 
 import styles from "./ContentPage.module.css";
@@ -14,24 +14,25 @@ function ContentPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axiosInstance.get(`/getPost/${contentId}`);
+      const { data } = await axiosInstance.get(`/posts/${contentId}`);
       setContentData(data);
     };
     fetchData();
   }, []);
 
+  console.log(contentData);
   return (
     contentData && (
       <main className="mt-5 text-center">
         <div className={`${styles.contentPage_title} py-2`}>
           <div className="d-flex align-items-center justify-content-center">
-            <h2 className="text-white text-bolder">{contentData.name}</h2>
-            <ul className="d-flex text-light align-items-center">
+            <h2 className="text-white text-bolder">{contentData.title}</h2>
+            {/* <ul className="d-flex text-light align-items-center">
               <li className="list-unstyled ms-1">{contentData.watch_time}</li>
               <li className="list-unstyled ms-1">March 17, 2019 </li>
               <li className="list-unstyled ms-1">Romantic </li>
               <li className="list-unstyled ms-1">U/A 18+ </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
         <br />
@@ -43,8 +44,8 @@ function ContentPage() {
               className="w-auto"
             />
           </Card>
-          <SingleVideo link={contentData?.post_details[0]?.downloadLink} />
-          {/* <SeriesVideo /> */}
+          {contentData.type === "singleVideo" && <SingleVideo link={contentData.content} />}
+          {contentData.type === "series" && <SeriesVideo content={contentData.content} />}
         </Container>
       </main>
     )
