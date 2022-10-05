@@ -7,6 +7,7 @@ import SeriesVideo from "./SeriesVideo/SeriesVideo";
 import SingleVideo from "./SingleVideo/SingleVideo";
 
 import styles from "./ContentPage.module.css";
+import MultiVideoOrFiles from "./MultiVideoOrFiles/MultiVideoOrFiles";
 
 function ContentPage() {
   const { contentId } = useParams();
@@ -20,7 +21,6 @@ function ContentPage() {
     fetchData();
   }, []);
 
-  console.log(contentData);
   return (
     contentData && (
       <main className="mt-5 text-center">
@@ -46,6 +46,9 @@ function ContentPage() {
           </Card>
           {contentData.type === "singleVideo" && <SingleVideo link={contentData.content} />}
           {contentData.type === "series" && <SeriesVideo content={contentData.content} />}
+          {(contentData.type === "multiVideo" || contentData.type === "multiFile") && (
+            <MultiVideoOrFiles content={contentData.content} type={contentData.type} />
+          )}
         </Container>
       </main>
     )
