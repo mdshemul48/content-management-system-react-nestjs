@@ -15,10 +15,11 @@ CREATE TABLE `users` (
 CREATE TABLE `categories` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+    `type` ENUM('main', 'sub') NOT NULL DEFAULT 'main',
     `parentId` INTEGER NULL,
+    `userId` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
-    `userId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -31,10 +32,14 @@ CREATE TABLE `posts` (
     `image` VARCHAR(191) NOT NULL,
     `metaData` VARCHAR(191) NULL,
     `tags` VARCHAR(191) NOT NULL,
+    `content` JSON NOT NULL,
     `name` VARCHAR(191) NULL,
     `quality` VARCHAR(191) NULL,
     `watchTime` VARCHAR(191) NULL,
+    `year` VARCHAR(191) NULL,
     `userId` INTEGER NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
