@@ -8,6 +8,7 @@ import { PostsModule } from './posts/posts.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { HomePageModule } from './home-page/home-page.module';
+import { SearchRecommendationModule } from './search-recommendation/search-recommendation.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { HomePageModule } from './home-page/home-page.module';
     PrismaModule,
     PostsModule,
     HomePageModule,
+    SearchRecommendationModule,
   ],
   controllers: [],
   providers: [],
