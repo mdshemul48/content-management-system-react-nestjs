@@ -220,7 +220,11 @@ export class PostsService {
     return post;
   }
 
-  update(id: number, updatePostDto: UpdatePostDto, file: Express.Multer.File) {
+  async update(
+    id: number,
+    updatePostDto: UpdatePostDto,
+    file: Express.Multer.File,
+  ) {
     const {
       title,
       type,
@@ -235,6 +239,18 @@ export class PostsService {
     } = updatePostDto;
 
     const postContent = JSON.parse(content);
+
+    // disconnect all categories
+    await this.prisma.post.update({
+      where: {
+        id,
+      },
+      data: {
+        categories: {
+          set: [],
+        },
+      },
+    });
 
     return this.prisma.post.update({
       where: {
@@ -252,7 +268,7 @@ export class PostsService {
         watchTime,
         year,
         categories: {
-          connect: JSON.parse(categoriesString).map((category: number) => ({
+          connect: JSON.parse(categoriesString).map((category: string) => ({
             id: category,
           })),
         },
