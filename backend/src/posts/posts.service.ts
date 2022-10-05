@@ -71,7 +71,7 @@ export class PostsService {
     });
   }
 
-  findAll(findPostDto: FindPostDto) {
+  async findAll(findPostDto: FindPostDto) {
     const { searchTerm, order, page, limit, category, categoryExact } =
       findPostDto;
 
@@ -169,13 +169,29 @@ export class PostsService {
       },
     };
 
-    return this.prisma.post.findMany({
+    const postCount = await this.prisma.post.count({
+      where,
+    });
+
+    const paginationInfo = {
+      total: postCount,
+      active: page ? Number(page) : 1,
+      limit: limit ? Number(limit) : 10,
+      pages: Math.ceil(postCount / (limit ? Number(limit) : 10)),
+    };
+
+    const posts = await this.prisma.post.findMany({
       where,
       select,
       orderBy,
       skip,
       take,
     });
+
+    return {
+      posts,
+      pagination: paginationInfo,
+    };
   }
 
   findOne(id: number) {
