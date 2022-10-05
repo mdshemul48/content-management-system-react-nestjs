@@ -36,7 +36,7 @@ function CategoryPage() {
             subCategory ? `${mainCategoryId},${subCategory}` : mainCategoryId
           }&page=${page}&order=desc`
         );
-        setPosts(data);
+        setPosts(data.posts);
         setPaginationInfo({
           from: data.from,
           to: data.last_page,

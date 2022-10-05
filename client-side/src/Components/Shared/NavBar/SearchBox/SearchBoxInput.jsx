@@ -10,7 +10,7 @@ const SearchBoxInput = ({ setSearchQuery }) => {
   const handleSearch = async (query) => {
     setSearchQuery(query);
     setIsLoading(true);
-    const { data } = await axiosInstance.get(`/getSuggestion?target=${query}`);
+    const { data } = await axiosInstance.get(`/search-recommendation?search=${query}`);
     setOptions(data[1]);
     setIsLoading(false);
   };

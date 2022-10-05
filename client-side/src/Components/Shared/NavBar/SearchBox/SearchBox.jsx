@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormControl, Form, Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
@@ -9,10 +9,6 @@ import SearchBoxInput from "./SearchBoxInput";
 const SearchBox = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
-
-  const onChangeHandler = (event) => {
-    setSearchText(event.target.value);
-  };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();

@@ -5,13 +5,13 @@ import axiosInstance from "../../../utility/axiosInstance";
 import SinglePost from "../../Shared/SinglePost/SinglePost";
 
 const SearchPage = () => {
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState({ posts: [] });
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search).get("q");
 
   useEffect(() => {
     const fetchPost = async () => {
-      const { data } = await axiosInstance.get(`/search/${searchParams}`);
+      const { data } = await axiosInstance.get(`/posts?searchTerm=${searchParams}`);
       setSearchResult(data);
     };
     fetchPost();
@@ -23,7 +23,7 @@ const SearchPage = () => {
       <hr className="text-light" />
       <Container fluid>
         <Row>
-          {searchResult.map((item) => (
+          {searchResult.posts.map((item) => (
             <SinglePost item={item} key={item.id} />
           ))}
         </Row>
