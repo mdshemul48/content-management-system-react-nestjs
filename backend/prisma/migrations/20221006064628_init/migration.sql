@@ -41,15 +41,12 @@ CREATE TABLE `posts` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    FULLTEXT INDEX `posts_title_idx`(`title`),
+    FULLTEXT INDEX `posts_name_idx`(`name`),
+    FULLTEXT INDEX `posts_tags_idx`(`tags`),
+    FULLTEXT INDEX `posts_metaData_idx`(`metaData`),
+    FULLTEXT INDEX `posts_title_name_tags_metaData_idx`(`title`, `name`, `tags`, `metaData`),
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `categoriesOnPosts` (
-    `postId` INTEGER NOT NULL,
-    `categoryId` INTEGER NOT NULL,
-
-    PRIMARY KEY (`postId`, `categoryId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -69,12 +66,6 @@ ALTER TABLE `categories` ADD CONSTRAINT `categories_userId_fkey` FOREIGN KEY (`u
 
 -- AddForeignKey
 ALTER TABLE `posts` ADD CONSTRAINT `posts_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `categoriesOnPosts` ADD CONSTRAINT `categoriesOnPosts_postId_fkey` FOREIGN KEY (`postId`) REFERENCES `posts`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `categoriesOnPosts` ADD CONSTRAINT `categoriesOnPosts_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `_CategoryToPost` ADD CONSTRAINT `_CategoryToPost_A_fkey` FOREIGN KEY (`A`) REFERENCES `categories`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
