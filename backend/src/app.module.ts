@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CategoriesModule } from './categories/categories.module';
@@ -19,6 +19,12 @@ import { SearchRecommendationModule } from './search-recommendation/search-recom
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
     }),
+    CacheModule.register({
+      ttl: 300,
+      max: 500,
+      isGlobal: true,
+    }),
+
     AuthModule,
     UserModule,
     CategoriesModule,
