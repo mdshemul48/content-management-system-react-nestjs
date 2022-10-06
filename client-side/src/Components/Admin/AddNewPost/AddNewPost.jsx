@@ -20,7 +20,8 @@ const AddNewPostAndEdit = () => {
     downloadLink: "",
     watchTime: "",
     quality: "",
-    type: "singleVideo",
+    metaData: "",
+    tags: "",
   };
 
   const [postDetail, setPostDetail] = useState(defaultFormValue);
@@ -42,16 +43,13 @@ const AddNewPostAndEdit = () => {
           downloadLink: data.content,
           watchTime: data.watchTime,
           quality: data.quality,
+          metaData: data.metaData,
+          tags: data.tags,
         });
       };
       fetchPostDetail();
     }
   }, [postId]);
-
-  const onResetHandler = () => {
-    setPostDetail({ ...defaultFormValue });
-    setPublishOption("singleVideo");
-  };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -68,7 +66,8 @@ const AddNewPostAndEdit = () => {
         "content",
         publishOption === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
       );
-      formData.append("tags", "this is tags");
+      formData.append("tags", postDetail.tags);
+      formData.append("metaData", postDetail.metaData);
       formData.append("year", postDetail.year);
       formData.append("watchTime", postDetail.watchTime);
       formData.append("quality", postDetail.quality);
@@ -100,7 +99,23 @@ const AddNewPostAndEdit = () => {
     }
   };
 
-  console.log(postDetail);
+  const onDeleteHandler = async () => {
+    // eslint-disable-next-line no-alert, no-undef
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+
+    if (confirmDelete) {
+      try {
+        await axios.delete(`${process.env.REACT_APP_API_BACKEND_API}/posts/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+        toast.success("Post deleted successfully");
+      } catch (err) {
+        toast.error(err.response.data.message);
+      }
+    }
+  };
 
   return (
     <main className="m-2 p-3">
@@ -112,7 +127,7 @@ const AddNewPostAndEdit = () => {
           setPublishOption={setPublishOption}
           onSubmitHandler={onSubmitHandler}
           publishOption={publishOption}
-          onResetHandler={onResetHandler}
+          postId={postId}
         />
       </section>
     </main>

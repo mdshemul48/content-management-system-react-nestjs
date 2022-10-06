@@ -29,7 +29,7 @@ const Categories = ({ selectedCategories, setSelectedCategories }) => {
                   value={category.id}
                   checked={selectedCategories.includes(`${category.id}`)}
                 />
-                {category.name}s
+                {category.name}
               </label>
               <ul className={styles.selectedSubCategory}>
                 {category.subCategory.map((subCategory) => (

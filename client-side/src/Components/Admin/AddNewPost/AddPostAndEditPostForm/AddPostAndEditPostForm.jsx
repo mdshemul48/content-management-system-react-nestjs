@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, ButtonGroup, Card, Col, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import Categories from "./Categories/Categories";
 import Movie from "./Movie/Movie";
@@ -13,8 +14,10 @@ const AddPostAndEditPostForm = ({
   setPublishOption,
   onSubmitHandler,
   publishOption,
-  onResetHandler,
+  postId,
 }) => {
+  const navigate = useNavigate();
+
   const onPostTypeChangeHandler = (event) => {
     setPublishOption(event.target.value);
   };
@@ -41,6 +44,11 @@ const AddPostAndEditPostForm = ({
       });
     };
   };
+
+  const onGoBackHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <Form onSubmit={onSubmitHandler}>
       <Row>
@@ -70,6 +78,17 @@ const AddPostAndEditPostForm = ({
       </Row>
       <Row>
         <Col lg={10}>
+          <Form.Group className="mb-3">
+            <Form.Label>Meta Information</Form.Label>
+            <Form.Control
+              onChange={onChangeHandler}
+              name="metaData"
+              as="textarea"
+              value={postDetail.metaData}
+              rows={3}
+            />
+          </Form.Group>
+
           {(publishOption === "singleVideo" || publishOption === "series") && (
             <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />
           )}
@@ -96,12 +115,22 @@ const AddPostAndEditPostForm = ({
           <Card className="p-1 mt-2">
             {" "}
             <ButtonGroup className="w-100">
-              <Button variant="secondary" onClick={onResetHandler}>
-                Reset
-              </Button>{" "}
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
+              {postId ? (
+                <Button variant="danger">Delete</Button>
+              ) : (
+                <Button variant="secondary" onClick={onGoBackHandler}>
+                  Go back
+                </Button>
+              )}
+              {postId ? (
+                <Button type="submit" variant="warning">
+                  Update
+                </Button>
+              ) : (
+                <Button type="submit" variant="success">
+                  Publish
+                </Button>
+              )}
             </ButtonGroup>
           </Card>
         </Col>
