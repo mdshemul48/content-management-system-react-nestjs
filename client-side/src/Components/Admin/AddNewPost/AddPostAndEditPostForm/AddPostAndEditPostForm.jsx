@@ -7,19 +7,13 @@ import Movie from "./Movie/Movie";
 import PosterImage from "./PosterImage/PosterImage";
 import Parts from "./SeriesAndParts/Parts";
 import Series from "./SeriesAndParts/Series";
+import Tags from "./Tags/Tags";
 
-const AddPostAndEditPostForm = ({
-  postDetail,
-  setPostDetail,
-  setPublishOption,
-  onSubmitHandler,
-  publishOption,
-  postId,
-}) => {
+const AddPostAndEditPostForm = ({ postDetail, setPostDetail, onSubmitHandler, onDeleteHandler, postId }) => {
   const navigate = useNavigate();
 
   const onPostTypeChangeHandler = (event) => {
-    setPublishOption(event.target.value);
+    setPostDetail({ ...postDetail, type: event.target.value });
   };
 
   const onChangeHandler = (event) => {
@@ -67,7 +61,7 @@ const AddPostAndEditPostForm = ({
         <Col lg={2} md={4} className="align-items-end d-flex">
           {" "}
           <Form.Group className="mb-3 w-100">
-            <Form.Select onChange={onPostTypeChangeHandler} value={publishOption}>
+            <Form.Select onChange={onPostTypeChangeHandler} value={postDetail.type}>
               <option value="singleVideo">Single Video</option>
               <option value="multiVideo">Multi Video</option>
               <option value="multiFile">Multi File</option>
@@ -89,16 +83,16 @@ const AddPostAndEditPostForm = ({
             />
           </Form.Group>
 
-          {(publishOption === "singleVideo" || publishOption === "series") && (
+          {(postDetail.type === "singleVideo" || postDetail.type === "series") && (
             <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />
           )}
-          {publishOption === "series" && (
+          {postDetail.type === "series" && (
             <Series
               content={postDetail.content}
               setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
             />
           )}
-          {publishOption !== "singleVideo" && publishOption !== "series" && (
+          {postDetail.type !== "singleVideo" && postDetail.type !== "series" && (
             <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
           )}
         </Col>
@@ -107,6 +101,7 @@ const AddPostAndEditPostForm = ({
             selectedCategories={postDetail.categories}
             setSelectedCategories={(newCategories) => setPostDetail({ ...postDetail, categories: newCategories })}
           />
+          <Tags onChangeHandler={onChangeHandler} postDetail={postDetail} />
           <PosterImage
             onImageChangeHandler={onImageChangeHandler}
             image={postDetail.previewImage}
@@ -116,7 +111,9 @@ const AddPostAndEditPostForm = ({
             {" "}
             <ButtonGroup className="w-100">
               {postId ? (
-                <Button variant="danger">Delete</Button>
+                <Button variant="danger" onClick={onDeleteHandler}>
+                  Delete
+                </Button>
               ) : (
                 <Button variant="secondary" onClick={onGoBackHandler}>
                   Go back

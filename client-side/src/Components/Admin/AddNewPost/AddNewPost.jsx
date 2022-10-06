@@ -22,16 +22,15 @@ const AddNewPostAndEdit = () => {
     quality: "",
     metaData: "",
     tags: "",
+    type: "singleVideo",
   };
 
   const [postDetail, setPostDetail] = useState(defaultFormValue);
-  const [publishOption, setPublishOption] = useState("singleVideo");
   useEffect(() => {
     if (postId) {
       const fetchPostDetail = async () => {
         const { data } = await axios.get(`${process.env.REACT_APP_API_BACKEND_API}/posts/${postId}`);
 
-        setPublishOption(data.type);
         setPostDetail({
           title: data.title,
           name: data.name,
@@ -45,6 +44,7 @@ const AddNewPostAndEdit = () => {
           quality: data.quality,
           metaData: data.metaData,
           tags: data.tags,
+          type: data.type,
         });
       };
       fetchPostDetail();
@@ -58,13 +58,13 @@ const AddNewPostAndEdit = () => {
       // eslint-disable-next-line no-undef
       const formData = new FormData();
       formData.append("title", postDetail.title);
-      formData.append("type", publishOption);
+      formData.append("type", postDetail.type);
       formData.append("name", postDetail.name);
       formData.append("image", postDetail.imageFile);
       formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
       formData.append(
         "content",
-        publishOption === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
+        postDetail.type === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
       );
       formData.append("tags", postDetail.tags);
       formData.append("metaData", postDetail.metaData);
@@ -124,10 +124,9 @@ const AddNewPostAndEdit = () => {
         <AddPostAndEditPostForm
           postDetail={postDetail}
           setPostDetail={setPostDetail}
-          setPublishOption={setPublishOption}
           onSubmitHandler={onSubmitHandler}
-          publishOption={publishOption}
           postId={postId}
+          onDeleteHandler={onDeleteHandler}
         />
       </section>
     </main>
