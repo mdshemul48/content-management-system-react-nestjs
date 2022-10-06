@@ -64,6 +64,7 @@ export class PostsController {
   @Get()
   @UseInterceptors(CacheInterceptor)
   findAll(@Query() findPostDto: FindPostDto) {
+    console.log('hello world');
     return this.postsService.findAll(findPostDto);
   }
 
