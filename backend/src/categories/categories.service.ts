@@ -77,7 +77,7 @@ export class CategoriesService {
   }
 
   async findOne(id: number) {
-    return await this.prisma.category.findFirst({
+    const post = await this.prisma.category.findFirst({
       where: { id: id },
       include: {
         createdBy: {
@@ -105,6 +105,12 @@ export class CategoriesService {
         },
       },
     });
+
+    if (!post) {
+      throw new NotFoundException('Category Not Found.');
+    }
+
+    return post;
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
