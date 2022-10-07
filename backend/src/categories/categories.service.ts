@@ -114,11 +114,16 @@ export class CategoriesService {
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+    const { name, parentId } = updateCategoryDto;
     return await this.prisma.category.update({
       where: {
         id,
       },
-      data: updateCategoryDto,
+      data: {
+        name,
+        parentId: parentId || null,
+        type: parentId ? 'sub' : 'main',
+      },
     });
   }
 
