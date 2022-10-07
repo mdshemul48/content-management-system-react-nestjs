@@ -81,6 +81,7 @@ const AddNewPostAndEdit = () => {
           },
         });
         toast.success("Post deleted successfully");
+        navigate(`/admin/posts`);
       } catch (err) {
         toast.error(err.response.data.message);
       }

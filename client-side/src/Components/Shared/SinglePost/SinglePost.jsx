@@ -17,7 +17,7 @@ function SinglePost({ item: { image, name, quality, id, year, title } }) {
             />
             <div className={`text-center ${styles.singlePost_text}`}>
               <h3 className="fs-5 text-white">
-                {name} {year && year}
+                {name} {year && <span>({year})</span>}
               </h3>
               {quality && <p className="text-white">Quality : {quality}</p>}
               <Button variant="danger" className="rounded-0 mb-2">
