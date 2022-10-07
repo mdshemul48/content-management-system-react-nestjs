@@ -3,13 +3,13 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-function Pagination({ to, active, paginationHandler }) {
-  if (to === 1) return null;
+function Pagination({ paginationInfo, paginationHandler }) {
+  if (paginationInfo.pages === 1) return null;
 
   const paginationData = [];
-  for (let i = 1; i <= to; i += 1) {
+  for (let i = 1; i <= paginationInfo.pages; i += 1) {
     paginationData.push(
-      <li className={`page-item ${active === i ? "disabled" : ""}`}>
+      <li className={`page-item mx-1 ${paginationInfo.active === i ? "disabled" : ""}`}>
         <Button
           className="page-link"
           onClick={(event) => {
