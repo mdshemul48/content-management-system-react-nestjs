@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import AddPostAndEditPostForm from "./AddPostAndEditPostForm/AddPostAndEditPostForm";
+import { createOrUpdatePost } from "../../../Store/asyncMethods/postMethod";
+import axiosInstance from "../../../utility/axiosInstance";
 
 const AddNewPostAndEdit = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { postId } = useParams();
 
   const { auth } = useSelector((state) => state);
@@ -29,7 +34,11 @@ const AddNewPostAndEdit = () => {
   useEffect(() => {
     if (postId) {
       const fetchPostDetail = async () => {
-        const { data } = await axios.get(`${process.env.REACT_APP_API_BACKEND_API}/posts/${postId}`);
+        const { data } = await axiosInstance.get(`/admin/posts/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
 
         setPostDetail({
           title: data.title,
@@ -53,50 +62,11 @@ const AddNewPostAndEdit = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-
-    try {
-      // eslint-disable-next-line no-undef
-      const formData = new FormData();
-      formData.append("title", postDetail.title);
-      formData.append("type", postDetail.type);
-      formData.append("name", postDetail.name);
-      formData.append("image", postDetail.imageFile);
-      formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
-      formData.append(
-        "content",
-        postDetail.type === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
-      );
-      formData.append("tags", postDetail.tags);
-      formData.append("metaData", postDetail.metaData);
-      formData.append("year", postDetail.year);
-      formData.append("watchTime", postDetail.watchTime);
-      formData.append("quality", postDetail.quality);
-
-      if (postId) {
-        await axios.patch(`${process.env.REACT_APP_API_BACKEND_API}/posts/${postId}`, formData, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        });
-        toast.success("Post Updated Successfully");
-      } else {
-        const { data } = await axios.post(`${process.env.REACT_APP_API_BACKEND_API}/posts`, formData, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        });
-        toast.success("Post added successfully");
-      }
-    } catch (err) {
-      const errorMessages = err.response.data.message;
-      if (Array.isArray(errorMessages)) {
-        errorMessages.forEach((message) => {
-          toast.error(message);
-        });
-      } else {
-        toast.error(errorMessages);
-      }
-    }
+    dispatch(
+      createOrUpdatePost(postDetail, postId, (data) => {
+        navigate(`/admin/edit/${data.id}`);
+      })
+    );
   };
 
   const onDeleteHandler = async () => {
