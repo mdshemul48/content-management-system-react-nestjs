@@ -43,7 +43,7 @@ export class PostsController {
             );
           }
 
-          const fileExtName = file.originalname.split('.')[1];
+          const fileExtName = file.originalname.split('.').pop();
           const newFileName = `${uuid()}.${fileExtName}`;
           cb(null, newFileName);
         },
@@ -87,7 +87,7 @@ export class PostsController {
             );
           }
 
-          const fileExtName = file.originalname.split('.')[1];
+          const fileExtName = file.originalname.split('.').pop();
           const newFileName = `${uuid()}.${fileExtName}`;
           cb(null, newFileName);
         },

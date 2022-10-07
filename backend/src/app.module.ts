@@ -9,6 +9,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { HomePageModule } from './home-page/home-page.module';
 import { SearchRecommendationModule } from './search-recommendation/search-recommendation.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { SearchRecommendationModule } from './search-recommendation/search-recom
     PostsModule,
     HomePageModule,
     SearchRecommendationModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],
