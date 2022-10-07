@@ -16,7 +16,9 @@ function SideBar() {
         <MenuItem icon={<FaPlus />}>
           <Link to="/admin/addNewPost">Add New Post</Link>
         </MenuItem>
-        <MenuItem icon={<FaTable />}>Posts</MenuItem>
+        <MenuItem icon={<FaTable />}>
+          <Link to="/admin/posts">Posts</Link>
+        </MenuItem>
         <MenuItem icon={<FaFolderOpen />}>
           {" "}
           <Link to="/admin/category">Categories</Link>

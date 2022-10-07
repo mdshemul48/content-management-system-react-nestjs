@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import AddAndEditPost from "./AddAndEditPost/AddAndEditPost";
 import CategoryManage from "./CategoryManage/CategoryManage";
 import Dashboard from "./Dashboard/Dashboard";
+import PostsManage from "./PostsManage/PostsManage";
 import SideBar from "./SideBar/SideBar";
 
 function AdminHomePage() {
@@ -14,6 +15,7 @@ function AdminHomePage() {
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="/addNewPost" element={<AddAndEditPost />} />
+          <Route path="/posts" element={<PostsManage />} />
           <Route path="/edit/:postId" element={<AddAndEditPost />} />
           <Route path="/category" element={<CategoryManage />} />
         </Routes>
