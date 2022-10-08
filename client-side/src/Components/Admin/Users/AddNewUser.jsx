@@ -42,8 +42,8 @@ const AddNewUser = ({ setUsers }) => {
       toast.success("User added successfully");
       handleClose();
     } catch (error) {
-      if (Array.isArray(error.response.data)) {
-        error.response.data.forEach((err) => toast.error(err.message));
+      if (Array.isArray(error.response.data.message)) {
+        error.response.data.message.forEach((err) => toast.error(err));
       } else {
         toast.error(error.response.data.message);
       }

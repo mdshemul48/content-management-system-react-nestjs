@@ -21,7 +21,7 @@ function Home() {
       <HomeCarousel />
       <LatestUpload posts={categoryWithPost.latestPost} />
       {categoryWithPost.categoryPosts.map((categoryAndPosts) => (
-        <LatestPostInCategory item={categoryAndPosts} />
+        <LatestPostInCategory item={categoryAndPosts} key={categoryAndPosts.id} />
       ))}
     </main>
   );
