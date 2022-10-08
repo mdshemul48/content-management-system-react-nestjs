@@ -53,7 +53,9 @@ const PostsManage = () => {
 
   return (
     <Container fluid>
-      <h3 className="text-bold mt-2">Posts Manage</h3>
+      <Button as={Link} to="/admin/addNewPost" className="mt-3">
+        Add New Post
+      </Button>
       <Row className="mt-4">
         <Col lg={2}>
           <Form.Select onChange={onChangeHandler} value={filter.order} name="order">
