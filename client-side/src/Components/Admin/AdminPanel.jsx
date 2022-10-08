@@ -6,6 +6,7 @@ import CategoryManage from "./CategoryManage/CategoryManage";
 import Dashboard from "./Dashboard/Dashboard";
 import PostsManage from "./PostsManage/PostsManage";
 import SideBar from "./SideBar/SideBar";
+import Users from "./Users/Users";
 
 function AdminHomePage() {
   return (
@@ -18,6 +19,7 @@ function AdminHomePage() {
           <Route path="/posts" element={<PostsManage />} />
           <Route path="/edit/:postId" element={<AddAndEditPost />} />
           <Route path="/category" element={<CategoryManage />} />
+          <Route path="/users" element={<Users />} />
         </Routes>
       </section>
     </main>

@@ -23,7 +23,9 @@ function SideBar() {
           {" "}
           <Link to="/admin/category">Categories</Link>
         </MenuItem>
-        <MenuItem icon={<FaUsers />}>Users</MenuItem>
+        <MenuItem icon={<FaUsers />}>
+          <Link to="/admin/users">Users</Link>
+        </MenuItem>
       </Menu>
     </ProSidebar>
   );
