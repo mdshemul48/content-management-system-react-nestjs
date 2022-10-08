@@ -41,6 +41,12 @@ export class UserService {
         email: true,
         createdAt: true,
         updatedAt: true,
+        _count: {
+          select: {
+            post: true,
+            category: true,
+          },
+        },
       },
     });
     return allUser;
@@ -49,7 +55,7 @@ export class UserService {
   async findOne(id: number) {
     const user = await this.prisma.user.findUnique({ where: { id } });
     if (!user) {
-      throw new NotFoundException();
+      throw new NotFoundException("User doesn't exist");
     }
     delete user.password;
     return user;
