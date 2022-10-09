@@ -20,7 +20,7 @@ const Movie = ({ onChangeHandler, postDetail }) => (
     <Col lg={6}>
       <Form.Group className="mb-3">
         <Form.Label>Watch Time</Form.Label>
-        <Form.Control name="WatchTime" type="text" onChange={onChangeHandler} value={postDetail.WatchTime} />
+        <Form.Control name="watchTime" type="text" onChange={onChangeHandler} value={postDetail.watchTime} />
       </Form.Group>
     </Col>
     <Col lg={6}>

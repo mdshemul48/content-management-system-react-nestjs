@@ -38,7 +38,7 @@ const PostsManage = () => {
           searchTerm: filter.searchTerm,
           categoryExact: filter.category && `${filter.category}${filter.subCategory ? `, ${filter.subCategory}` : ""}`,
           limit: filter.limit,
-          order: filter.order,
+          order: filter.order || null,
           page,
         },
         headers: {
@@ -59,6 +59,7 @@ const PostsManage = () => {
       <Row className="mt-4">
         <Col lg={2}>
           <Form.Select onChange={onChangeHandler} value={filter.order} name="order">
+            <option value="">Select Order</option>
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </Form.Select>
