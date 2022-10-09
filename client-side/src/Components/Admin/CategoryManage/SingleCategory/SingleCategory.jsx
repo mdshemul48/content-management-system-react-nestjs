@@ -22,7 +22,7 @@ const SingleCategory = ({ item }) => {
 
   return (
     <>
-      <UpdateCategoryModal handleClose={handleClose} show={show} />
+      <UpdateCategoryModal handleClose={handleClose} show={show} category={item} />
       <tr>
         <td>{item.id}</td>
         <td>

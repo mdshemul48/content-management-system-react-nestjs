@@ -11,6 +11,7 @@ import {
   UseInterceptors,
   BadRequestException,
   Query,
+  CacheInterceptor,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -42,7 +43,7 @@ export class PostsController {
             );
           }
 
-          const fileExtName = file.originalname.split('.')[1];
+          const fileExtName = file.originalname.split('.').pop();
           const newFileName = `${uuid()}.${fileExtName}`;
           cb(null, newFileName);
         },
@@ -61,11 +62,13 @@ export class PostsController {
   }
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
   findAll(@Query() findPostDto: FindPostDto) {
     return this.postsService.findAll(findPostDto);
   }
 
   @Get(':id')
+  @UseInterceptors(CacheInterceptor)
   findOne(@Param('id') id: string) {
     return this.postsService.findOne(+id);
   }
@@ -84,7 +87,7 @@ export class PostsController {
             );
           }
 
-          const fileExtName = file.originalname.split('.')[1];
+          const fileExtName = file.originalname.split('.').pop();
           const newFileName = `${uuid()}.${fileExtName}`;
           cb(null, newFileName);
         },

@@ -16,12 +16,16 @@ function SideBar() {
         <MenuItem icon={<FaPlus />}>
           <Link to="/admin/addNewPost">Add New Post</Link>
         </MenuItem>
-        <MenuItem icon={<FaTable />}>Posts</MenuItem>
+        <MenuItem icon={<FaTable />}>
+          <Link to="/admin/posts">Posts</Link>
+        </MenuItem>
         <MenuItem icon={<FaFolderOpen />}>
           {" "}
           <Link to="/admin/category">Categories</Link>
         </MenuItem>
-        <MenuItem icon={<FaUsers />}>Users</MenuItem>
+        <MenuItem icon={<FaUsers />}>
+          <Link to="/admin/users">Users</Link>
+        </MenuItem>
       </Menu>
     </ProSidebar>
   );

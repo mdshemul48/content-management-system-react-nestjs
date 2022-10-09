@@ -41,17 +41,37 @@ export class UserService {
         email: true,
         createdAt: true,
         updatedAt: true,
+        _count: {
+          select: {
+            post: true,
+            category: true,
+          },
+        },
       },
     });
     return allUser;
   }
 
   async findOne(id: number) {
-    const user = await this.prisma.user.findUnique({ where: { id } });
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true,
+        _count: {
+          select: {
+            post: true,
+            category: true,
+          },
+        },
+      },
+    });
     if (!user) {
-      throw new NotFoundException();
+      throw new NotFoundException("User doesn't exist");
     }
-    delete user.password;
     return user;
   }
 
@@ -68,7 +88,8 @@ export class UserService {
     return updatedUser;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    await this.prisma.user.delete({ where: { id } });
+    return 'User deleted successfully';
   }
 }

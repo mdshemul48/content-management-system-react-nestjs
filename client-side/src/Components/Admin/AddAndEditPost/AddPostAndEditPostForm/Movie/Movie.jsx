@@ -10,15 +10,17 @@ const Movie = ({ onChangeHandler, postDetail }) => (
       </Form.Group>
     </Col>
     <Col lg={6}>
-      <Form.Group className="mb-3">
-        <Form.Label>Download Link</Form.Label>
-        <Form.Control name="downloadLink" type="text" onChange={onChangeHandler} value={postDetail.downloadLink} />
-      </Form.Group>
+      {postDetail.type !== "series" && (
+        <Form.Group className="mb-3">
+          <Form.Label>Download Link</Form.Label>
+          <Form.Control name="downloadLink" type="text" onChange={onChangeHandler} value={postDetail.downloadLink} />
+        </Form.Group>
+      )}
     </Col>
     <Col lg={6}>
       <Form.Group className="mb-3">
         <Form.Label>Watch Time</Form.Label>
-        <Form.Control name="WatchTime" type="text" onChange={onChangeHandler} value={postDetail.WatchTime} />
+        <Form.Control name="watchTime" type="text" onChange={onChangeHandler} value={postDetail.watchTime} />
       </Form.Group>
     </Col>
     <Col lg={6}>

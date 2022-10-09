@@ -2,10 +2,10 @@
   transition: transform 0.3s ease, outline 1s ease, outline-offset 2s ease;
   background-size: cover;
   height: 400px;
-  /* height: 100%; */
 }
 
 .singlePost_text {
+  width: 250px;
   position: absolute;
   z-index: 9000;
   display: flex;

@@ -34,14 +34,10 @@ function CategoryPage() {
         const { data } = await axiosInstance.get(
           `/posts?categoryExact=${
             subCategory ? `${mainCategoryId},${subCategory}` : mainCategoryId
-          }&page=${page}&order=desc`
+          }&page=${page}&order=desc&limit=50`
         );
         setPosts(data.posts);
-        setPaginationInfo({
-          from: data.from,
-          to: data.last_page,
-          active: data.current_page,
-        });
+        setPaginationInfo(data.pagination);
       } catch (error) {
         toast.error(error.response.data.message);
       }
@@ -64,12 +60,7 @@ function CategoryPage() {
             <SinglePost item={item} key={item.id} />
           ))}
         </Row>
-        <Pagination
-          from={paginationInfo.from}
-          to={paginationInfo.to}
-          active={paginationInfo.active}
-          paginationHandler={paginationHandler}
-        />
+        <Pagination paginationInfo={paginationInfo} paginationHandler={paginationHandler} />
       </Container>
     </main>
   );

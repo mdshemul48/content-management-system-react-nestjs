@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Card, Container } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { Button, Card, Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 import axiosInstance from "../../../utility/axiosInstance";
 import SeriesVideo from "./SeriesVideo/SeriesVideo";
@@ -10,6 +11,7 @@ import styles from "./ContentPage.module.css";
 import MultiVideoOrFiles from "./MultiVideoOrFiles/MultiVideoOrFiles";
 
 function ContentPage() {
+  const { user } = useSelector((state) => state.auth);
   const { contentId } = useParams();
   const [contentData, setContentData] = useState(null);
 
@@ -27,6 +29,12 @@ function ContentPage() {
         <div className={`${styles.contentPage_title} py-2`}>
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="text-white text-bolder">{contentData.title}</h2>
+
+            {user && (
+              <Button as={Link} to={`/admin/edit/${contentData.id}`} variant="warning">
+                Edit
+              </Button>
+            )}
             {/* <ul className="d-flex text-light align-items-center">
               <li className="list-unstyled ms-1">{contentData.watch_time}</li>
               <li className="list-unstyled ms-1">March 17, 2019 </li>

@@ -1,22 +1,19 @@
 import React from "react";
 import { Button, ButtonGroup, Card, Col, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import Categories from "./Categories/Categories";
 import Movie from "./Movie/Movie";
 import PosterImage from "./PosterImage/PosterImage";
 import Parts from "./SeriesAndParts/Parts";
 import Series from "./SeriesAndParts/Series";
+import Tags from "./Tags/Tags";
 
-const AddPostAndEditPostForm = ({
-  postDetail,
-  setPostDetail,
-  setPublishOption,
-  onSubmitHandler,
-  publishOption,
-  onResetHandler,
-}) => {
+const AddPostAndEditPostForm = ({ postDetail, setPostDetail, onSubmitHandler, onDeleteHandler, postId }) => {
+  const navigate = useNavigate();
+
   const onPostTypeChangeHandler = (event) => {
-    setPublishOption(event.target.value);
+    setPostDetail({ ...postDetail, type: event.target.value });
   };
 
   const onChangeHandler = (event) => {
@@ -41,6 +38,11 @@ const AddPostAndEditPostForm = ({
       });
     };
   };
+
+  const onGoBackHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <Form onSubmit={onSubmitHandler}>
       <Row>
@@ -59,7 +61,7 @@ const AddPostAndEditPostForm = ({
         <Col lg={2} md={4} className="align-items-end d-flex">
           {" "}
           <Form.Group className="mb-3 w-100">
-            <Form.Select onChange={onPostTypeChangeHandler} value={publishOption}>
+            <Form.Select onChange={onPostTypeChangeHandler} value={postDetail.type}>
               <option value="singleVideo">Single Video</option>
               <option value="multiVideo">Multi Video</option>
               <option value="multiFile">Multi File</option>
@@ -70,16 +72,27 @@ const AddPostAndEditPostForm = ({
       </Row>
       <Row>
         <Col lg={10}>
-          {(publishOption === "singleVideo" || publishOption === "series") && (
+          <Form.Group className="mb-3">
+            <Form.Label>Meta Information</Form.Label>
+            <Form.Control
+              onChange={onChangeHandler}
+              name="metaData"
+              as="textarea"
+              value={postDetail.metaData}
+              rows={3}
+            />
+          </Form.Group>
+
+          {(postDetail.type === "singleVideo" || postDetail.type === "series") && (
             <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />
           )}
-          {publishOption === "series" && (
+          {postDetail.type === "series" && (
             <Series
               content={postDetail.content}
               setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
             />
           )}
-          {publishOption !== "singleVideo" && publishOption !== "series" && (
+          {postDetail.type !== "singleVideo" && postDetail.type !== "series" && (
             <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
           )}
         </Col>
@@ -88,6 +101,7 @@ const AddPostAndEditPostForm = ({
             selectedCategories={postDetail.categories}
             setSelectedCategories={(newCategories) => setPostDetail({ ...postDetail, categories: newCategories })}
           />
+          <Tags onChangeHandler={onChangeHandler} postDetail={postDetail} />
           <PosterImage
             onImageChangeHandler={onImageChangeHandler}
             image={postDetail.previewImage}
@@ -96,12 +110,24 @@ const AddPostAndEditPostForm = ({
           <Card className="p-1 mt-2">
             {" "}
             <ButtonGroup className="w-100">
-              <Button variant="secondary" onClick={onResetHandler}>
-                Reset
-              </Button>{" "}
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
+              {postId ? (
+                <Button variant="danger" onClick={onDeleteHandler}>
+                  Delete
+                </Button>
+              ) : (
+                <Button variant="secondary" onClick={onGoBackHandler}>
+                  Go back
+                </Button>
+              )}
+              {postId ? (
+                <Button type="submit" variant="warning">
+                  Update
+                </Button>
+              ) : (
+                <Button type="submit" variant="success">
+                  Publish
+                </Button>
+              )}
             </ButtonGroup>
           </Card>
         </Col>

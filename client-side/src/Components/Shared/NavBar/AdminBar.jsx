@@ -27,8 +27,12 @@ function AdminBar() {
           <Dropdown.Item as={Link} to="/admin">
             Dashboard
           </Dropdown.Item>
-          <Dropdown.Item href="#">Add New Post</Dropdown.Item>
-          <Dropdown.Item href="#">Users</Dropdown.Item>
+          <Dropdown.Item as={Link} to="/admin/addNewPost">
+            Add New Post
+          </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/admin/users">
+            Users
+          </Dropdown.Item>
           <Dropdown.Divider />
 
           <Dropdown.Item onClick={logoutHandler}>Logout</Dropdown.Item>

@@ -6,7 +6,7 @@ import styles from "./SinglePost.module.css";
 
 function SinglePost({ item: { image, name, quality, id, year, title } }) {
   return (
-    <Col xxl={2} lg={3}>
+    <Col xxl={2} lg={3} md={4} sm={6}>
       <div className={`rounded ${styles.singlePost_card} p-1 m-1`} title={title}>
         <Link to={`/content/${id}`} className="text-decoration-none">
           <div className="overflow-hidden d-flex justify-content-center  align-items-end rounded">
@@ -17,7 +17,7 @@ function SinglePost({ item: { image, name, quality, id, year, title } }) {
             />
             <div className={`text-center ${styles.singlePost_text}`}>
               <h3 className="fs-5 text-white">
-                {name} {year && year}
+                {name} {year && <span>({year})</span>}
               </h3>
               {quality && <p className="text-white">Quality : {quality}</p>}
               <Button variant="danger" className="rounded-0 mb-2">

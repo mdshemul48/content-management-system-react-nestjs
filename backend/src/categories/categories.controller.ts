@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UseGuards,
+  CacheInterceptor,
+  UseInterceptors,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/auth/decorator';
@@ -26,11 +28,13 @@ export class CategoriesController {
   }
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
   findAll() {
     return this.categoriesService.findAll();
   }
 
   @Get(':id')
+  @UseInterceptors(CacheInterceptor)
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(+id);
   }
