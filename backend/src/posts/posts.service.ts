@@ -108,22 +108,22 @@ export class PostsService {
       const search = [
         {
           title: {
-            search: searchTerm.replace(/[^a-zA-Z ]/g, ''),
+            search: searchTerm.replace(/[^a-zA-Z ]/g, ' '),
           },
         },
         {
           metaData: {
-            search: searchTerm.replace(/[^a-zA-Z ]/g, ''),
+            search: searchTerm.replace(/[^a-zA-Z ]/g, ' '),
           },
         },
         {
           tags: {
-            search: searchTerm.replace(/[^a-zA-Z ]/g, ''),
+            search: searchTerm.replace(/[^a-zA-Z ]/g, ' '),
           },
         },
         {
           name: {
-            search: searchTerm.replace(/[^a-zA-Z ]/g, ''),
+            search: searchTerm.replace(/[^a-zA-Z ]/g, ' '),
           },
         },
       ];
