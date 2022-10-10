@@ -41,11 +41,11 @@ CREATE TABLE `posts` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    FULLTEXT INDEX `posts_title_name_tags_metaData_idx`(`title`, `name`, `tags`, `metaData`),
     FULLTEXT INDEX `posts_title_idx`(`title`),
     FULLTEXT INDEX `posts_name_idx`(`name`),
     FULLTEXT INDEX `posts_tags_idx`(`tags`),
     FULLTEXT INDEX `posts_metaData_idx`(`metaData`),
-    FULLTEXT INDEX `posts_title_name_tags_metaData_idx`(`title`, `name`, `tags`, `metaData`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
