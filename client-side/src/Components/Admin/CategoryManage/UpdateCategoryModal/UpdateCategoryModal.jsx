@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import { Button, Form, Modal } from "react-bootstrap";
 
 const UpdateCategoryModal = ({ show, handleClose, onSubmitHandler, onChangeHandler, category }) => {
-  const { categories } = useSelector((state) => state.categories);
+  const {
+    categories: { categories },
+    auth,
+  } = useSelector((state) => state);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Form onSubmit={onSubmitHandler}>

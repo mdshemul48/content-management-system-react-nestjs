@@ -3,7 +3,6 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 export class FindPostDto {
   @IsOptional()
   @IsString()
-//  @IsNotEmpty()
   searchTerm?: string;
 
   @IsOptional()
@@ -23,11 +22,9 @@ export class FindPostDto {
 
   @IsOptional()
   @IsString()
-  @IsNotEmpty()
   category?: string;
 
   @IsOptional()
   @IsString()
- // @IsNotEmpty()
   categoryExact?: string;
 }
