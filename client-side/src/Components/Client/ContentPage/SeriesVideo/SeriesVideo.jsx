@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Tab, Table, Tabs } from "react-bootstrap";
+import ContentPlayModal from "../ContentPlayModal/ContentPlayModal";
 
 function SeriesVideo({ content }) {
   const [key, setKey] = useState(content[0].seasonName);
@@ -28,10 +29,7 @@ function SeriesVideo({ content }) {
                       </Button>
                     </td>
                     <td>
-                      {" "}
-                      <Button variant="danger" className="px-4">
-                        Play
-                      </Button>
+                      <ContentPlayModal title={episode.title} link={episode.link} />{" "}
                     </td>
                   </tr>
                 ))}
