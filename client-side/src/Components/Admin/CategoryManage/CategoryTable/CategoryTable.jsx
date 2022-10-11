@@ -16,7 +16,7 @@ const CategoryTable = ({ categories }) => (
     <tbody>
       {categories.map((item) => [
         <SingleCategory key={item.id} item={item} />,
-        item.subCategory.map((subItem) => <SingleCategory key={subItem.id} item={subItem} />),
+        item?.subCategory?.map((subItem) => <SingleCategory key={subItem.id} item={subItem} />),
       ])}
     </tbody>
   </Table>

@@ -15,7 +15,14 @@ export const getCategoriesMethod = () => async (dispatch, state) => {
     });
     dispatch(getCategories(data));
   } catch (error) {
-    toast.error(error.message);
+    const errorMessages = error.response.data.message;
+    if (Array.isArray(errorMessages)) {
+      errorMessages.forEach((message) => {
+        toast.error(message);
+      });
+    } else {
+      toast.error(errorMessages);
+    }
   }
 };
 
@@ -34,7 +41,14 @@ export const addNewCategoryMethod = (data, callback) => async (dispatch, state) 
     callback();
     toast.success("Category Added");
   } catch (error) {
-    toast.error(error.message);
+    const errorMessages = error.response.data.message;
+    if (Array.isArray(errorMessages)) {
+      errorMessages.forEach((message) => {
+        toast.error(message);
+      });
+    } else {
+      toast.error(errorMessages);
+    }
   }
 };
 
@@ -52,6 +66,13 @@ export const deleteCategoryMethod = (item, callback) => async (dispatch, state) 
     callback();
     toast.success("Category Deleted");
   } catch (error) {
-    toast.error(error.message);
+    const errorMessages = error.response.data.message;
+    if (Array.isArray(errorMessages)) {
+      errorMessages.forEach((message) => {
+        toast.error(message);
+      });
+    } else {
+      toast.error(errorMessages);
+    }
   }
 };
