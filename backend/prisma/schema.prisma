@@ -61,11 +61,11 @@ enum PostType {
 
 model Post {
   id       Int      @id @default(autoincrement())
-  title    String?
+  title    String?  @db.MediumText()
   type     PostType
   image    String
-  metaData String?
-  tags     String
+  metaData String?  @db.MediumText()
+  tags     String   @db.MediumText()
 
   content Json
 

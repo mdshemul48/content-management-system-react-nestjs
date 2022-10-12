@@ -37,6 +37,23 @@ export class CategoriesService {
             name: true,
           },
         },
+        subCategory: {
+          select: {
+            id: true,
+            name: true,
+            type: true,
+            parentId: true,
+            userId: true,
+            createdAt: true,
+            updatedAt: true,
+            createdBy: {
+              select: {
+                name: true,
+                id: true,
+              },
+            },
+          },
+        },
       },
     });
 

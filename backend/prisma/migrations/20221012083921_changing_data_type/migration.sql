@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `posts` MODIFY `title` MEDIUMTEXT NULL,
+    MODIFY `metaData` MEDIUMTEXT NULL,
+    MODIFY `tags` MEDIUMTEXT NOT NULL;
