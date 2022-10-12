@@ -10,8 +10,9 @@ export class HomePageController {
   constructor(private homePage: HomePageService) {}
 
   @Get('getHomePagePosts')
-  @UseInterceptors(CacheInterceptor)
+  // @UseInterceptors(CacheInterceptor)
   getHomePagePosts() {
+    console.log('getHomePagePosts');
     return this.homePage.getHomePagePosts();
   }
 }
