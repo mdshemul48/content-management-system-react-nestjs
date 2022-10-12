@@ -52,6 +52,33 @@ export const addNewCategoryMethod = (data, callback) => async (dispatch, state) 
   }
 };
 
+export const updateCategory = (data, callback) => async (dispatch, state) => {
+  const {
+    auth: { token },
+  } = state();
+  try {
+    const response = await axiosInstance.patch(`/categories/${data.id}`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    dispatch(addCategory(response.data));
+    callback();
+    toast.success("Category Updated");
+  } catch (error) {
+    const errorMessages = error.response.data.message;
+    if (Array.isArray(errorMessages)) {
+      errorMessages.forEach((message) => {
+        toast.error(message);
+      });
+    } else {
+      toast.error(errorMessages);
+    }
+  }
+};
+
 export const deleteCategoryMethod = (item, callback) => async (dispatch, state) => {
   const {
     auth: { token },
