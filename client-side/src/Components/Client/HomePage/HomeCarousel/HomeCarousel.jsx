@@ -3,36 +3,28 @@ import { Button, Carousel } from "react-bootstrap";
 
 import styles from "./HomeCarousel.module.css";
 
-const HomeCarousel = () => (
+const HomeCarousel = ({ mostPopularPosts }) => (
   <Carousel>
-    <Carousel.Item>
-      <img
-        className="d-block w-100"
-        src="https://streamo.vuejstemplate.com/images/slider/slider-hm4-1.jpg"
-        alt="Second slide"
-      />
-      <Carousel.Caption className={styles.homeCarousel}>
-        <h1 className={`fw-bolder ${styles.homeCarouselTitle}`}>The Lost Girl</h1>
-        <h2 className="mt-2">Hindi Movie | 1hr 45minutes</h2>
-        <Button variant="danger" className={`rounded-0 mt-3 ${styles.homeCarouselWatchButton}`} size="lg">
-          Watch Now
-        </Button>
-      </Carousel.Caption>
-    </Carousel.Item>
-    <Carousel.Item>
-      <img
-        className="d-block w-100"
-        src="https://streamo.vuejstemplate.com/images/slider/slider-hm4-2.jpg"
-        alt="First slide"
-      />
-      <Carousel.Caption className={styles.homeCarousel}>
-        <h1 className={`fw-bolder ${styles.homeCarouselTitle}`}>Land And Sea</h1>
-        <h2 className="mt-2">English Movie | 2hr 45minutes</h2>
-        <Button variant="danger" className={`rounded-0 mt-3 ${styles.homeCarouselWatchButton}`} size="lg">
-          Watch Now
-        </Button>
-      </Carousel.Caption>
-    </Carousel.Item>
+    {mostPopularPosts.map((post) => (
+      <Carousel.Item key={post.id}>
+        <img
+          className="d-block w-100"
+          src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${post.cover}`}
+          alt="First slide"
+          width="1920"
+          height="540"
+        />
+        <Carousel.Caption className={styles.homeCarousel}>
+          <h1 className={`fw-bolder ${styles.homeCarouselTitle}`}>{post.name}</h1>
+          <h2 className="mt-2">
+            {post.categories.find((category) => category.type === "main").name} | {post.watchTime}
+          </h2>
+          <Button variant="danger" className={`rounded-0 mt-3 ${styles.homeCarouselWatchButton}`} size="lg">
+            Watch Now
+          </Button>
+        </Carousel.Caption>
+      </Carousel.Item>
+    ))}
   </Carousel>
 );
 

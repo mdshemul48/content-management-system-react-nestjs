@@ -6,21 +6,23 @@ import HomeCarousel from "./HomeCarousel/HomeCarousel";
 import LatestPostInCategory from "./LatestPostInCategory/LatestPostInCategory";
 
 function Home() {
-  const [categoryWithPost, setCategoryWithPost] = useState({ categoryPosts: [], latestPost: [] });
+  const [homePagePosts, setHomePagePosts] = useState({ categoryPosts: [], latestPost: [], mostPopularPosts: [] });
 
   useEffect(() => {
     const fetchPost = async () => {
       const { data } = await axiosInstance.get("/home-page/getHomePagePosts");
-      setCategoryWithPost(data);
+      setHomePagePosts(data);
     };
     fetchPost();
   }, []);
 
+  console.log(homePagePosts);
+
   return (
     <main>
-      <HomeCarousel />
-      <LatestUpload posts={categoryWithPost.latestPost} />
-      {categoryWithPost.categoryPosts.map((categoryAndPosts) => (
+      <HomeCarousel mostPopularPosts={homePagePosts.mostPopularPosts} />
+      <LatestUpload posts={homePagePosts.latestPost} />
+      {homePagePosts.categoryPosts.map((categoryAndPosts) => (
         <LatestPostInCategory item={categoryAndPosts} key={categoryAndPosts.id} />
       ))}
     </main>
