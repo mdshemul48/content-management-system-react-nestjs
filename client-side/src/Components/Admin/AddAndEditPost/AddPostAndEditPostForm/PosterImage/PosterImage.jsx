@@ -2,9 +2,9 @@ import React from "react";
 import { Card, Form } from "react-bootstrap";
 import placeHolderImage from "../../../../../Assets/300x450.png";
 
-const PosterImage = ({ onImageChangeHandler, image, imageFile }) => (
-  <Card>
-    <Card.Header>Poster Image</Card.Header>{" "}
+const PosterImage = ({ onImageChangeHandler, image, imageFile, cardTitle }) => (
+  <Card className="mt-1">
+    <Card.Header>{cardTitle}</Card.Header>{" "}
     <Card.Body className="p-1">
       {" "}
       <img

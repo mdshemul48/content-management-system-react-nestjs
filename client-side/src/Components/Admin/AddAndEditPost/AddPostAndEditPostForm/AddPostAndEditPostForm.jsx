@@ -38,6 +38,20 @@ const AddPostAndEditPostForm = ({ postDetail, setPostDetail, onSubmitHandler, on
       });
     };
   };
+  const onCoverPhotoChangeHandler = (event) => {
+    const file = event.target.files[0];
+    // eslint-disable-next-line no-undef
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      setPostDetail({
+        ...postDetail,
+        coverFile: file,
+        previewCover: reader.result,
+      });
+    };
+  };
 
   const onGoBackHandler = () => {
     navigate(-1);
@@ -103,9 +117,16 @@ const AddPostAndEditPostForm = ({ postDetail, setPostDetail, onSubmitHandler, on
           />
           <Tags onChangeHandler={onChangeHandler} postDetail={postDetail} />
           <PosterImage
+            cardTitle="Poster Image"
             onImageChangeHandler={onImageChangeHandler}
             image={postDetail.previewImage}
             imageFile={postDetail.imageFile}
+          />
+          <PosterImage
+            cardTitle="Cover Image"
+            onImageChangeHandler={onCoverPhotoChangeHandler}
+            image={postDetail.previewCover}
+            imageFile={postDetail.coverFile}
           />
           <Card className="p-1 mt-2">
             {" "}

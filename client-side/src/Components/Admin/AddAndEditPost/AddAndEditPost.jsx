@@ -45,6 +45,8 @@ const AddNewPostAndEdit = () => {
           name: data.name,
           imageFile: null,
           previewImage: data.image,
+          coverFile: null,
+          previewCover: data.cover,
           categories: data.categories.map((category) => `${category.id}`),
           content: data.content,
           year: data.year,

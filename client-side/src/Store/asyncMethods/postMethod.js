@@ -12,6 +12,7 @@ export const createOrUpdatePost = (postDetail, postId, callback) => async (dispa
     formData.append("type", postDetail.type);
     formData.append("name", postDetail.name);
     formData.append("image", postDetail.imageFile);
+    formData.append("cover", postDetail.coverFile);
     formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
     formData.append(
       "content",
