@@ -227,7 +227,10 @@ export class PostsService {
   async update(
     id: number,
     updatePostDto: UpdatePostDto,
-    file: Express.Multer.File,
+    files: {
+      image?: Express.Multer.File[];
+      cover?: Express.Multer.File[];
+    },
   ) {
     const {
       title,
@@ -266,7 +269,8 @@ export class PostsService {
         metaData,
         tags,
         content: postContent,
-        image: file && file.filename,
+        image: files.image && files.image[0].filename,
+        cover: files.cover && files.cover[0].filename,
         name,
         quality,
         watchTime,
