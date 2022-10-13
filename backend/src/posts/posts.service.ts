@@ -37,6 +37,7 @@ export class PostsService {
         title,
         type,
         image: files.image[0].filename,
+        cover: files.cover ? files.cover[0].filename : null,
         metaData,
         tags,
         content: postContent,

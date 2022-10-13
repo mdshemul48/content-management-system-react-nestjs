@@ -64,6 +64,7 @@ model Post {
   title    String?  @db.MediumText()
   type     PostType
   image    String
+  cover    String?
   metaData String?  @db.MediumText()
   tags     String   @db.MediumText()
 
