@@ -12,7 +12,10 @@ export class PostsService {
   async create(
     user: User,
     createPostDto: CreatePostDto,
-    file: Express.Multer.File,
+    files: {
+      image: Express.Multer.File[];
+      cover?: Express.Multer.File[];
+    },
   ) {
     const {
       title,
@@ -33,7 +36,7 @@ export class PostsService {
       data: {
         title,
         type,
-        image: file.filename,
+        image: files.image[0].filename,
         metaData,
         tags,
         content: postContent,

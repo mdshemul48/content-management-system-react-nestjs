@@ -12,12 +12,16 @@ import {
   BadRequestException,
   Query,
   CacheInterceptor,
+  UploadedFiles,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from 'src/auth/guard';
-import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { v4 as uuid } from 'uuid';
 import { GetUser } from 'src/auth/decorator';
@@ -32,33 +36,56 @@ export class PostsController {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: join(__dirname, '..', '..', 'public', 'uploads'),
-        filename: (req, file, cb) => {
-          if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(
-              new BadRequestException('Only image files are allowed!'),
-              '',
-            );
-          }
+    FileFieldsInterceptor(
+      [
+        { name: 'image', maxCount: 1 },
+        { name: 'cover', maxCount: 1 },
+      ],
+      {
+        storage: diskStorage({
+          destination: join(__dirname, '..', '..', 'public', 'uploads'),
+          filename: (req, file, cb) => {
+            if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+              return cb(
+                new BadRequestException('Only image files are allowed!'),
+                '',
+              );
+            }
 
-          const fileExtName = file.originalname.split('.').pop();
-          const newFileName = `${uuid()}.${fileExtName}`;
-          cb(null, newFileName);
-        },
-      }),
-    }),
+            const fileExtName = file.originalname.split('.').pop();
+            const newFileName = `${uuid()}.${fileExtName}`;
+            cb(null, newFileName);
+          },
+        }),
+      },
+    ),
   )
   create(
     @GetUser() user: User,
     @Body() createPostDto: CreatePostDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFiles()
+    files: {
+      image: Express.Multer.File[];
+      cover?: Express.Multer.File[];
+    },
   ) {
-    if (!file) {
+    if (!files.image) {
       throw new BadRequestException('Image is required');
+    } else {
+      if (!files.image[0].originalname.match(/\.(jpg|jpeg|png)$/)) {
+        throw new BadRequestException(
+          'Only image files are allowed for poster!',
+        );
+      }
     }
-    return this.postsService.create(user, createPostDto, file);
+    if (files.cover) {
+      if (!files.cover[0].originalname.match(/\.(jpg|jpeg|png)$/)) {
+        throw new BadRequestException(
+          'Only image files are allowed for cover!',
+        );
+      }
+    }
+    return this.postsService.create(user, createPostDto, files);
   }
 
   @Get()
