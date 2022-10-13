@@ -63,6 +63,9 @@ export class CategoriesService {
   async findAll() {
     const categories = this.prisma.category.findMany({
       where: { type: 'main' },
+      orderBy: {
+        name: 'asc',
+      },
       include: {
         createdBy: {
           select: {
@@ -85,6 +88,9 @@ export class CategoriesService {
                 id: true,
               },
             },
+          },
+          orderBy: {
+            name: 'asc',
           },
         },
       },
