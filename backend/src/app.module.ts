@@ -21,8 +21,8 @@ import { AdminModule } from './admin/admin.module';
       exclude: ['/api*'],
     }),
     CacheModule.register({
-      ttl: 300,
-      max: 500,
+      ttl: 600,
+      max: 1000,
       isGlobal: true,
     }),
 
