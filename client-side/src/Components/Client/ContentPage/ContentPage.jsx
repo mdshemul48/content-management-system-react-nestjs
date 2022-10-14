@@ -35,12 +35,6 @@ function ContentPage() {
                 Edit
               </Button>
             )}
-            {/* <ul className="d-flex text-light align-items-center">
-              <li className="list-unstyled ms-1">{contentData.watch_time}</li>
-              <li className="list-unstyled ms-1">March 17, 2019 </li>
-              <li className="list-unstyled ms-1">Romantic </li>
-              <li className="list-unstyled ms-1">U/A 18+ </li>
-            </ul> */}
           </div>
         </div>
         <br />
@@ -56,6 +50,18 @@ function ContentPage() {
           {contentData.type === "series" && <SeriesVideo content={contentData.content} />}
           {(contentData.type === "multiVideo" || contentData.type === "multiFile") && (
             <MultiVideoOrFiles content={contentData.content} type={contentData.type} />
+          )}
+          {contentData.type === "singleFile" && (
+            <a
+              className="btn btn-warning btn-lg mt-2"
+              size="lg"
+              target="_blank"
+              download
+              href={contentData.data}
+              rel="noreferrer"
+            >
+              Download
+            </a>
           )}
         </Container>
       </main>
