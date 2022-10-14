@@ -4,10 +4,12 @@ import { Col, Form, Row } from "react-bootstrap";
 const Movie = ({ onChangeHandler, postDetail }) => (
   <Row>
     <Col lg={6}>
-      <Form.Group className="mb-3">
-        <Form.Label>Year</Form.Label>
-        <Form.Control name="year" type="text" onChange={onChangeHandler} value={postDetail.year} />
-      </Form.Group>
+      {postDetail.type !== "singleFile" && (
+        <Form.Group className="mb-3">
+          <Form.Label>Year</Form.Label>
+          <Form.Control name="year" type="text" onChange={onChangeHandler} value={postDetail.year} />
+        </Form.Group>
+      )}
     </Col>
     <Col lg={6}>
       {postDetail.type !== "series" && (
@@ -18,16 +20,20 @@ const Movie = ({ onChangeHandler, postDetail }) => (
       )}
     </Col>
     <Col lg={6}>
-      <Form.Group className="mb-3">
-        <Form.Label>Watch Time</Form.Label>
-        <Form.Control name="watchTime" type="text" onChange={onChangeHandler} value={postDetail.watchTime} />
-      </Form.Group>
+      {postDetail.type !== "singleFile" && (
+        <Form.Group className="mb-3">
+          <Form.Label>Watch Time</Form.Label>
+          <Form.Control name="watchTime" type="text" onChange={onChangeHandler} value={postDetail.watchTime} />
+        </Form.Group>
+      )}
     </Col>
     <Col lg={6}>
-      <Form.Group className="mb-3">
-        <Form.Label>Quality</Form.Label>
-        <Form.Control name="quality" type="text" onChange={onChangeHandler} value={postDetail.quality} />
-      </Form.Group>
+      {postDetail.type !== "singleFile" && (
+        <Form.Group className="mb-3">
+          <Form.Label>Quality</Form.Label>
+          <Form.Control name="quality" type="text" onChange={onChangeHandler} value={postDetail.quality} />
+        </Form.Group>
+      )}
     </Col>
   </Row>
 );

@@ -77,6 +77,7 @@ const AddPostAndEditPostForm = ({ postDetail, setPostDetail, onSubmitHandler, on
           <Form.Group className="mb-3 w-100">
             <Form.Select onChange={onPostTypeChangeHandler} value={postDetail.type}>
               <option value="singleVideo">Single Video</option>
+              <option value="singleFile">Single File</option>
               <option value="multiVideo">Multi Video</option>
               <option value="multiFile">Multi File</option>
               <option value="series">Series</option>
@@ -97,7 +98,7 @@ const AddPostAndEditPostForm = ({ postDetail, setPostDetail, onSubmitHandler, on
             />
           </Form.Group>
 
-          {(postDetail.type === "singleVideo" || postDetail.type === "series") && (
+          {(postDetail.type === "singleVideo" || postDetail.type === "series" || postDetail.type === "singleFile") && (
             <Movie onChangeHandler={onChangeHandler} postDetail={postDetail} />
           )}
           {postDetail.type === "series" && (
@@ -106,7 +107,7 @@ const AddPostAndEditPostForm = ({ postDetail, setPostDetail, onSubmitHandler, on
               setContent={(newContent) => setPostDetail({ ...postDetail, content: newContent })}
             />
           )}
-          {postDetail.type !== "singleVideo" && postDetail.type !== "series" && (
+          {postDetail.type !== "singleVideo" && postDetail.type !== "series" && postDetail.type !== "singleFile" && (
             <Parts postDetail={postDetail} setPostDetail={setPostDetail} />
           )}
         </Col>

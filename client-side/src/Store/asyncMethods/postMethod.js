@@ -16,7 +16,9 @@ export const createOrUpdatePost = (postDetail, postId, callback) => async (dispa
     formData.append("categories", JSON.stringify(postDetail.categories.map((item) => parseInt(item, 10))));
     formData.append(
       "content",
-      postDetail.type === "singleVideo" ? JSON.stringify(postDetail.downloadLink) : JSON.stringify(postDetail.content)
+      postDetail.type === "singleVideo" || postDetail.type === "singleFile"
+        ? JSON.stringify(postDetail.downloadLink)
+        : JSON.stringify(postDetail.content)
     );
     formData.append("tags", postDetail.tags);
     formData.append("metaData", postDetail.metaData);
