@@ -7,6 +7,39 @@ export class HomePageService {
   constructor(private prisma: PrismaService, private config: ConfigService) {}
 
   async getHomePagePosts() {
+    const homePageSelectedCategory = this.config
+      .get<string>('HOMEPAGE_CATEGORY')
+      .split(',')
+      .map((categoryId) => +categoryId);
+
+    const mostPopularCategory = +this.config.get('MOST_POPULAR_CATEGORY');
+
+    const mostPopularPosts = await this.prisma.category
+      .findUnique({
+        where: { id: mostPopularCategory },
+      })
+      .posts({
+        take: 10,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          createdBy: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          categories: {
+            select: {
+              id: true,
+              name: true,
+              type: true,
+            },
+          },
+        },
+      });
+
     const latestPost = await this.prisma.post.findMany({
       take: 12,
       orderBy: {
@@ -22,11 +55,6 @@ export class HomePageService {
         year: true,
       },
     });
-
-    const homePageSelectedCategory = this.config
-      .get<string>('HOMEPAGE_CATEGORY')
-      .split(',')
-      .map((categoryId) => +categoryId);
 
     const categoriesWithPost = await this.prisma.category.findMany({
       where: {
@@ -61,6 +89,6 @@ export class HomePageService {
       categories.push(category);
     }
 
-    return { latestPost, categoryPosts: categories };
+    return { latestPost, categoryPosts: categories, mostPopularPosts };
   }
 }
