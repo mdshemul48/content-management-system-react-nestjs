@@ -12,9 +12,8 @@ export class CreatePostDto {
   @IsOptional()
   metaData: string;
 
-  @IsNotEmpty()
   @IsString()
-  tags: string;
+  tags?: string;
 
   @IsNotEmpty()
   @IsString()
