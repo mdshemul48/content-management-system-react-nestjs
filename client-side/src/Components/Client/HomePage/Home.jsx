@@ -16,8 +16,6 @@ function Home() {
     fetchPost();
   }, []);
 
-  console.log(homePagePosts);
-
   return (
     <main>
       <HomeCarousel mostPopularPosts={homePagePosts.mostPopularPosts} />

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import styles from "./HomeCarousel.module.css";
 
@@ -14,15 +15,17 @@ const HomeCarousel = ({ mostPopularPosts }) => (
           width="1920"
           height="540"
         />
-        <Carousel.Caption className={styles.homeCarousel}>
-          <h1 className={`fw-bolder ${styles.homeCarouselTitle}`}>{post.name}</h1>
-          <h2 className="mt-2">
-            {post.categories.find((category) => category.type === "main").name} | {post.watchTime}
-          </h2>
-          <Button variant="danger" className={`rounded-0 mt-3 ${styles.homeCarouselWatchButton}`} size="lg">
-            Watch Now
-          </Button>
-        </Carousel.Caption>
+        <Link to={`/content/${post.id}`}>
+          <Carousel.Caption className={styles.homeCarousel}>
+            <h1 className={`fw-bolder ${styles.homeCarouselTitle}`}>{post.name}</h1>
+            <h2 className="mt-2">
+              {post.categories.find((category) => category.type === "main").name} | {post.watchTime}
+            </h2>
+            <Button variant="danger" className={`rounded-0 mt-3 ${styles.homeCarouselWatchButton}`} size="lg">
+              Watch Now
+            </Button>
+          </Carousel.Caption>
+        </Link>
       </Carousel.Item>
     ))}
   </Carousel>
