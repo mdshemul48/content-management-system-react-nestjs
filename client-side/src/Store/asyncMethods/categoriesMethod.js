@@ -1,6 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 import { toast } from "react-hot-toast";
-import { addCategory, deleteCategory, getCategories } from "../reducers/categories";
+import {
+  addCategory,
+  deleteCategory,
+  getCategories,
+  updateCategory as updateCategoryState,
+} from "../reducers/categories";
 import axiosInstance from "../../utility/axiosInstance";
 
 export const getCategoriesMethod = () => async (dispatch, state) => {
@@ -64,7 +69,7 @@ export const updateCategory = (data, callback) => async (dispatch, state) => {
       },
     });
 
-    dispatch(addCategory(response.data));
+    dispatch(updateCategoryState(response.data));
     callback();
     toast.success("Category Updated");
   } catch (error) {

@@ -1,12 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Form, Modal } from "react-bootstrap";
+import { updateCategory } from "../../../../Store/asyncMethods/categoriesMethod";
 
-const UpdateCategoryModal = ({ show, handleClose, onSubmitHandler, onChangeHandler, category }) => {
-  const {
-    categories: { categories },
-    auth,
-  } = useSelector((state) => state);
+const UpdateCategoryModal = ({ show, handleClose, category }) => {
+  const [categoryState, setCategoryState] = useState(category);
+  const dispatch = useDispatch();
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setCategoryState({ ...categoryState, [name]: value });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(updateCategory(categoryState, handleClose));
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -22,18 +32,8 @@ const UpdateCategoryModal = ({ show, handleClose, onSubmitHandler, onChangeHandl
               name="name"
               type="text"
               placeholder="Category Name"
-              value={category.name}
+              value={categoryState.name}
             />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="parentId">
-            <Form.Select name="parentId" onChange={onChangeHandler}>
-              <option value="">Parent Category</option>
-              {categories?.map((item) => (
-                <option key={item.id} value={item.id} selected={category.parentId === item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </Form.Select>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
