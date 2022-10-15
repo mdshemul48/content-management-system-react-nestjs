@@ -7,6 +7,9 @@ import axiosInstance from "../../../utility/axiosInstance";
 const Settings = () => {
   const { token } = useSelector((state) => state.auth);
   const clearCacheHandler = async () => {
+    // eslint-disable-next-line no-alert, no-undef
+    const confirm = window.confirm("Are you sure you want to clear cache?");
+    if (!confirm) return;
     try {
       const { data } = await axiosInstance.delete("/admin/resetCache", {
         headers: { Authorization: `Bearer ${token}` },
