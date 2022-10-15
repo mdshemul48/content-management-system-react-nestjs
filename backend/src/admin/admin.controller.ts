@@ -6,6 +6,7 @@ import {
   Query,
   UseGuards,
   HttpStatus,
+  Delete,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard';
 import { CategoriesService } from 'src/categories/categories.service';
@@ -41,7 +42,7 @@ export class AdminController {
     return this.postsService.findOne(+id);
   }
 
-  @Get('/resetCache')
+  @Delete('/resetCache')
   @HttpCode(HttpStatus.ACCEPTED)
   resetCache() {
     return this.adminService.resetCache();
