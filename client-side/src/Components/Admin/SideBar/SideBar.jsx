@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { FaLightbulb, FaPlus, FaFolderOpen, FaTable, FaUsers } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 import "react-pro-sidebar/dist/css/styles.css";
@@ -25,6 +26,9 @@ function SideBar() {
         </MenuItem>
         <MenuItem icon={<FaUsers />}>
           <Link to="/admin/users">Users</Link>
+        </MenuItem>
+        <MenuItem icon={<IoMdSettings />}>
+          <Link to="/admin/settings">Settings</Link>
         </MenuItem>
       </Menu>
     </ProSidebar>

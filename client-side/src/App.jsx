@@ -28,29 +28,27 @@ function App() {
     <>
       <NavBar />
       <Toaster position="top-right" reverseOrder />
-      <div>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="category/:mainCategory" element={<CategoryPage />}>
-              <Route path=":subCategory" element={<CategoryPage />} />
-            </Route>
-            <Route path="content/:contentId" element={<ContentPage />} />
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="category/:mainCategory" element={<CategoryPage />}>
+            <Route path=":subCategory" element={<CategoryPage />} />
           </Route>
+          <Route path="content/:contentId" element={<ContentPage />} />
+        </Route>
 
-          <Route
-            path="/admin/*"
-            element={
-              <RequireAuth>
-                <AdminPanel />
-              </RequireAuth>
-            }
-          />
+        <Route
+          path="/admin/*"
+          element={
+            <RequireAuth>
+              <AdminPanel />
+            </RequireAuth>
+          }
+        />
 
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </div>
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
       <p className="bg-dark text-white mb-0 py-2 text-center mt-2 ">POWERED & DEVELOPED BY YETFIX.COM</p>
     </>
   );
