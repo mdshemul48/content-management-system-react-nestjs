@@ -7,6 +7,7 @@ import AdminBar from "./AdminBar";
 import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
 import SearchBox from "./SearchBox/SearchBox";
+import DirectLink from "./DirectLink";
 
 function NavBar() {
   const { pathname } = useLocation();
@@ -26,7 +27,7 @@ function NavBar() {
               </Nav.Link>
 
               <MenuCategories />
-
+              <DirectLink />
               <PartnerFTPLinks />
 
               <Nav.Link href="" className="text-white text-uppercase">

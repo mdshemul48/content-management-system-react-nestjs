@@ -8,3 +8,6 @@ body {
 .btn-danger {
   --bs-btn-bg: #f4181c !important;
 }
+#navbarScroll > div.mx-auto.my-lg-0.navbar-nav > div.text-uppercase.text-dark.nav-item.show.dropdown > div > div > a {
+  color: #000 !important;
+}
