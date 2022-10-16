@@ -59,6 +59,8 @@ const AddNewPostAndEdit = () => {
         });
       };
       fetchPostDetail();
+    } else {
+      setPostDetail(defaultFormValue);
     }
   }, [postId]);
 
