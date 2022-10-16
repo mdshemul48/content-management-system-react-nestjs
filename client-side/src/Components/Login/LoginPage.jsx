@@ -38,7 +38,7 @@ function LoginPage() {
   };
 
   return (
-    <main className="form-signin w-100 mb-5">
+    <main className="form-signin w-100 my-5">
       <form className="bg-white p-3 w-25 rounded text-center m-auto" onSubmit={onSubmitHandler}>
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
