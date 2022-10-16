@@ -8,6 +8,7 @@ import MenuCategories from "./MenuCategories";
 import PartnerFTPLinks from "./PartnerFTPLinks";
 import SearchBox from "./SearchBox/SearchBox";
 import DirectLink from "./DirectLink";
+import ArrowButton from "../ArrowButton/ArrowButton";
 
 function NavBar() {
   const { pathname } = useLocation();
@@ -30,13 +31,14 @@ function NavBar() {
               <DirectLink />
               <PartnerFTPLinks />
 
-              <Nav.Link href="" className="text-white text-uppercase">
-                Live Tv
-              </Nav.Link>
-              <Nav.Link href="" className="text-white text-uppercase">
+              <Nav.Link href="http://emby.circleftp.net/" className="text-white text-uppercase" as={ArrowButton}>
                 Emby
               </Nav.Link>
-              <Nav.Link href="" className="text-white text-uppercase">
+              <Nav.Link
+                href="http://15.1.4.7/FILE/circleApp/circleapp.apk"
+                className="text-white text-uppercase"
+                as={ArrowButton}
+              >
                 Download App
               </Nav.Link>
             </Nav>
