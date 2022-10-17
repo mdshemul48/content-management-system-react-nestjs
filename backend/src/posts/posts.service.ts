@@ -4,10 +4,13 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { FindPostDto } from './dto/find-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-
+import { StorageService } from 'src/utils/storage/storage.service';
 @Injectable()
 export class PostsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private storageService: StorageService,
+  ) {}
 
   async create(
     user: User,
@@ -30,14 +33,24 @@ export class PostsService {
       categories: categoriesString,
     } = createPostDto;
 
+    const imageFileName = await this.storageService.storeImageFile(
+      files.image[0],
+    );
+
+    let coverFileName: string = null;
+
+    if (files.cover) {
+      coverFileName = await this.storageService.storeImageFile(files.cover[0]);
+    }
+
     const postContent = JSON.parse(content);
 
     return await this.prisma.post.create({
       data: {
         title,
         type,
-        image: files.image[0].filename,
-        cover: files.cover ? files.cover[0].filename : null,
+        image: imageFileName,
+        cover: files.cover ? coverFileName : null,
         metaData,
         tags,
         content: postContent,

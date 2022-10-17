@@ -10,6 +10,7 @@ import { join } from 'path';
 import { HomePageModule } from './home-page/home-page.module';
 import { SearchRecommendationModule } from './search-recommendation/search-recommendation.module';
 import { AdminModule } from './admin/admin.module';
+import { StorageModule } from 'src/utils/storage/storage.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { AdminModule } from './admin/admin.module';
     HomePageModule,
     SearchRecommendationModule,
     AdminModule,
+    StorageModule,
   ],
   controllers: [],
   providers: [],
