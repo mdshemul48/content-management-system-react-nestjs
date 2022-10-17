@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `posts` ADD COLUMN `imageSm` VARCHAR(191) NOT NULL DEFAULT '';

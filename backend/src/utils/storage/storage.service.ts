@@ -12,14 +12,28 @@ const config = {
 
 @Injectable()
 export class StorageService {
-  async storeImageFile(file: Express.Multer.File) {
+  async storeImageFile(file: Express.Multer.File, imageSize?: number) {
     this._syncDir(join(__dirname, '..', '..', '..', 'public', 'uploads'));
 
     const image = sharp(file.buffer);
     const ImageMetaDetails = await image.metadata();
     const fileName = uuid() + '.' + ImageMetaDetails.format;
     await image[ImageMetaDetails.format](config[ImageMetaDetails.format])
-      .resize(1000)
+      .resize(imageSize || null)
+      .toFile(join(__dirname, '..', '..', '..', 'public', 'uploads', fileName));
+    return fileName;
+  }
+
+  async storeImageFileSm(file: Express.Multer.File) {
+    this._syncDir(join(__dirname, '..', '..', '..', 'public', 'uploads'));
+
+    const image = sharp(file.buffer);
+    const ImageMetaDetails = await image.metadata();
+    const fileName = uuid() + '.' + ImageMetaDetails.format;
+
+    await image[ImageMetaDetails.format](config[ImageMetaDetails.format])
+      .resize(300)
+
       .toFile(join(__dirname, '..', '..', '..', 'public', 'uploads', fileName));
     return fileName;
   }

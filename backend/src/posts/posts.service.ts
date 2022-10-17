@@ -35,6 +35,11 @@ export class PostsService {
 
     const imageFileName = await this.storageService.storeImageFile(
       files.image[0],
+      1000,
+    );
+
+    const imageFileSm = await this.storageService.storeImageFileSm(
+      files.image[0],
     );
 
     let coverFileName: string = null;
@@ -50,6 +55,7 @@ export class PostsService {
         title,
         type,
         image: imageFileName,
+        imageSm: imageFileSm,
         cover: files.cover ? coverFileName : null,
         metaData,
         tags,
