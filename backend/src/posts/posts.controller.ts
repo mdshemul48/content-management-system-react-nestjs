@@ -18,12 +18,9 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from 'src/auth/guard';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { v4 as uuid } from 'uuid';
 import { GetUser } from 'src/auth/decorator';
 import { User } from '@prisma/client';
 import { FindPostDto } from './dto/find-post.dto';
-import { join } from 'path';
 
 @Controller('posts')
 export class PostsController {
