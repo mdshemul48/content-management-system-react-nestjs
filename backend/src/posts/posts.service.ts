@@ -351,6 +351,19 @@ export class PostsService {
   }
 
   async remove(id: number) {
+    const post = await this.prisma.post.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    // deleting old image and cover
+    await this.storageService.deleteImageFile(post.image);
+    await this.storageService.deleteImageFile(post.imageSm);
+    if (post.cover) {
+      await this.storageService.deleteImageFile(post.cover);
+    }
+
     await this.prisma.post.delete({
       where: {
         id,
