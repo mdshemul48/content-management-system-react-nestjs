@@ -80,29 +80,10 @@ export class PostsController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(
-    FileFieldsInterceptor(
-      [
-        { name: 'image', maxCount: 1 },
-        { name: 'cover', maxCount: 1 },
-      ],
-      {
-        storage: diskStorage({
-          destination: join(__dirname, '..', '..', 'public', 'uploads'),
-          filename: (req, file, cb) => {
-            if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-              return cb(
-                new BadRequestException('Only image files are allowed!'),
-                '',
-              );
-            }
-
-            const fileExtName = file.originalname.split('.').pop();
-            const newFileName = `${uuid()}.${fileExtName}`;
-            cb(null, newFileName);
-          },
-        }),
-      },
-    ),
+    FileFieldsInterceptor([
+      { name: 'image', maxCount: 1 },
+      { name: 'cover', maxCount: 1 },
+    ]),
   )
   update(
     @Param('id') id: string,

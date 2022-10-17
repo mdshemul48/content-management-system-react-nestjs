@@ -264,7 +264,37 @@ export class PostsService {
       categories: categoriesString,
     } = updatePostDto;
 
+    let image: string = null;
+    let imageSm: string = null;
+    let cover: string = null;
+
+    if (files.image) {
+      image = await this.storageService.storeImageFile(files.image[0], 1000);
+      imageSm = await this.storageService.storeImageFileSm(files.image[0]);
+    }
+
+    if (files.cover) {
+      cover = await this.storageService.storeImageFile(files.cover[0]);
+    }
+
     const postContent = JSON.parse(content);
+
+    const post = await this.prisma.post.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    // deleting old image
+    if (image) {
+      await this.storageService.deleteImageFile(post.image);
+      await this.storageService.deleteImageFile(post.imageSm);
+    }
+
+    // deleting old cover
+    if (cover) {
+      await this.storageService.deleteImageFile(post.cover);
+    }
 
     // disconnect all categories
     await this.prisma.post.update({
@@ -288,8 +318,9 @@ export class PostsService {
         metaData,
         tags,
         content: postContent,
-        image: files.image && files.image[0].filename,
-        cover: files.cover && files.cover[0].filename,
+        image: image ? image : undefined,
+        imageSm: imageSm ? imageSm : undefined,
+        cover: cover ? cover : undefined,
         name,
         quality,
         watchTime,
