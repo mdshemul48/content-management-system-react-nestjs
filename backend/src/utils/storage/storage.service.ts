@@ -39,9 +39,13 @@ export class StorageService {
   }
 
   async deleteImageFile(fileName: string) {
-    fs.unlinkSync(
-      join(__dirname, '..', '..', '..', 'public', 'uploads', fileName),
-    );
+    try {
+      fs.unlinkSync(
+        join(__dirname, '..', '..', '..', 'public', 'uploads', fileName),
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   private _syncDir(dir: string) {

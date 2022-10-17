@@ -168,6 +168,7 @@ export class PostsService {
       title: true,
       type: true,
       image: true,
+      imageSm: true,
       metaData: true,
       tags: true,
       name: true,
