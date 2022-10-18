@@ -35,8 +35,7 @@ const HomeCarousel = ({ mostPopularPosts }) => (
                   <img
                     src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${post.imageSm}`}
                     className="rounded img-fluid"
-                    alt=""
-                    max-height="300px"
+                    alt={post.name}
                   />
                 </div>
               </Col>
