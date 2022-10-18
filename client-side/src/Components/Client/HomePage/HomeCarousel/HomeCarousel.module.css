@@ -9,3 +9,17 @@
   font-family: "Poppins", sans-serif !important;
   font-size: 16px !important;
 }
+
+.homeCarouselImage {
+  object-fit: cover;
+  filter: blur(3px) brightness(50%);
+}
+
+.homeCarouselTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.homeCarouselPoster {
+  box-shadow: -7px 14px 37px #000000e0;
+}
