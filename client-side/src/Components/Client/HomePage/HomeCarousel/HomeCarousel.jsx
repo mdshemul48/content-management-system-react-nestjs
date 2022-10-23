@@ -30,7 +30,7 @@ const HomeCarousel = ({ mostPopularPosts }) => (
                   </Button>
                 </div>
               </Col>
-              <Col lg={4}>
+              <Col lg={4} className="d-none d-lg-block">
                 <div className={`p-1 bg-white d-inline-block rounded ${styles.homeCarouselPoster}`}>
                   <img
                     src={`${process.env.REACT_APP_IMAGE_FOLDER_LOCATION}/${post.imageSm}`}
