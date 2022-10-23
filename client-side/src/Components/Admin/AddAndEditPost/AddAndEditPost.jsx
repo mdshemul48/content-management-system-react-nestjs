@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -68,7 +67,7 @@ const AddNewPostAndEdit = () => {
     event.preventDefault();
     dispatch(
       createOrUpdatePost(postDetail, postId, (data) => {
-        navigate(`/admin/edit/${data.id}`);
+        navigate(`/content/${data.id}`);
       })
     );
   };
@@ -79,7 +78,7 @@ const AddNewPostAndEdit = () => {
 
     if (confirmDelete) {
       try {
-        await axios.delete(`${process.env.REACT_APP_API_BACKEND_API}/posts/${postId}`, {
+        await axiosInstance.delete(`/posts/${postId}`, {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
