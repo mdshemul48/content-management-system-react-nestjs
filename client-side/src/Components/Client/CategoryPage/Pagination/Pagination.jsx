@@ -2,30 +2,29 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import { Button } from "react-bootstrap";
+import ReactPaginate from "react-paginate";
 
 function Pagination({ paginationInfo, paginationHandler }) {
-  if (paginationInfo.pages === 1) return null;
-
-  const paginationData = [];
-  for (let i = 1; i <= paginationInfo.pages; i += 1) {
-    paginationData.push(
-      <li className={`page-item mx-1 ${paginationInfo.active === i ? "disabled" : ""}`}>
-        <Button
-          className="page-link"
-          onClick={(event) => {
-            event.preventDefault();
-            paginationHandler(i);
-          }}
-        >
-          {i}
-        </Button>
-      </li>
-    );
-  }
   return (
-    <nav>
-      <ul className="pagination pagination-md">{paginationData}</ul>
-    </nav>
+    <ReactPaginate
+      previousLabel="previous"
+      nextLabel="next"
+      breakLabel="..."
+      pageCount={paginationInfo.pages}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={3}
+      onPageChange={paginationHandler}
+      containerClassName="pagination justify-content-center"
+      pageClassName="page-item"
+      pageLinkClassName="page-link"
+      previousClassName="page-item"
+      previousLinkClassName="page-link"
+      nextClassName="page-item"
+      nextLinkClassName="page-link"
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
+      activeClassName="active"
+    />
   );
 }
 
