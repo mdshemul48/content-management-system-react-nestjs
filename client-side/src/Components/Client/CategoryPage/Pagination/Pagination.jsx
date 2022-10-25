@@ -13,7 +13,7 @@ function Pagination({ paginationInfo, paginationHandler }) {
       pageCount={paginationInfo.pages}
       marginPagesDisplayed={2}
       pageRangeDisplayed={3}
-      onPageChange={paginationHandler}
+      onPageChange={(event) => paginationHandler(event.selected)}
       containerClassName="pagination justify-content-center"
       pageClassName="page-item"
       pageLinkClassName="page-link"
