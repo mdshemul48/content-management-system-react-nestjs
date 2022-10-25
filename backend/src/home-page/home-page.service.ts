@@ -20,16 +20,16 @@ export class HomePageService {
       })
       .posts({
         take: 10,
-        orderBy: {
-          createdAt: 'desc',
-        },
-        include: {
-          createdBy: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
+        select: {
+          id: true,
+          title: true,
+          name: true,
+          image: true,
+          cover: true,
+          imageSm: true,
+          quality: true,
+          watchTime: true,
+          year: true,
           categories: {
             select: {
               id: true,
@@ -37,6 +37,15 @@ export class HomePageService {
               type: true,
             },
           },
+          createdBy: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: 'desc',
         },
       });
 
@@ -53,6 +62,7 @@ export class HomePageService {
         imageSm: true,
         quality: true,
         watchTime: true,
+        type: true,
         year: true,
       },
     });
@@ -78,6 +88,7 @@ export class HomePageService {
             quality: true,
             watchTime: true,
             year: true,
+            type: true,
           },
         },
       },
