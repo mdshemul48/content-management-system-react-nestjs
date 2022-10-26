@@ -33,6 +33,7 @@ const PostsManage = () => {
   };
   useEffect(() => {
     const fetch = async () => {
+      console.log(filter.limit);
       const { data } = await axiosInstance.get("/admin/posts", {
         params: {
           searchTerm: filter.searchTerm,
