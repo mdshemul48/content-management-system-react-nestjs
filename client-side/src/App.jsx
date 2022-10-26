@@ -49,7 +49,12 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Suspense>
-      <p className="bg-dark text-white mb-0 py-2 text-center mt-2 ">POWERED & DEVELOPED BY YETFIX.COM</p>
+      <p className="bg-dark text-white mb-0 py-2 text-center mt-2 ">
+        POWERED & DEVELOPED BY{" "}
+        <a className="text-decoration-none text-danger" href="http://yetfix.com/">
+          YETFIX.COM
+        </a>{" "}
+      </p>
     </>
   );
 }
