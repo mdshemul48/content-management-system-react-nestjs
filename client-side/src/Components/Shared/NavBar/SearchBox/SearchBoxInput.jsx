@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
-import axiosInstance from "../../../../utility/axiosInstance";
+import fetchJsonp from "fetch-jsonp";
 
 const SearchBoxInput = ({ setSearchQuery }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,8 +10,10 @@ const SearchBoxInput = ({ setSearchQuery }) => {
   const handleSearch = async (query) => {
     setSearchQuery(query);
     setIsLoading(true);
-    const { data } = await axiosInstance.get(`/search-recommendation?search=${query}`);
-    setOptions(data[1]);
+    const response = await fetchJsonp(`https://suggestqueries.google.com/complete/search?client=youtube&q=${query}`);
+    const responseJson = await response.json();
+    const data = responseJson[1].map((item) => item[0]);
+    setOptions(data);
     setIsLoading(false);
   };
 
