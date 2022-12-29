@@ -9,6 +9,7 @@ import PartnerFTPLinks from "./PartnerFTPLinks";
 import SearchBox from "./SearchBox/SearchBox";
 import DirectLink from "./DirectLink";
 import ArrowButton from "../ArrowButton/ArrowButton";
+import LiveTv from "./LiveTv";
 
 function NavBar() {
   const { pathname } = useLocation();
@@ -30,6 +31,7 @@ function NavBar() {
               <MenuCategories />
               <DirectLink />
               <PartnerFTPLinks />
+              <LiveTv />
 
               <Nav.Link href="http://emby.circleftp.net/" className="text-white text-uppercase" as={ArrowButton}>
                 Emby

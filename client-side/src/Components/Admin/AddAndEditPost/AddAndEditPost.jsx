@@ -67,7 +67,11 @@ const AddNewPostAndEdit = () => {
     event.preventDefault();
     dispatch(
       createOrUpdatePost(postDetail, postId, (data) => {
-        navigate(`/content/${data.id}`);
+        if (data.id) {
+          navigate(`/content/${data.id}`);
+        } else {
+          toast.error(data.message);
+        }
       })
     );
   };

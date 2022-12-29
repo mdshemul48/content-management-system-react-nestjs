@@ -11,7 +11,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const { data } = await axiosInstance.get(`/posts?searchTerm=${searchParams}`);
+      const { data } = await axiosInstance.get(`/posts?searchTerm=${searchParams}&order=desc`);
       setSearchResult(data);
     };
     fetchPost();
