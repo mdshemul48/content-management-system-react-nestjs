@@ -7,8 +7,8 @@ import {
   UseGuards,
   HttpStatus,
   Delete,
-  Post,
   Body,
+  Patch,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard';
 import { CategoriesService } from 'src/categories/categories.service';
@@ -51,7 +51,7 @@ export class AdminController {
     return this.adminService.resetCache();
   }
 
-  @Post('/changeUrl')
+  @Patch('/changeUrl')
   @HttpCode(HttpStatus.ACCEPTED)
   changeUrl(@Body() changeUrlInfo: changeUrl) {
     return this.adminService.changeUrl(changeUrlInfo);
