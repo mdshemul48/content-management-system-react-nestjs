@@ -7,12 +7,15 @@ import {
   UseGuards,
   HttpStatus,
   Delete,
+  Post,
+  Body,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard';
 import { CategoriesService } from 'src/categories/categories.service';
 import { FindPostDto } from 'src/posts/dto/find-post.dto';
 import { PostsService } from 'src/posts/posts.service';
 import { AdminService } from './admin.service';
+import { changeUrl } from './dto/changeUrl.dto';
 
 @Controller('admin')
 @UseGuards(JwtAuthGuard)
@@ -46,5 +49,11 @@ export class AdminController {
   @HttpCode(HttpStatus.ACCEPTED)
   resetCache() {
     return this.adminService.resetCache();
+  }
+
+  @Post('/changeUrl')
+  @HttpCode(HttpStatus.ACCEPTED)
+  changeUrl(@Body() changeUrlInfo: changeUrl) {
+    return this.adminService.changeUrl(changeUrlInfo);
   }
 }
