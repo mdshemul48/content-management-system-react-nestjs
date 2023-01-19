@@ -1,8 +1,9 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Tab, Tabs } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../../utility/axiosInstance";
+import LinkChange from "./LinkChange/LinkChange";
 
 const Settings = () => {
   const { token } = useSelector((state) => state.auth);
@@ -22,9 +23,16 @@ const Settings = () => {
 
   return (
     <div>
-      <Button variant="danger" onClick={clearCacheHandler}>
-        Clear Cache
-      </Button>
+      <Tabs defaultActiveKey="general">
+        <Tab eventKey="general" title="General" className="p-1">
+          <Button variant="danger" onClick={clearCacheHandler}>
+            Clear Cache
+          </Button>
+        </Tab>
+        <Tab eventKey="changeLink" title="Link Change" className="p-1">
+          <LinkChange />
+        </Tab>
+      </Tabs>
     </div>
   );
 };
