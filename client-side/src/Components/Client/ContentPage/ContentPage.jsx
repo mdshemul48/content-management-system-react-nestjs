@@ -57,7 +57,7 @@ function ContentPage() {
               size="lg"
               target="_blank"
               download
-              href={contentData.data}
+              href={contentData.content}
               rel="noreferrer"
             >
               Download
