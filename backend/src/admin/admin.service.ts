@@ -15,13 +15,10 @@ export class AdminService {
   }
 
   async changeUrl(changeUrlInfo: changeUrl) {
-    const allThePosts = await this.prisma.post.findMany({
-      select: {
-        type: true,
-        content: true,
-      },
-    });
-    console.log(allThePosts);
-    return changeUrlInfo;
+    const { fromUrl, toUrl } = changeUrlInfo;
+    await this.prisma
+      .$executeRaw`UPDATE posts SET content = REPLACE(content, ${fromUrl},${toUrl})`;
+
+    return 'Url changed successfully';
   }
 }
