@@ -18,7 +18,7 @@ const LinkChange = () => {
       axiosInstance.patch(
         "/admin/changeUrl",
         {
-          formUrl: links.fromLink,
+          fromUrl: links.fromLink,
           toUrl: links.toLink,
         },
         {
