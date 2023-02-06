@@ -15,17 +15,23 @@ This is a full-stack content management system built with React in the frontend 
 
 1. Clone the repository
 
-   `git clone https://github.com/mdshemul48/circleftp-content-management-system-react-nestjs`
+   `$ git clone https://github.com/mdshemul48/circleftp-content-management-system-react-nestjs`
 
 2. Navigate to the frontend directory
 
-   `cd circleftp-content-management-system-react-nestjs/frontend`
+   `$ cd circleftp-content-management-system-react-nestjs/frontend`
 
 3. Copy the `.env.example` file to `.env` and add the link to the backend API and image endpoint.
 4. Install the dependencies
 
-   `npm install`
+   `$ npm install`
 
 5. Start the development server
 
-   `npm run start`
+   `$ npm run start`
+
+### Backend Installation
+
+1. Navigate to the backend directory
+
+   `$ cd circleftp-content-management-system-react-nestjs/backend`
