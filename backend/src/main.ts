@@ -13,6 +13,6 @@ async function bootstrap() {
   );
   app.setGlobalPrefix('api');
   app.enableCors();
-  await app.listen(80);
+  await app.listen(5000);
 }
 bootstrap();
