@@ -1,4 +1,4 @@
-# Circleftp Content Management System
+# Circleftp Content Management System (ReactJs + NestJs)
 
 This is a full-stack content management system built with React in the frontend and NestJS in the backend. The frontend utilizes React, Redux Toolkit, React Bootstrap, axios, momentJs, etc. while the backend utilizes NestJS, MySQL, and Prisma. It also has real-time search recommendation powered by Google. With this system, you can manage your collections of movies, TV series, games, and software.
 
