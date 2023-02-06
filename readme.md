@@ -35,3 +35,21 @@ This is a full-stack content management system built with React in the frontend 
 1. Navigate to the backend directory
 
    `$ cd circleftp-content-management-system-react-nestjs/backend`
+
+2. Install the dependencies
+
+   `$ npm install`
+
+3. Copy the `.env.example` file to `.env` and add database url, jwt secret, and more.
+
+4. Install the dependencies
+
+   `$ npm install`
+
+5. Start the development server
+
+   `$ npm run dev`
+
+### Usage
+
+The frontend will be available at http://localhost:3000 and the backend will be available at http://localhost:5000.
