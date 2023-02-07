@@ -7,7 +7,7 @@ This is a full-stack content management system built with React in the frontend 
 - Manage movies, TV series, games, and software
 - Add, edit, and delete entries for each category
 - View details for each entry
-- Fast and efficient search with Google Realtime Search
+- Fast and efficient search with Google Realtime Search recommendation
 - Organize entries by categories
 - And more!
 
