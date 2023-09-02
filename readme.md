@@ -1,4 +1,4 @@
-# Circleftp Content Management System (ReactJs + NestJs)
+# Content Management System (ReactJs + NestJs)
 
 This is a full-stack content management system built with React in the frontend and NestJS in the backend. The frontend utilizes React, Redux Toolkit, React Bootstrap, axios, momentJs, etc. while the backend utilizes NestJS, MySQL, and Prisma. It also has real-time search recommendation powered by Google. With this system, you can manage your collections of movies, TV series, games, and software.
 
@@ -15,11 +15,11 @@ This is a full-stack content management system built with React in the frontend 
 
 1. Clone the repository
 
-   `$ git clone https://github.com/mdshemul48/circleftp-content-management-system-react-nestjs`
+   `$ git clone https://github.com/mdshemul48/content-management-system-react-nestjs`
 
 2. Navigate to the frontend directory
 
-   `$ cd circleftp-content-management-system-react-nestjs/frontend`
+   `$ cd content-management-system-react-nestjs/frontend`
 
 3. Copy the `.env.example` file to `.env` and add the link to the backend API and image endpoint.
 4. Install the dependencies
@@ -34,7 +34,7 @@ This is a full-stack content management system built with React in the frontend 
 
 1. Navigate to the backend directory
 
-   `$ cd circleftp-content-management-system-react-nestjs/backend`
+   `$ cd content-management-system-react-nestjs/backend`
 
 2. Install the dependencies
 
